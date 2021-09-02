@@ -2,7 +2,7 @@ import { EditorPluginConfig, EditorStoreState } from '@/types'
 
 const module = {
   state: (): EditorStoreState => ({
-    plugins: null,
+    plugins: {},
     activePlugin: null
   }),
 

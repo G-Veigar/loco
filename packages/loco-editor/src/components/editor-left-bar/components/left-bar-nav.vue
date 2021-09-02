@@ -36,7 +36,7 @@ export default class LeftBarNav extends Vue {
 <style lang="scss" scoped>
 $leftBar-wdith: 46px;
 
-.left-bar {
+.left-bar-nav {
   width: $leftBar-wdith;
   height: 100%;
   background-color: #EAEDF0;

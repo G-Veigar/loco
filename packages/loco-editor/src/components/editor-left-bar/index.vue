@@ -1,21 +1,23 @@
 <template>
-  <div class="editor-left-bar">
-    editor-left-bar
-    <!-- <left-bar-nav
+  <div id="editor-left-bar">
+    <left-bar-nav
       :plugins="pluginList"
       :current="currentPluginName"
-      @pluginChange="handlePluginChange"></left-bar-nav> -->
-    <!-- <div class="tool-wrapper">
-      <keep-alive>
+      @pluginChange="handlePluginChange"></left-bar-nav>
+    <div class="tool-wrapper">
+      <!-- <keep-alive>
         <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>
-      </keep-alive>
-    </div> -->
+      </keep-alive> -->
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import LeftBarNav from './components/left-bar-nav.vue'
+import { namespace } from 'vuex-class'
+
+const editorStore = namespace('editor')
 
 @Options({
   name: 'editor-left-bar',
@@ -24,9 +26,32 @@ import LeftBarNav from './components/left-bar-nav.vue'
   }
 })
 export default class EditorLeftBar extends Vue {
+  @editorStore.State(state => state.plugins)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly plugins: any;
+
+  get pluginList ():{name: string, icon: string}[] {
+    const list = []
+    for (const pluginName in this.plugins) {
+      list.push({
+        name: pluginName,
+        icon: this.plugins[pluginName].icon
+      })
+    }
+    return list
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
+#editor-left-bar {
+  width: 260px;
+  display: flex;
+  background: #00336622;
 
+  .tool-wrapper {
+    width: 100%;
+    border-right: 1px solid #ccc;
+  }
+}
 </style>

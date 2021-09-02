@@ -1,5 +1,5 @@
 <template>
-  <div class="editor-right-bar">editor-right-bar</div>
+  <div id="editor-right-bar">editor-right-bar</div>
 </template>
 
 <script lang="ts">
@@ -16,6 +16,12 @@ export default class EditorLeftBar extends Vue {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+#editor-right-bar {
+  width: 360px;
+  max-height: 100vh;
+  overflow-y: auto;
+  border-left: 1px solid #ccc;
+  background: #99330022;
+}
 </style>

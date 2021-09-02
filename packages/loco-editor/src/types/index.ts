@@ -6,7 +6,8 @@ export type EditorPluginConfig = {
   component: Vue;
 };
 
-export interface EditorStoreState {
-  plugins: Record<string, unknown> | null;
+export type EditorStorePlugins = any;
+export type EditorStoreState = {
+  plugins: EditorStorePlugins;
   activePlugin: EditorPluginConfig | null
 }

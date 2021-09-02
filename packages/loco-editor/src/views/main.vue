@@ -1,5 +1,5 @@
 <template>
-  <div class="loco-editor">
+  <div id="loco-editor">
     <editor-left-bar></editor-left-bar>
     <editor-zone></editor-zone>
     <editor-right-bar></editor-right-bar>
@@ -22,3 +22,10 @@ export default {
   // }
 }
 </script>
+
+<style lang="scss">
+#loco-editor {
+  height: 100vh;
+  display: flex;
+}
+</style>
