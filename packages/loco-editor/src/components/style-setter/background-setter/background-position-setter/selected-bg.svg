@@ -1,0 +1,14 @@
+<svg width="24" height="24"> 
+    <rect
+    x="0"
+    y="0"
+    rx="2"
+    ry="2"
+    width="24"
+    height="24"
+    style="
+        fill: #3C3C3C;
+        stroke: #737373;
+        stroke-width: 1;
+    "/>
+</svg> 

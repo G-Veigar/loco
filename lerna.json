@@ -1,7 +1,8 @@
 {
   "packages": [
     "packages/*",
-    "packages/loco-editor-plugins/*"
+    "packages/loco-editor-plugins/*",
+    "packages/loco-components/*"
   ],
   "version": "independent"
 }

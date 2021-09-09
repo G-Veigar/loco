@@ -14,12 +14,12 @@
           :title="item.title"
           :name="item.title">
           <div class="item-wrapper">
-            <material-item
+            <component-item
               v-for="component in item.components"
               :material="component"
               class="mt-item"
               :dragImg="dragImgMap[component.name]"
-              :key="component.name"></material-item>
+              :key="component.name"></component-item>
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -27,37 +27,36 @@
   </div>
 </template>
 
-<script>
-import materialItem from './material-item'
+<script lang="ts">
+import componentItem from './component-item.vue'
 import event from '@/utils/event'
 import { materialList } from '@/core/material'
+import { Options, Vue } from 'vue-class-component'
 
-export default {
-  components: { materialItem },
-  data () {
-    return {
-      searchVal: '',
-      materialList,
-      activeNames: materialList.map(item => item.title),
-      dragImgMap: {}
-    }
-  },
-  methods: {
-    createDragImgs () {
-      let dragList = []
-      materialList.forEach(item => {
-        dragList = [...dragList, ...item.components]
-      })
-      event.on('drag-img-created', res => {
-        console.log('drag-img-created', res)
-        this.dragImgMap = res
-      })
-      this.$nextTick(() => {
-        event.emit('create-drag-img', dragList)
-      })
-    }
-  },
-  mounted () {
+Options({
+  components: { componentItem }
+})
+export class leftPanel extends Vue {
+  searchVal = ''
+  materialList = []
+  activeNames = materialList.map((item: { title: string }) => item.title)
+  dragImgMap = {}
+
+  createDragImgs (): void {
+    let dragList: any[] = []
+    materialList.forEach((item: { components: any }) => {
+      dragList = [...dragList, ...item.components]
+    })
+    event.on('drag-img-created', (res: any) => {
+      console.log('drag-img-created', res)
+      this.dragImgMap = res
+    })
+    this.$nextTick(() => {
+      event.emit('create-drag-img', dragList)
+    })
+  }
+
+  mounted (): void{
     // this.createDragImgs()
   }
 }

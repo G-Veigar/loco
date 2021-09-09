@@ -6,20 +6,21 @@
   </div>
 </template>
 
-<script>
-import editorLeftBar from '@/components/editor-left-bar'
-import editorZone from '@/components/editor-zone'
-import editorRightBar from '@/components/editor-right-bar'
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component'
+import editorLeftBar from './components/editor-left-bar/index.vue'
+import editorZone from './components/editor-zone/index.vue'
+import editorRightBar from './components/editor-right-bar/index.vue'
 
-export default {
+@Options({
   name: 'editor-main',
   components: {
     editorLeftBar,
     editorZone,
     editorRightBar
   }
-  // setup () {
-  // }
+})
+export default class Editor extends Vue {
 }
 </script>
 

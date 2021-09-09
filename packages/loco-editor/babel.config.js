@@ -1,5 +1,3 @@
 module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ]
+  extends: '../../babel.config.js'
 }

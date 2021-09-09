@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "init": "lerna bootstrap --hoist",
-    "clean": "lerna clean"
+    "clean": "lerna clean",
+    "dev:editor": "lerna run --scope @loco/editor serve --stream"
   },
   "devDependencies": {
     "lerna": "^4.0.0"
