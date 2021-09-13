@@ -50,7 +50,7 @@
             style="
               pointer-events: none;
               stroke-width: 2px;
-              stroke: rgb(51, 51, 51);
+              stroke: #333333;
             "
           ></rect>
           <clipPath id="margin-inner">
@@ -77,7 +77,7 @@
             style="
               pointer-events: none;
               stroke-width: 2px;
-              stroke: rgb(51, 51, 51);
+              stroke: #333333;
             "
           ></rect>
         </svg>
@@ -148,7 +148,7 @@
             style="
               pointer-events: none;
               stroke-width: 2px;
-              stroke: rgb(51, 51, 51);
+              stroke: #333333;
             "
           ></rect>
           <clipPath id="padding-inner">
@@ -175,7 +175,7 @@
             style="
               pointer-events: none;
               stroke-width: 2px;
-              stroke: rgb(51, 51, 51);
+              stroke: #333333;
             "
           ></rect>
         </svg>

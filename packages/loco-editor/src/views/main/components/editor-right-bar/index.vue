@@ -40,22 +40,24 @@ export default class EditorLeftBar extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/style/var.scss';
+
 #editor-right-bar {
   width: 300px;
   max-height: 100vh;
   overflow-y: auto;
   border-left: 1px solid #1a1a1a;
-  background-color: #2b2b2b;
+  background-color: $mainBgColor;
   display: flex;
   align-self: stretch;
 
   .el-tabs {
     width: 100%;
-    background-color: #2b2b2b;
+    background-color: $mainBgColor;
     border: none;
   }
   .el-tabs__header {
-    background-color: #2b2b2b;
+    background-color: $mainBgColor;
     border: none;
   }
 
@@ -69,7 +71,7 @@ export default class EditorLeftBar extends Vue {
       color: #fff;
     }
     &.is-active {
-      background-color: #404040;
+      background-color: $mainBgColorLight;
       color: #fff;
     }
   }

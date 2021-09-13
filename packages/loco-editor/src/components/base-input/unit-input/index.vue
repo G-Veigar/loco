@@ -111,7 +111,7 @@ export default class UnitInput extends Vue {
 
   .unit-select {
     background-color: rgb(77, 77, 77);
-    border: 1px solid rgb(51, 51, 51);
+    border: 1px solid #333333;
     box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px;
     border-radius: 3px;
     position: fixed;

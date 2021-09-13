@@ -158,7 +158,7 @@ $grid-value-size: 24px;
     background-image: url('./selected-bg.png');
     background-repeat: no-repeat;
     background-size: $grid-value-size $grid-value-size;
-    transition: background-position 0.15s linear;
+    transition: background-position 0.12s linear;
     border: 1px solid rgb(33, 33, 33);
     border-radius: 2px;
 

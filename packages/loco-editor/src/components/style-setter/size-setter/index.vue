@@ -61,8 +61,10 @@ export default class SizeSetter extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/style/var.scss';
+
 .size-setter {
-  background-color: #404040;
+  background-color: $mainBgColorLight;
   .setter-line {
     display: flex;
   }

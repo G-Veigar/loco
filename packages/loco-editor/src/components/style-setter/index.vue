@@ -13,6 +13,12 @@
       <el-collapse-item title="背景" name="背景">
         <background-setter></background-setter>
       </el-collapse-item>
+      <el-collapse-item title="test" name="test">
+        <picker-bar :value="currentTest" @select="handleSelect">
+          <picker-bar-item value="hehe">heheddddddddd</picker-bar-item>
+          <picker-bar-item value="haha">haha</picker-bar-item>
+        </picker-bar>
+      </el-collapse-item>
     </el-collapse>
   </div>
 </template>
@@ -22,16 +28,21 @@ import { Vue, Options } from 'vue-property-decorator'
 import spacingSetter from './spacing-setter/index.vue'
 import sizeSetter from './size-setter/index.vue'
 import backgroundSetter from './background-setter/index.vue'
+import pickerBar from '../base-input/picker-bar/index.vue'
+import pickerBarItem from '../base-input/picker-bar/picker-bar-item.vue'
 
 @Options({
   components: {
     spacingSetter,
     sizeSetter,
-    backgroundSetter
+    backgroundSetter,
+    pickerBar,
+    pickerBarItem
   }
 })
 export default class styleSetter extends Vue {
-  activeNames = ['间隔', '尺寸', '定位']
+  activeNames = ['间隔', '尺寸', '定位', '背景', 'test']
+  currentTest = 'hehe'
 
   handleChange (val: string):void {
     console.log(val)
@@ -40,6 +51,10 @@ export default class styleSetter extends Vue {
   // 处理样式设置
   handleInput (val: string):void {
     console.log(val)
+  }
+
+  handleSelect (val: string):void {
+    this.currentTest = val
   }
 }
 </script>

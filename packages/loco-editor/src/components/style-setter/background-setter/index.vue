@@ -4,12 +4,22 @@
       <div class="child-setter-label">Position</div>
       <background-position-setter></background-position-setter>
     </div>
+    <div class="child-setter">
+      <div class="child-setter-label">Repeat</div>
+      <background-repeat-setter></background-repeat-setter>
+    </div>
+    <div class="child-setter">
+      <div class="child-setter-label">Size</div>
+      <background-size-setter></background-size-setter>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, Prop } from 'vue-property-decorator'
 import backgroundPositionSetter from './background-position-setter/index.vue'
+import backgroundRepeatSetter from './background-repeat-setter/index.vue'
+import backgroundSizeSetter from './background-size-setter/index.vue'
 
 interface StyleObjBackground {
   backgroundColor: string;
@@ -23,7 +33,9 @@ interface StyleObjBackground {
 @Options({
   name: 'BackgroundSetter',
   components: {
-    backgroundPositionSetter
+    backgroundPositionSetter,
+    backgroundRepeatSetter,
+    backgroundSizeSetter
   }
 })
 export default class BackgroundSetter extends Vue {
@@ -33,8 +45,10 @@ export default class BackgroundSetter extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/style/var.scss';
+
 .background-setter {
-  background-color: #404040;
+  background-color: $mainBgColorLight;
   .child-setter {
     display: flex;
     .child-setter-label {
