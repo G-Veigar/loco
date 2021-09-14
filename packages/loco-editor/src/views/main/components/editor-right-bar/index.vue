@@ -3,7 +3,6 @@
     <el-tabs type="border-card">
       <el-tab-pane label="样式" name="style">
         <style-setter></style-setter>
-        style-setter
       </el-tab-pane>
       <el-tab-pane label="属性" name="attr">
         <!-- <prop-setter></prop-setter> -->
@@ -55,24 +54,30 @@ export default class EditorLeftBar extends Vue {
     width: 100%;
     background-color: $mainBgColor;
     border: none;
-  }
-  .el-tabs__header {
-    background-color: $mainBgColor;
-    border: none;
-  }
+    display: flex;
+    flex-direction: column;
 
-  .el-tabs__content {
-    padding: 0;
-  }
-
-  .el-tabs__item {
-    border: none;
-    &:hover {
-      color: #fff;
+    .el-tabs__header {
+      background-color: $mainBgColor;
+      border: none;
+      flex: none;
     }
-    &.is-active {
-      background-color: $mainBgColorLight;
-      color: #fff;
+
+    .el-tabs__content {
+      padding: 0;
+      flex: auto;
+      overflow: auto;
+    }
+
+    .el-tabs__item {
+      border: none;
+      &:hover {
+        color: #fff;
+      }
+      &.is-active {
+        background-color: $mainBgColorLight;
+        color: #fff;
+      }
     }
   }
 }

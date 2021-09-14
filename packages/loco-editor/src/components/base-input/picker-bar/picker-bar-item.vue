@@ -46,12 +46,18 @@ export default class PickerBar extends Vue {
   align-items: center;
   background-color: $optionBgColor;
   color: $optionColor;
+  cursor: default;
+
   &:not(:last-of-type) {
     margin-right: $optionMargin;
   }
   &.selected {
     background-color: $optionSelectedBgColor;
     color: $optionSelectedColor;
+  }
+  &:not(.selected):hover {
+    background-color: $optionHoveredBgColor;
+    color: $optionHoveredColor;
   }
 }
 </style>

@@ -8,7 +8,7 @@ import 'modern-normalize'
 
 const app = createApp(App)
 
-// 注册element-plus组件
+// 按需注册element-plus组件
 requiredElements.forEach(element => {
   app.component(element.name, element)
 })

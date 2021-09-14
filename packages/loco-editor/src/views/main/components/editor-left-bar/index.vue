@@ -44,14 +44,16 @@ export default class EditorLeftBar extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/style/var.scss';
+
 #editor-left-bar {
   width: 260px;
   display: flex;
-  background: #00336622;
 
   .tool-wrapper {
     width: 100%;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid $mainBorderColor;
+    background-color: $leftBarDetailBgColor;
   }
 }
 </style>

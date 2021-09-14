@@ -5,7 +5,8 @@ import {
   ElTabs,
   ElTabPane,
   ElCollapse,
-  ElCollapseItem
+  ElCollapseItem,
+  ElSlider
 } from 'element-plus'
 
 export default [
@@ -13,5 +14,6 @@ export default [
   ElTabs,
   ElTabPane,
   ElCollapse,
-  ElCollapseItem
+  ElCollapseItem,
+  ElSlider
 ]

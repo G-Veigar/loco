@@ -1,6 +1,10 @@
 <template>
   <div class="background-setter">
     <div class="child-setter">
+      <div class="child-setter-label">Type</div>
+      <background-type-setter></background-type-setter>
+    </div>
+    <div class="child-setter">
       <div class="child-setter-label">Position</div>
       <background-position-setter></background-position-setter>
     </div>
@@ -17,6 +21,7 @@
 
 <script lang="ts">
 import { Vue, Options, Prop } from 'vue-property-decorator'
+import backgroundTypeSetter from './background-type-setter/index.vue'
 import backgroundPositionSetter from './background-position-setter/index.vue'
 import backgroundRepeatSetter from './background-repeat-setter/index.vue'
 import backgroundSizeSetter from './background-size-setter/index.vue'
@@ -33,6 +38,7 @@ interface StyleObjBackground {
 @Options({
   name: 'BackgroundSetter',
   components: {
+    backgroundTypeSetter,
     backgroundPositionSetter,
     backgroundRepeatSetter,
     backgroundSizeSetter

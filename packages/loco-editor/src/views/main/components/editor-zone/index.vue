@@ -1,15 +1,19 @@
 <template>
-  <div id="editor-zone">editor-zone</div>
+  <div id="editor-zone">
+    <header-top>header-top</header-top>
+  </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
+import headerTop from './components/header-top/index.vue'
 
 @Options({
   name: 'editor-zone',
   props: {
     msg: String
-  }
+  },
+  components: { headerTop }
 })
 export default class EditorZone extends Vue {
   msg!: string
@@ -17,34 +21,12 @@ export default class EditorZone extends Vue {
 </script>
 
 <style lang="scss">
-// .mobile-device {
-//   transform: scale(0.7);
-// }
-
-// #viewer-readonly {
-//   background-color: #fff;
-//   width: 100%;
-//   height: 100%;
-//   border-radius: 40px;
-
-//   iframe {
-//     border: none;
-//   }
-// }
+@import '@/style/var.scss';
 
 #editor-zone {
   flex: auto;
+  background-color: $mainZoneBg;
+  display: flex;
+  flex-direction: column;
 }
-
-// .viewer {
-//   background-color: #fff;
-//   width: 375px;
-//   height: 600px;
-
-//   iframe {
-//     width: 100%;
-//     height: 100%;
-//     border: 1px solid #aaa;
-//   }
-// }
 </style>

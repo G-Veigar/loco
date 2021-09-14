@@ -1,6 +1,7 @@
 /* color */
 $mainBgColor: #2B2B2B;
 $mainBgColorLight: #404040;
+$mainBorderColor: #1a1a1a;
 // option
 $optionBgColor: #5E5E5E;
 $optionColor: #DADADA;
@@ -8,6 +9,19 @@ $optionSelectedBgColor: $mainBgColor;
 $optionSelectedColor: #FFFFFF;
 $optionHoveredBgColor: #6B6B6B;
 $optionHoveredColor: #FFFFFF;
+// mainZone
+$mainZoneBg: #5D5E5D;
+// left-bar
+$leftBarDetailBgColor: #4d4d4d;
+$leftBarNavBgColor: $mainBgColorLight;
+
 
 /* size */ 
+// option
 $optionMargin: 2px;
+// header-top
+$headerTopHeight: 36px;
+// left-bar
+$leftBarWidth: 42px;
+
+

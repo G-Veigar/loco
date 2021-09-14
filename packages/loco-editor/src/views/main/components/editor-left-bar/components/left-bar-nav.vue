@@ -34,19 +34,19 @@ export default class LeftBarNav extends Vue {
 </script>
 
 <style lang="scss" scoped>
-$leftBar-wdith: 46px;
+@import '@/style/var.scss';
 
 .left-bar-nav {
-  width: $leftBar-wdith;
+  width: $leftBarWidth;
   height: 100%;
-  background-color: #EAEDF0;
+  background-color: $leftBarNavBgColor;
   flex: none;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid $mainBorderColor;
 }
 
 .plugin-item {
   cursor: pointer;
-  width: $leftBar-wdith;
+  width: $leftBarWidth;
   height: 36px;
   display: flex;
   justify-content: center;
