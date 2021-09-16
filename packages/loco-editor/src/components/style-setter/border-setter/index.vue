@@ -8,6 +8,10 @@
       <div class="child-setter-label">Border</div>
       <border-selector></border-selector>
     </div>
+    <div class="child-setter">
+      <div class="child-setter-label">Style</div>
+      <border-style-setter></border-style-setter>
+    </div>
   </div>
 </template>
 
@@ -15,11 +19,13 @@
 import { Vue, Options } from 'vue-property-decorator'
 import borderRadiusSetter from './border-radius-setter/index.vue'
 import borderSelector from './border-selector/index.vue'
+import borderStyleSetter from './border-style-setter/index.vue'
 
 @Options({
   components: {
     borderRadiusSetter,
-    borderSelector
+    borderSelector,
+    borderStyleSetter
   }
 })
 export default class styleSetter extends Vue {

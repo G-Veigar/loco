@@ -10,6 +10,9 @@
       <el-collapse-item title="定位" name="定位">
         定位
       </el-collapse-item>
+      <el-collapse-item title="布局" name="定位">
+        <display-setter></display-setter>
+      </el-collapse-item>
       <el-collapse-item title="边框" name="边框">
         <border-setter></border-setter>
       </el-collapse-item>
@@ -36,6 +39,7 @@ import sizeSetter from './size-setter/index.vue'
 import backgroundSetter from './background-setter/index.vue'
 import textFontSetter from './text-font-setter/index.vue'
 import borderSetter from './border-setter/index.vue'
+import displaySetter from './display-setter/index.vue'
 import pickerBar from '../base-input/picker-bar/index.vue'
 import pickerBarItem from '../base-input/picker-bar/picker-bar-item.vue'
 
@@ -47,11 +51,12 @@ import pickerBarItem from '../base-input/picker-bar/picker-bar-item.vue'
     pickerBar,
     pickerBarItem,
     textFontSetter,
-    borderSetter
+    borderSetter,
+    displaySetter
   }
 })
 export default class styleSetter extends Vue {
-  activeNames = ['间隔', '尺寸', '定位', '背景', '文本', 'test', '边框']
+  activeNames = ['间隔', '尺寸', '定位', '布局', '背景', '文本', 'test', '边框']
   currentTest = 'hehe'
 
   handleChange (val: string):void {
