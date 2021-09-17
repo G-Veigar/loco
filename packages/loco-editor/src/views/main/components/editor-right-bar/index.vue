@@ -1,18 +1,30 @@
 <template>
   <div id="editor-right-bar">
     <el-tabs type="border-card">
-      <el-tab-pane label="样式" name="style">
+      <el-tab-pane name="style">
+        <template #label>
+          <i class="iconfont icon-yangshi"></i>
+        </template>
         <style-setter></style-setter>
       </el-tab-pane>
       <el-tab-pane label="属性" name="attr">
+        <template #label>
+          <i class="iconfont icon-sliders"></i>
+        </template>
         <!-- <prop-setter></prop-setter> -->
         prop-setter
       </el-tab-pane>
       <el-tab-pane label="事件" name="event">
+        <template #label>
+          <i class="iconfont icon-click"></i>
+        </template>
         <!-- <event-setter></event-setter> -->
         event-setter
       </el-tab-pane>
-      <el-tab-pane label="状态" name="data">
+      <el-tab-pane label="动画" name="data">
+        <template #label>
+          <i class="iconfont icon-bim_donghua"></i>
+        </template>
         <!-- <status-setter></status-setter> -->
         status-setter
       </el-tab-pane>
@@ -50,6 +62,10 @@ export default class EditorLeftBar extends Vue {
   display: flex;
   align-self: stretch;
 
+  .iconfont {
+    font-size: 22px;
+  }
+
   .el-tabs {
     width: 100%;
     background-color: $mainBgColor;
@@ -71,6 +87,7 @@ export default class EditorLeftBar extends Vue {
 
     .el-tabs__item {
       border: none;
+      height: $headerTopHeight;
       &:hover {
         color: #fff;
       }

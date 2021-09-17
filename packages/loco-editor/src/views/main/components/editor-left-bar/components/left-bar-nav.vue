@@ -1,32 +1,47 @@
 <template>
   <div class="left-bar-nav">
-    <div
-      class="plugin-item"
-      :title="item.name"
-      :class="{active: current===item.name}"
-      v-for="item in plugins"
-      :key="item.label"
-      @click="changePlugin(item)">
-      <i class="iconfont plugin-icon" :class="item.icon"></i>
+    <div class="nav-top">
+      <div
+        class="plugin-item"
+        :title="item.name"
+        :class="{active: current===item.name}"
+        v-for="item in topPlugins"
+        :key="item.label"
+        @click="changePlugin(item)">
+        <i class="iconfont plugin-icon" :class="item.icon"></i>
+      </div>
+    </div>
+    <div class="nav-bottom">
+      <div
+        class="plugin-item"
+        :title="item.name"
+        :class="{active: current===item.name}"
+        v-for="item in bottomPlugins"
+        :key="item.label"
+        @click="changePlugin(item)">
+        <i class="iconfont plugin-icon" :class="item.icon"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Vue, Prop, Options } from 'vue-property-decorator'
 import { EditorPluginConfig } from '@/types'
 
 @Options({
-  props: {
-    plugins: {
-      type: Array
-    },
-    current: {
-      type: String
-    }
-  }
+  name: 'leftBarNav'
 })
 export default class LeftBarNav extends Vue {
+  @Prop({ type: Array, required: true })
+  topPlugins!: any;
+
+  @Prop({ type: Array, required: true })
+  bottomPlugins!: any;
+
+  @Prop({ type: String, required: true })
+  current!: string;
+
   changePlugin (item: EditorPluginConfig): void {
     this.$emit('pluginChange', item.name)
   }
@@ -41,22 +56,34 @@ export default class LeftBarNav extends Vue {
   height: 100%;
   background-color: $leftBarNavBgColor;
   flex: none;
+  box-sizing: border-box;
   border-right: 1px solid $mainBorderColor;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .plugin-item {
   cursor: pointer;
   width: $leftBarWidth;
-  height: 36px;
+  height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #cfcfcf;
+
   &.active {
-    background: #ccc;
+    background: $mainBgColor;
+    color: #fafafa;
   }
+
+  &:hover {
+    color: #fafafa;
+  }
+
   .plugin-icon {
-    font-size: 20px;
-    color: #555;
+    font-size: 22px;
   }
 }
 </style>

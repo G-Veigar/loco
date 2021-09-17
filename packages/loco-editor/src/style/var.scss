@@ -2,9 +2,10 @@
 $mainBgColor: #2B2B2B;
 $mainBgColorLight: #404040;
 $mainBorderColor: #1a1a1a;
+$mainFontColor: #DADADA;
 // option
 $optionBgColor: #5E5E5E;
-$optionColor: #DADADA;
+$optionColor: $mainFontColor;
 $optionSelectedBgColor: $mainBgColor;
 $optionSelectedColor: #FFFFFF;
 $optionHoveredBgColor: #6B6B6B;
@@ -22,6 +23,5 @@ $optionMargin: 2px;
 // header-top
 $headerTopHeight: 36px;
 // left-bar
-$leftBarWidth: 42px;
-
-
+$leftBarWidth: 38px;
+$leftToolBarWidth: 250px;

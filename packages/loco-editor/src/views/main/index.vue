@@ -11,6 +11,8 @@ import { Options, Vue } from 'vue-class-component'
 import editorLeftBar from './components/editor-left-bar/index.vue'
 import editorZone from './components/editor-zone/index.vue'
 import editorRightBar from './components/editor-right-bar/index.vue'
+import { initHotkeys } from '@/modules/hot-key'
+import { HOOK, callHook } from '@/modules/hook'
 
 @Options({
   name: 'editor-main',
@@ -21,6 +23,13 @@ import editorRightBar from './components/editor-right-bar/index.vue'
   }
 })
 export default class Editor extends Vue {
+  created (): void {
+    initHotkeys()
+  }
+
+  mounted (): void {
+    callHook(HOOK.editorReady)
+  }
 }
 </script>
 

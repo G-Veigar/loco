@@ -1,10 +1,12 @@
 <template>
   <div id="editor-left-bar">
     <left-bar-nav
-      :plugins="pluginList"
+      :top-plugins="mockPluginList"
+      :bottom-plugins="mockBottomPluginList"
       :current="currentPluginName"
       @pluginChange="handlePluginChange"></left-bar-nav>
-    <div class="tool-wrapper">
+    <div class="tool-bar" v-show="toolBarShow">
+      <tool-header title="hehe" @close="handleClose"></tool-header>
       <!-- <keep-alive>
         <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>
       </keep-alive> -->
@@ -14,21 +16,41 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import LeftBarNav from './components/left-bar-nav.vue'
+import leftBarNav from './components/left-bar-nav.vue'
 import { namespace } from 'vuex-class'
+import toolHeader from './components/tool-header.vue'
 
 const editorStore = namespace('editor')
 
 @Options({
   name: 'editor-left-bar',
   components: {
-    LeftBarNav
+    leftBarNav,
+    toolHeader
   }
 })
 export default class EditorLeftBar extends Vue {
   @editorStore.State(state => state.plugins)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly plugins: any;
+
+  toolBarShow = true
+
+  // TODO: 去掉mock数据
+  currentPluginName = 'test'
+
+  mockPluginList = [
+    { name: '组件库', icon: 'icon-ts-tubiao_component' },
+    { name: '组件树', icon: 'icon-node-tree' },
+    { name: '页面管理', icon: 'icon-file-text-fill' },
+    { name: '插件市场', icon: 'icon-shopping-fill' },
+    { name: '静态资源管理', icon: 'icon-folder-open-fill' }
+  ]
+
+  mockBottomPluginList = [
+    { name: '文档', icon: 'icon-read-fill' },
+    { name: '设置', icon: 'icon-setting-fill' }
+  ]
 
   get pluginList ():{name: string, icon: string}[] {
     const list = []
@@ -40,6 +62,14 @@ export default class EditorLeftBar extends Vue {
     }
     return list
   }
+
+  handleClose (): void{
+    this.toolBarShow = false
+  }
+
+  handlePluginChange (plugin: string): void{
+    this.currentPluginName = plugin
+  }
 }
 </script>
 
@@ -47,11 +77,17 @@ export default class EditorLeftBar extends Vue {
 @import '@/style/var.scss';
 
 #editor-left-bar {
-  width: 260px;
-  display: flex;
+  width: $leftBarWidth;
+  overflow: visible;
+  position: relative;
 
-  .tool-wrapper {
-    width: 100%;
+  .tool-bar {
+    background-color: #aaa;
+    position: absolute;
+    width: $leftToolBarWidth;
+    bottom: 0;
+    left: $leftBarWidth;
+    top: $headerTopHeight;
     border-right: 1px solid $mainBorderColor;
     background-color: $leftBarDetailBgColor;
   }
