@@ -1,9 +1,10 @@
 const HOOK = {
-  editorReady: 'editorReady'
+  editorReady: 'editorReady',
+  contextMenu: 'contextMenu'
 }
 
-function callHook (hookName: string): void{
-  console.log(hookName)
+function callHook (hookName: string, data?: unknown): void{
+  console.log(hookName, data)
 }
 
 export {

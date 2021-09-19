@@ -1,0 +1,140 @@
+<template>
+  <div
+    class="context-menu"
+    v-show="contextMenuShow"
+    :style="contextMenuStyle">
+    <!-- 主菜单 -->
+    <div class="menu-panel main-menu">
+      <div
+        class="menu-group"
+        v-for="item in contextMenuList"
+        :key="item.id">
+        <context-menu-item v-if="!item.isGroup" :menu="item" @child="showChildMenu"></context-menu-item>
+        <context-menu-item
+          v-else
+          v-for="menuItem in item.items"
+          :key="menuItem.id"
+          :menu="menuItem"
+          @child="showChildMenu"></context-menu-item>
+      </div>
+    </div>
+    <!-- 子菜单 -->
+    <div
+      class="menu-panel child-menu menu-left"
+      v-show="childMenus.childs"
+      :style="childMenusStyle">
+      <context-menu-item
+        v-for="item in childMenus.childs"
+        :key="item.id"
+        :menu="item"
+        ></context-menu-item>
+    </div>
+  </div>
+</template>
+
+<script>
+import { Vue, Options } from 'vue-property-decorator'
+import { mapState, mapMutations } from 'vuex'
+import contextMenuItem from './context-menu-item.vue'
+
+@Options({
+  name: 'contextMenu',
+  components: {
+    contextMenuItem
+  },
+  computed: {
+    ...mapState({
+      contextMenuShow: state => state.editor.contextMenu.show,
+      contextMenuList: state => state.editor.contextMenu.menuList,
+      contextMenuPosition: state => state.editor.contextMenu.position,
+      childMenus: state => state.editor.contextMenu.childMenus
+    })
+  },
+  methods: {
+    ...mapMutations(['setContextMenu'])
+  }
+})
+export default class contextMenu extends Vue {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  get contextMenuStyle () {
+    const { left, top } = this.contextMenuPosition
+    return {
+      left: left + 'px',
+      top: top + 'px'
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  get childMenusStyle () {
+    const contextMenuTop = this.contextMenuPosition.top
+    const { top } = this.childMenus
+    const offsetTop = top - contextMenuTop
+    return {
+      top: offsetTop + 'px !important'
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  showChildMenu (childMenus) {
+    this.setContextMenu({
+      key: 'childMenus',
+      value: childMenus
+    })
+  }
+}
+</script>
+
+<style lang="scss">
+@import '@/style/var.scss';
+$mainMenuWidth: 200px;
+
+.context-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  cursor: default;
+
+  .menu-panel {
+    color: $mainFontColor;
+    border-radius: 3px;
+    border: 1px solid #212121;
+    background-color: $leftBarDetailBgColor;
+    box-shadow: 0px 1px 15px rgb(0 0 0 / 20%);
+  }
+
+  .main-menu {
+    width: $mainMenuWidth;
+  }
+
+  .child-menu {
+    min-width: 120px;
+    max-width: 220px;
+    position: absolute;
+
+    &.menu-left {
+      right: $mainMenuWidth - 1px;
+    }
+
+    &.menu-right {
+      left: $mainMenuWidth - 1px;
+    }
+  }
+
+  .menu-group {
+    border-bottom: 1px solid #212121;
+    padding: 3px 0;
+  }
+
+  .menu-item {
+    height: 26px;
+    line-height: 26px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    &:hover {
+      background-color: $optionHoveredBgColor;
+    }
+  }
+}
+</style>
