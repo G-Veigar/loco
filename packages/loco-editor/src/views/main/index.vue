@@ -39,8 +39,11 @@ export default class Editor extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/style/var.scss';
+
 #loco-editor {
   height: 100vh;
   display: flex;
+  color: $mainFontColor;
 }
 </style>

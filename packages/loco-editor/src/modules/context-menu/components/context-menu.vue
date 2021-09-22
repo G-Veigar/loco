@@ -108,6 +108,7 @@ $mainMenuWidth: 200px;
   }
 
   .child-menu {
+    padding: 3px 0;
     min-width: 120px;
     max-width: 220px;
     position: absolute;
@@ -122,7 +123,9 @@ $mainMenuWidth: 200px;
   }
 
   .menu-group {
-    border-bottom: 1px solid #212121;
+    &:not(:last-child) {
+      border-bottom: 1px solid #212121;
+    }
     padding: 3px 0;
   }
 

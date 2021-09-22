@@ -7,6 +7,7 @@
       @pluginChange="handlePluginChange"></left-bar-nav>
     <div class="tool-bar" v-show="toolBarShow">
       <tool-header title="hehe" @close="handleClose"></tool-header>
+      <component-lib></component-lib>
       <!-- <keep-alive>
         <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>
       </keep-alive> -->
@@ -19,6 +20,7 @@ import { Options, Vue } from 'vue-class-component'
 import leftBarNav from './components/left-bar-nav.vue'
 import { namespace } from 'vuex-class'
 import toolHeader from './components/tool-header.vue'
+import componentLib from '../component-lib/index.vue'
 
 const editorStore = namespace('editor')
 
@@ -26,7 +28,8 @@ const editorStore = namespace('editor')
   name: 'editor-left-bar',
   components: {
     leftBarNav,
-    toolHeader
+    toolHeader,
+    componentLib
   }
 })
 export default class EditorLeftBar extends Vue {

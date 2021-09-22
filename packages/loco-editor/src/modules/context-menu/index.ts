@@ -7,9 +7,11 @@ type menuConfig = {
 }
 
 function initContextMenu ():void {
-  document.addEventListener('contextmenu', e => {
+  document.addEventListener('contextmenu', (e: any) => {
     callHook(HOOK.contextMenu, {
-      target: e.target
+      target: e.target,
+      x: e.x,
+      y: e.y
     })
   })
 }
