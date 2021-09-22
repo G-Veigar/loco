@@ -1,19 +1,26 @@
 <template>
   <div id="editor-zone">
-    <header-top>header-top</header-top>
+    <header-top></header-top>
+    <div class="edit-main">
+      <edit-viewport></edit-viewport>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import headerTop from './components/header-top/index.vue'
+import editViewport from '@/modules/edit-viewport/index.vue'
 
 @Options({
   name: 'editor-zone',
   props: {
     msg: String
   },
-  components: { headerTop }
+  components: {
+    headerTop,
+    editViewport
+  }
 })
 export default class EditorZone extends Vue {
   msg!: string
@@ -28,5 +35,12 @@ export default class EditorZone extends Vue {
   background-color: $mainZoneBg;
   display: flex;
   flex-direction: column;
+
+  .edit-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: auto;
+  }
 }
 </style>

@@ -32,13 +32,14 @@ export default class Editor extends Vue {
   border-right: 1px solid rgb(51, 51, 51);
   border-bottom: 1px solid rgb(51, 51, 51);
   cursor: pointer;
+  padding: 4px 0 10px;
 
   &:hover {
     background-color: #5d5d5d;
   }
 
   .component-icon {
-    height: 60px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,8 +48,7 @@ export default class Editor extends Vue {
     }
   }
   .component-name {
-    height: 32px;
-    line-height: 32px;
+    margin-top: 2px;
   }
 }
 </style>

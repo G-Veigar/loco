@@ -1,7 +1,10 @@
 <template>
   <div class="component-group">
-    <div class="component-group-header"><i class="iconfont icon-caret-right"></i>{{name}}</div>
-    <div class="component-group-wrapper">
+    <div class="component-group-header" @click="toggleFold">
+      <i class="iconfont" :class="folded ? 'icon-caret-right' : 'icon-caret-down'"></i>
+      {{name}}
+    </div>
+    <div class="component-group-wrapper" v-show="!folded">
       <component-item
         v-for="item in components"
         :key="item.name"
@@ -27,6 +30,12 @@ export default class Editor extends Vue {
 
   @Prop({ type: Array, required: true })
   components!: any[]
+
+  folded = false
+
+  toggleFold ():void {
+    this.folded = !this.folded
+  }
 }
 </script>
 
@@ -42,6 +51,8 @@ export default class Editor extends Vue {
     line-height: 28px;
     border-bottom: 1px solid $mainBorderColor;
     color: $mainFontColor;
+    cursor: default;
+
     .iconfont {
       font-size: 12px;
       margin-right: 6px;

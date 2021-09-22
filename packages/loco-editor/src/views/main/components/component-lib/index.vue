@@ -1,6 +1,7 @@
 <template>
   <div class="component-lib">
     <component-group name="basic" :components="basicComponents"></component-group>
+    <component-group name="pro" :components="proComponents"></component-group>
     <component-group name="form" :components="formComponents"></component-group>
   </div>
 </template>
@@ -43,6 +44,33 @@ export default class Editor extends Vue {
     }
   ]
 
+  proComponents = [
+    {
+      name: 'block',
+      icon: 'icon-shouyelunbotu'
+    },
+    {
+      name: 'popup',
+      icon: 'icon-program-code'
+    },
+    {
+      name: 'lottery',
+      icon: 'icon-zhuanpanshezhi'
+    },
+    {
+      name: 'upload',
+      icon: 'icon-cloudupload'
+    },
+    {
+      name: 'share',
+      icon: 'icon-fenxiang'
+    },
+    {
+      name: 'tabs',
+      icon: 'icon-bootstrap_tabs'
+    }
+  ]
+
   formComponents = [
     {
       name: 'input',
@@ -71,6 +99,10 @@ export default class Editor extends Vue {
     {
       name: 'picker',
       icon: 'icon-date'
+    },
+    {
+      name: 'slider',
+      icon: 'icon-Slider-horizontal'
     }
   ]
 }
