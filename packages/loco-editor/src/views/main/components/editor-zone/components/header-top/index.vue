@@ -1,10 +1,17 @@
 <template>
   <div class="header-top">
-    <div class="device-picker btn">
+    <div class="device-picker">
       <i class="iconfont icon-phone"></i>
-      <div class="device-name">
+      <div class="device-name btn" @click="toggleShowDeviceList">
         {{editViewport.device}}
         <i class="iconfont icon-caret-down"></i>
+      </div>
+      <div class="pick-list" v-if="showDeviceList">
+        <div class="pick-list-item custom">自定义...</div>
+        <div
+          class="pick-list-item"
+          v-for="item in deviceList"
+          :key="item.name">{{item.name}}</div>
       </div>
     </div>
     <div class="device-ratio btn">
@@ -26,7 +33,7 @@
 <script>
 import { Options, Vue } from 'vue-class-component'
 import { mapState, mapMutations } from 'vuex'
-// import { deviceList } from '@/modules/edit-viewport/device'
+import { deviceList } from '@/modules/edit-viewport/device'
 
 @Options({
   name: 'header-top',
@@ -40,12 +47,19 @@ import { mapState, mapMutations } from 'vuex'
   }
 })
 export default class HeaderTop extends Vue {
+  deviceList = deviceList
+  showDeviceList = false
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   rorateDevice () {
     this.setEditViewport({
       key: 'horizontal',
       value: !this.editViewport.horizontal
     })
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  toggleShowDeviceList () {
+    this.showDeviceList = !this.showDeviceList
   }
 }
 </script>
@@ -71,9 +85,45 @@ export default class HeaderTop extends Vue {
   }
 
   .device-picker {
-    font-size: 12px;
+    font-size: 14px;
     display: flex;
     align-items: center;
+    position: relative;
+
+    .pick-list {
+      position: absolute;
+      top: 105%;
+      background-color: $leftBarDetailBgColor;
+      border: 1px solid rgb(33, 33, 33);
+      border-radius: 3px;
+      box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px;
+      max-height: 500px;
+      overflow-y: scroll;
+      left: 15px;
+
+      .pick-list-item {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: $mainFontColor;
+        text-align: left;
+
+        &.custom {
+          margin-bottom: 4px;
+          &::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background-color: $mainBgColorLight;
+          }
+        }
+
+        &:hover {
+          background-color: $optionHoveredBgColor;
+          color: $optionHoveredColor;
+        }
+      }
+    }
 
     .icon-phone {
       font-size: 22px;
