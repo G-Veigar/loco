@@ -10,6 +10,7 @@ export type EditorStorePlugins = any;
 export type EditorStoreState = {
   plugins: EditorStorePlugins;
   activePlugin: EditorPluginConfig | null,
+  editViewport: any,
   contextMenu: {
     show: boolean;
     menuList: any[],

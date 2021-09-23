@@ -2,15 +2,20 @@
   <div id="editor-zone">
     <header-top></header-top>
     <div class="edit-main">
-      <edit-viewport></edit-viewport>
+      <edit-viewport
+        :width="editViewport.width"
+        :height="editViewport.height"
+        :horizontal="editViewport.horizontal"
+        ></edit-viewport>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { Options, Vue } from 'vue-class-component'
 import headerTop from './components/header-top/index.vue'
 import editViewport from '@/modules/edit-viewport/index.vue'
+import { mapState } from 'vuex'
 
 @Options({
   name: 'editor-zone',
@@ -20,10 +25,14 @@ import editViewport from '@/modules/edit-viewport/index.vue'
   components: {
     headerTop,
     editViewport
+  },
+  computed: {
+    ...mapState({
+      editViewport: state => state.editor.editViewport
+    })
   }
 })
 export default class EditorZone extends Vue {
-  msg!: string
 }
 </script>
 

@@ -1,5 +1,8 @@
 <template>
   <div class="component-item">
+    <div class="component-question">
+      <i class="iconfont icon-question-circle-fill"></i>
+    </div>
     <div class="component-icon">
       <i class="iconfont" :class="icon"></i>
     </div>
@@ -33,9 +36,30 @@ export default class Editor extends Vue {
   border-bottom: 1px solid rgb(51, 51, 51);
   cursor: pointer;
   padding: 4px 0 10px;
+  position: relative;
 
   &:hover {
     background-color: #5d5d5d;
+    color: $optionHoveredColor;
+
+    .component-question {
+      display: block;
+    }
+  }
+
+  .component-question {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    display: none;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    color: $mainFontColor;
+    &:hover {
+      color: $optionHoveredColor;
+      cursor: help;
+    }
   }
 
   .component-icon {

@@ -1,9 +1,19 @@
 import { EditorPluginConfig, EditorStoreState } from '@/types'
+import { deviceList } from '@/modules/edit-viewport/device'
+
+const defaultDevice = deviceList[0]
 
 const module = {
   state: (): EditorStoreState => ({
     plugins: {},
     activePlugin: null,
+    editViewport: {
+      device: defaultDevice.name,
+      width: defaultDevice.width,
+      height: defaultDevice.height,
+      zoom: 100,
+      horizontal: false
+    },
     contextMenu: {
       menuList: [
         {
@@ -85,6 +95,12 @@ const module = {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       state.contextMenu[key] = value
+    },
+    setEditViewport (state: EditorStoreState, options: {key: string, value: unknown}): void {
+      const { key, value } = options
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      state.editViewport[key] = value
     }
   }
 }
