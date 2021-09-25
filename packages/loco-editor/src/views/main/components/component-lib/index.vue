@@ -110,5 +110,6 @@ export default class Editor extends Vue {
 
 <style lang="scss">
 .component-lib {
+  user-select: none;
 }
 </style>

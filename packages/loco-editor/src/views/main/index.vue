@@ -46,4 +46,12 @@ export default class Editor extends Vue {
   display: flex;
   color: $mainFontColor;
 }
+
+.el-notification {
+  padding: 10px !important;
+
+  &.right {
+    right: 308px !important;
+  }
+}
 </style>

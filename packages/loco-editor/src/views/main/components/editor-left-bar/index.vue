@@ -6,7 +6,7 @@
       :current="currentPluginName"
       @pluginChange="handlePluginChange"></left-bar-nav>
     <div class="tool-bar" v-show="toolBarShow">
-      <tool-header title="hehe" @close="handleClose"></tool-header>
+      <tool-header title="组件库" @close="handleClose"></tool-header>
       <component-lib></component-lib>
       <!-- <keep-alive>
         <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>

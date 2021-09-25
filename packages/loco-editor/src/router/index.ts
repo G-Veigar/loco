@@ -1,12 +1,19 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import main from '../views/main/index.vue'
-import test from '../views/test/index.vue'
+
+const main = () => import('../views/main/index.vue')
+const renderApp = () => import('../views/render-app/index.vue')
+const test = () => import('../views/test/index.vue')
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'editor-main',
     component: main
+  },
+  {
+    path: '/render-app',
+    name: 'render-app',
+    component: renderApp
   },
   {
     path: '/test',

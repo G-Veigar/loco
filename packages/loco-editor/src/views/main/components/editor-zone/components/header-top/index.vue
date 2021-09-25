@@ -34,6 +34,7 @@
 import { Options, Vue } from 'vue-class-component'
 import { mapState, mapMutations } from 'vuex'
 import { deviceList } from '@/modules/edit-viewport/device'
+import { notify } from '@/modules/notify'
 
 @Options({
   name: 'header-top',
@@ -60,6 +61,12 @@ export default class HeaderTop extends Vue {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   toggleShowDeviceList () {
     this.showDeviceList = !this.showDeviceList
+    notify({
+      title: 'Info',
+      message: 'This is an info message',
+      type: 'info'
+      // duration: 0
+    })
   }
 }
 </script>
@@ -89,6 +96,7 @@ export default class HeaderTop extends Vue {
     display: flex;
     align-items: center;
     position: relative;
+    overflow: visible;
 
     .pick-list {
       position: absolute;
@@ -98,13 +106,19 @@ export default class HeaderTop extends Vue {
       border-radius: 3px;
       box-shadow: rgb(0 0 0 / 15%) 0px 5px 10px;
       max-height: 500px;
+      width: 120%;
       overflow-y: scroll;
       left: 15px;
+      &::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+      }
 
       .pick-list-item {
+        width: 100%;
         height: 30px;
         line-height: 30px;
         padding: 0 10px;
+        box-sizing: border-box;
         color: $mainFontColor;
         text-align: left;
 

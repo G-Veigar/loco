@@ -1,5 +1,8 @@
 <template>
-  <div class="component-item">
+  <div
+    class="component-item"
+    draggable="true"
+    @dragstart="handleDragstart">
     <div class="component-question">
       <i class="iconfont icon-question-circle-fill"></i>
     </div>
@@ -24,6 +27,11 @@ export default class Editor extends Vue {
 
   @Prop({ type: String, required: true })
   icon!: string
+
+  handleDragstart (e: any):void {
+    console.log('dragStart')
+    e.dataTransfer.setData('materialData', 'hehe')
+  }
 }
 </script>
 
@@ -34,7 +42,7 @@ export default class Editor extends Vue {
   flex: 0 0 33.3333%;
   border-right: 1px solid rgb(51, 51, 51);
   border-bottom: 1px solid rgb(51, 51, 51);
-  cursor: pointer;
+  // cursor: pointer;
   padding: 4px 0 10px;
   position: relative;
 

@@ -54,7 +54,7 @@ const module = {
           action: () => { console.log('kds kc') }
         }
       ],
-      show: true,
+      show: false,
       position: {
         left: 500,
         top: 250

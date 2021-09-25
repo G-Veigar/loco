@@ -30,6 +30,7 @@ export default class ToolHeader extends Vue {
   color: $mainFontColor;
   padding: 10px;
   border-bottom: 1px solid $mainBorderColor;
+  font-size: 14px;
 
   .close-btn {
     &:hover {
