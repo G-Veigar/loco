@@ -64,7 +64,8 @@ export default class HeaderTop extends Vue {
     notify({
       title: 'Info',
       message: 'This is an info message',
-      type: 'info'
+      type: 'info',
+      offset: 28
       // duration: 0
     })
   }
