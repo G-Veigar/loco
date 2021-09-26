@@ -34,7 +34,7 @@
 import { Options, Vue } from 'vue-class-component'
 import { mapState, mapMutations } from 'vuex'
 import { deviceList } from '@/modules/edit-viewport/device'
-import { notify } from '@/modules/notify'
+import { confirm } from '@/modules/notify'
 
 @Options({
   name: 'header-top',
@@ -59,15 +59,13 @@ export default class HeaderTop extends Vue {
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  toggleShowDeviceList () {
+  async toggleShowDeviceList () {
     this.showDeviceList = !this.showDeviceList
-    notify({
+    const res = await confirm({
       title: 'Info',
-      message: 'This is an info message',
-      type: 'info',
-      offset: 28
-      // duration: 0
+      message: 'This is an info message'
     })
+    console.log('toggleShowDeviceList', res)
   }
 }
 </script>

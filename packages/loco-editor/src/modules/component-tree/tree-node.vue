@@ -44,6 +44,8 @@ export default class TreeNode extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/style/var.scss';
+
 $collapseBtnWidth: 16px;
 $collapseBtnLeft: 3px;
 $nodeItemPaddingLeft: 20px;
@@ -67,6 +69,9 @@ $nodeItemPaddingLeft: 20px;
       height: $collapseBtnWidth;
       text-align: center;
       line-height: $collapseBtnWidth;
+      &:hover {
+        color: $optionHoveredColor;
+      }
       .iconfont {
         font-size: 12px;
       }

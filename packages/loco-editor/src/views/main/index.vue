@@ -45,13 +45,46 @@ export default class Editor extends Vue {
   height: 100vh;
   display: flex;
   color: $mainFontColor;
-}
 
-.el-notification {
+  .el-notification {
   padding: 10px !important;
 
-  &.right {
-    right: 308px !important;
+    &.right {
+      right: 308px !important;
+    }
+  }
+}
+
+.el-overlay {
+  background-color: rgba(0,0,0,.85) !important;
+}
+
+.el-message-box {
+  box-shadow: rgb(0 0 0 / 30%) 0px 0px 0px 1px;
+  background-color: $mainBgColorLight !important;
+  border: none;
+  border-radius: 3px !important;
+}
+
+.el-message-box__header {
+  background-color: $leftBarDetailBgColor !important;
+  border-bottom: 1px solid #212121;
+  .el-message-box__title {
+    color: $mainFontColor !important;
+  }
+  .el-message-box__close {
+    color: $mainFontColor !important;
+  }
+}
+
+.el-message-box__container {
+  color: $mainFontColor !important;
+}
+
+.el-message-box__btns {
+  .el-button {
+    border: 1px solid rgb(51, 51, 51) !important;
+    border-radius: 2px !important;
   }
 }
 </style>
