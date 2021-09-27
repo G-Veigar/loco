@@ -7,8 +7,8 @@
       @pluginChange="handlePluginChange"></left-bar-nav>
     <div class="tool-bar" v-show="toolBarShow">
       <tool-header title="组件库" @close="handleClose"></tool-header>
-      <!-- <component-lib></component-lib> -->
-      <component-tree></component-tree>
+      <component-lib></component-lib>
+      <!-- <component-tree></component-tree> -->
       <!-- <keep-alive>
         <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>
       </keep-alive> -->

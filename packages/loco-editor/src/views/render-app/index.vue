@@ -1,5 +1,8 @@
 <template>
-  <div class="loco-render-app">
+  <div
+    class="loco-render-app"
+    @dragover="handleDragover"
+    @drop="handleDrop">
     <loco-render></loco-render>
   </div>
 </template>
@@ -19,6 +22,14 @@ app.use(locoComponent)
   }
 })
 export default class RenderApp extends Vue {
+  handleDragover (e: any):void {
+    e.preventDefault()
+  }
+
+  handleDrop (e: any): void{
+    e.preventDefault()
+    console.log('handleDrop')
+  }
 }
 </script>
 
