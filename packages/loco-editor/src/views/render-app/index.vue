@@ -27,8 +27,21 @@ export default class RenderApp extends Vue {
   }
 
   handleDrop (e: any): void{
+    const data = e.dataTransfer.getData('materialData')
+    const files = e.dataTransfer.files
     e.preventDefault()
-    console.log('handleDrop')
+    const { x, y } = e
+    window.parent.postMessage({
+      type: 'drop',
+      data: {
+        dropPos: {
+          x,
+          y
+        },
+        component: data,
+        type: files[0].type
+      }
+    }, '*')
   }
 }
 </script>
@@ -38,7 +51,6 @@ export default class RenderApp extends Vue {
 
 .loco-render-app {
   height: 100vh;
-  display: flex;
   color: $mainFontColor;
 }
 </style>

@@ -1,0 +1,20 @@
+.base-button {
+    min-width: 100px;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #1989fa;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 16px;
+
+    &:active {
+        background-color: #1989fa;
+    }
+
+    &[disabled] {
+        background-color: #999;
+    }
+}

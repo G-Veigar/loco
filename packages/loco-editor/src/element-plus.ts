@@ -6,7 +6,16 @@ import {
   ElTabPane,
   ElCollapse,
   ElCollapseItem,
-  ElSlider
+  ElSlider,
+  ElInput,
+  ElInputNumber,
+  ElRadio,
+  ElCheckbox,
+  ElSelect,
+  ElOption,
+  ElSwitch,
+  ElDatePicker,
+  ElColorPicker
 } from 'element-plus'
 
 export default [
@@ -15,5 +24,14 @@ export default [
   ElTabPane,
   ElCollapse,
   ElCollapseItem,
-  ElSlider
+  ElSlider,
+  ElInput,
+  ElInputNumber,
+  ElRadio,
+  ElCheckbox,
+  ElSelect,
+  ElOption,
+  ElSwitch,
+  ElDatePicker,
+  ElColorPicker
 ]

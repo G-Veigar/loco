@@ -94,7 +94,7 @@ $nodeItemPaddingLeft: 20px;
       content: '';
       width: 1px;
       bottom: 0;
-      left: ($collapseBtnWidth + $collapseBtnLeft - 1px) / 2 + 1px;
+      // left: ($collapseBtnWidth + $collapseBtnLeft - 1px) / 2 + 1px;
       top: 0;
       background-color: #aaa;
       z-index: 1;

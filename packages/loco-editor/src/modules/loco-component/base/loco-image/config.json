@@ -1,0 +1,16 @@
+[
+    {
+        "name": "按钮文字",
+        "desc": "",
+        "type": "text",
+        "options": {
+            
+        },
+        "default": "",
+        "required": false,
+        "rule": {
+            "type": "preset",
+            "value": "httpLink"
+        }
+    }
+]

@@ -30,6 +30,9 @@ export default class Editor extends Vue {
   created (): void {
     initHotkeys()
     initContextMenu()
+    window.addEventListener('message', data => {
+      console.log('postmessage', data)
+    })
   }
 
   mounted (): void {

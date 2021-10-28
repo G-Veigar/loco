@@ -14,6 +14,20 @@ class Schema {
     // node = this._getNode(node)
     this.currentNode = node
   }
+
+  // 创建新节点
+  public createNode (options: any):SchemaNode {
+    const node = new SchemaNode({
+      tag: options.tag,
+      text: options.name
+    })
+    return node
+  }
+
+  public removeNode (node: SchemaNode) {
+    // node = this._getNode(node)
+    this.removeNodeFrom(node.parent, node)
+  }
 }
 
 export default Schema

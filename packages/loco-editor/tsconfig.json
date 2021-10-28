@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/modules/loco-render/utils.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -11,8 +11,7 @@
         <template #label>
           <i class="iconfont icon-sliders"></i>
         </template>
-        <!-- <prop-setter></prop-setter> -->
-        prop-setter
+        <prop-render></prop-render>
       </el-tab-pane>
       <el-tab-pane label="事件" name="event">
         <template #label>
@@ -35,11 +34,13 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
 import styleSetter from '@/components/style-setter/index.vue'
+import propRender from '@/components/prop-render/index.vue'
 
 @Options({
   name: 'editor-right-bar',
   components: {
-    styleSetter
+    styleSetter,
+    propRender
   },
   props: {
     msg: String

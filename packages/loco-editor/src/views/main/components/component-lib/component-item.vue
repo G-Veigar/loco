@@ -30,7 +30,7 @@ export default class Editor extends Vue {
 
   handleDragstart (e: any):void {
     console.log('dragStart')
-    e.dataTransfer.setData('materialData', 'hehe')
+    e.dataTransfer.setData('materialData', this.name)
   }
 }
 </script>
