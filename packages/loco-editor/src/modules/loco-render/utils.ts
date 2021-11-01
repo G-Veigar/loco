@@ -6,11 +6,16 @@
 import locoButton from '../loco-component//base/loco-button/view.vue'
 import locoImage from '../loco-component//base/loco-image/view.vue'
 import locoContainer from '../loco-component//base/loco-container/view.vue'
+// TODO: delete
+import cardDemo from '../loco-component//base/loco-container/card-demo.vue'
+import slotZone from '../../components/slot-zone/index.vue'
 
 const componentMap = {
   'loco-button': locoButton,
   'loco-image': locoImage,
-  'loco-container': locoContainer
+  'loco-container': locoContainer,
+  'card-demo': cardDemo,
+  'slot-zone': slotZone
 }
 
 function schema2RenderParmas (schema: any, h: any): any {

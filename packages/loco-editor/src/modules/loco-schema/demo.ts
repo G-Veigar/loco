@@ -78,6 +78,90 @@ const schema = {
               //   .track()
             }
           }
+        },
+        children: [
+          // {
+          //   tag: 'card-demo',
+          //   text: 'p1111122',
+          //   nodeId: '11122',
+          //   style: {
+          //     fontWeight: 'bold',
+          //     marginTop: '100px'
+          //   },
+          //   event: {
+          //     on: {},
+          //     emit: {
+          //       click: '#mybtn@click'
+          //     }
+          //   }
+          // },
+          // {
+          //   tag: 'card-demo',
+          //   text: 'p1111122',
+          //   nodeId: '11122222',
+          //   style: {
+          //     fontWeight: 'bold',
+          //     marginTop: '100px'
+          //   },
+          //   event: {
+          //     on: {},
+          //     emit: {
+          //       click: '#mybtn@click'
+          //     }
+          //   }
+          // },
+          // {
+          //   tag: 'card-demo',
+          //   text: 'p1111122',
+          //   nodeId: '111333',
+          //   style: {
+          //     fontWeight: 'bold',
+          //     marginTop: '100px'
+          //   },
+          //   event: {
+          //     on: {},
+          //     emit: {
+          //       click: '#mybtn@click'
+          //     }
+          //   }
+          // },
+          // {
+          //   tag: 'card-demo',
+          //   text: 'p1111122',
+          //   nodeId: '111444',
+          //   style: {
+          //     fontWeight: 'bold',
+          //     marginTop: '100px'
+          //   },
+          //   event: {
+          //     on: {},
+          //     emit: {
+          //       click: '#mybtn@click'
+          //     }
+          //   }
+          // },
+          {
+            tag: 'slot-zone',
+            nodeId: '111555'
+          }
+        ],
+        editorInfo: {
+          // slot: {
+          //   width: '100%',
+          //   height: '200px'
+          // },
+          slot: [
+            {
+              name: 'header',
+              width: '100%',
+              height: '100px'
+            },
+            {
+              name: 'footer',
+              width: '100%',
+              height: '100px'
+            }
+          ]
         }
       },
       {
