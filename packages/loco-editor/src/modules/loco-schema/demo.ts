@@ -1,4 +1,8 @@
-const schema = {
+import Schema from './index'
+import { ref } from 'vue'
+import SchemaNode from '../loco-schema/schema-node'
+
+const demoSchemaStr = {
   title: '抽奖活动', // 页面title
   manifest: {
     version: '1.0.0', // 当前活动版本
@@ -21,7 +25,7 @@ const schema = {
       // innerText: ''
     },
     event: {},
-    children: [
+    childNodes: [
       {
         tag: 'loco-button',
         text: 'p11111',
@@ -79,7 +83,7 @@ const schema = {
             }
           }
         },
-        children: [
+        childNodes: [
           // {
           //   tag: 'card-demo',
           //   text: 'p1111122',
@@ -142,7 +146,11 @@ const schema = {
           // },
           {
             tag: 'slot-zone',
-            nodeId: '111555'
+            nodeId: '111555',
+            props: {
+              id: '111555',
+              includes: ['button']
+            }
           }
         ],
         editorInfo: {
@@ -200,4 +208,17 @@ const schema = {
   }
 }
 
-export default schema
+const demoSchema = ref(new Schema(demoSchemaStr))
+
+function hehe (): void{
+  demoSchema.value.rootNode.childNodes[1].childNodes[0].changeTo(new SchemaNode({
+    tag: 'loco-button',
+    text: 'p11111'
+  }))
+}
+
+export default demoSchema
+export {
+  hehe
+}
+// export default demoSchema

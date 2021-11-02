@@ -16,6 +16,7 @@ import contextMenu from '@/modules/context-menu/components/context-menu.vue'
 import { initHotkeys } from '@/modules/hot-key'
 import { HOOK, callHook } from '@/modules/hook'
 import { initContextMenu } from '@/modules/context-menu'
+// import { initMessenger } from '@/modules/messenger'
 
 @Options({
   name: 'editor-main',
@@ -30,9 +31,7 @@ export default class Editor extends Vue {
   created (): void {
     initHotkeys()
     initContextMenu()
-    window.addEventListener('message', data => {
-      console.log('postmessage', data)
-    })
+    // initMessenger()
   }
 
   mounted (): void {

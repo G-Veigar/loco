@@ -1,7 +1,8 @@
 const HOOK = {
   editorReady: 'editorReady',
   contextMenu: 'contextMenu',
-  dropFromComponentLib: 'dropFromComponentLib'
+  dropFromComponentLib: 'dropFromComponentLib',
+  beforePageCreated: 'beforePageCreated'
 }
 
 function callHook (hookName: string, data?: unknown): void{

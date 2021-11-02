@@ -88,6 +88,22 @@ class SchemaNode {
     this.insertBefore(node, ++index)
   }
 
+  // 删除当前节点
+  remove (): void{
+    if (this.parent) {
+      this.parent.removeChild(this)
+    }
+  }
+
+  // 更换为其他节点
+  changeTo (node: SchemaNode): void{
+    if (this.parent) {
+      const thisIndex = this.parent.getChildIndex(this)
+      this.parent.insertBefore(node, thisIndex)
+      this.remove()
+    }
+  }
+
   // 新增事件触发
   addEventEmitter (eventType: string): void {
     const eventName = `#${this.nodeId}@${eventType}`
