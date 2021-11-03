@@ -77,7 +77,7 @@ export default class BaseContainer extends Vue {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px dashed #FFA500;
+  border: 3px dashed #FFA500;
   border-radius: 4px;
 }
 </style>

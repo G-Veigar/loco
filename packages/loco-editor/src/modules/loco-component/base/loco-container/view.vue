@@ -1,7 +1,6 @@
 <template>
   <div class="base-container" @scroll="handleScroll">
     <div class="inner-wrapper" :style="containerStyle">
-      <!-- <div class="demo-card" v-for="item in 20" :key="item">demo-card {{item}}</div> -->
       <slot></slot>
     </div>
   </div>

@@ -4,6 +4,7 @@
     @dragover="handleDragover"
     @drop="handleDrop">
     <loco-render :schema="schema"></loco-render>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2912932_j4fdpgcwuso.css">
   </div>
 </template>
 

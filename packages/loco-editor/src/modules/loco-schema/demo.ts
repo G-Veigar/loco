@@ -188,6 +188,20 @@ const demoSchemaStr = {
             path: 'root.module1'
           }
         }
+      },
+      {
+        tag: 'loco-popup',
+        nodeId: 'popup000',
+        childNodes: [
+          // {
+          //   tag: 'slot-zone',
+          //   nodeId: '11155522',
+          //   props: {
+          //     id: '11155522',
+          //     height: '100%'
+          //   }
+          // }
+        ]
       }
     ]
   },

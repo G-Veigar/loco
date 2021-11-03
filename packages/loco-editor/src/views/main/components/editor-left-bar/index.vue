@@ -6,12 +6,8 @@
       :current="currentPluginName"
       @pluginChange="handlePluginChange"></left-bar-nav>
     <div class="tool-bar" v-show="toolBarShow">
-      <tool-header title="组件库" @close="handleClose"></tool-header>
-      <component-lib></component-lib>
-      <!-- <component-tree></component-tree> -->
-      <!-- <keep-alive>
-        <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>
-      </keep-alive> -->
+      <tool-header :title="currentPluginName" @close="handleClose"></tool-header>
+      <component v-if="currentPluginComponent" :is="currentPluginComponent"></component>
     </div>
   </div>
 </template>
@@ -30,9 +26,9 @@ const editorStore = namespace('editor')
   name: 'editor-left-bar',
   components: {
     leftBarNav,
-    toolHeader,
-    componentLib,
-    componentTree
+    toolHeader
+    // componentLib,
+    // componentTree
   }
 })
 export default class EditorLeftBar extends Vue {
@@ -43,14 +39,14 @@ export default class EditorLeftBar extends Vue {
   toolBarShow = true
 
   // TODO: 去掉mock数据
-  currentPluginName = 'test'
+  currentPluginName = '组件库'
 
   mockPluginList = [
-    { name: '组件库', icon: 'icon-ts-tubiao_component' },
-    { name: '组件树', icon: 'icon-node-tree' },
+    { name: '组件库', icon: 'icon-ts-tubiao_component', component: componentLib },
+    { name: '组件树', icon: 'icon-node-tree', component: componentTree },
     { name: '页面管理', icon: 'icon-file-text-fill' },
-    { name: '插件市场', icon: 'icon-shopping-fill' },
-    { name: '静态资源管理', icon: 'icon-folder-open-fill' }
+    { name: '静态资源管理', icon: 'icon-folder-open-fill' },
+    { name: '插件市场', icon: 'icon-shopping-fill' }
   ]
 
   mockBottomPluginList = [
@@ -69,12 +65,30 @@ export default class EditorLeftBar extends Vue {
     return list
   }
 
+  get currentPluginComponent () {
+    const currentPlugin = this.mockPluginList.find((plugin: any) => {
+      return plugin.name === this.currentPluginName
+    })
+    if (currentPlugin) {
+      return currentPlugin?.component
+    }
+  }
+
   handleClose (): void{
     this.toolBarShow = false
+    this.currentPluginName = ''
   }
 
   handlePluginChange (plugin: string): void{
-    this.currentPluginName = plugin
+    if (this.currentPluginName === plugin) {
+      this.toolBarShow = !this.toolBarShow
+      if (!this.toolBarShow) {
+        this.currentPluginName = ''
+      }
+    } else {
+      this.currentPluginName = plugin
+      this.toolBarShow = true
+    }
   }
 }
 </script>
