@@ -46,7 +46,8 @@ export default class EditorLeftBar extends Vue {
     { name: '组件树', icon: 'icon-node-tree', component: componentTree },
     { name: '页面管理', icon: 'icon-file-text-fill' },
     { name: '静态资源管理', icon: 'icon-folder-open-fill' },
-    { name: '插件市场', icon: 'icon-shopping-fill' }
+    { name: '插件市场', icon: 'icon-shopping-fill' },
+    { name: '审查', icon: 'icon-contentAudit' }
   ]
 
   mockBottomPluginList = [
