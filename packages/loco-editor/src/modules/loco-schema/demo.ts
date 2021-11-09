@@ -1,6 +1,6 @@
-import Schema from './index'
+import Schema from './schema.class'
 import { ref } from 'vue'
-import SchemaNode from '../loco-schema/schema-node'
+import SchemaNode from './schema-node.class'
 
 const demoSchemaStr = {
   title: '抽奖活动', // 页面title
@@ -35,7 +35,15 @@ const demoSchemaStr = {
           marginTop: '100px'
         },
         event: {
-          on: {},
+          on: {
+            '#mybtn@click': {
+              type: 'base',
+              action: 'hide',
+              params: {
+                nodeId: '123'
+              }
+            }
+          },
           emit: {
             click: '#mybtn@click'
           }
@@ -224,15 +232,5 @@ const demoSchemaStr = {
 
 const demoSchema = ref(new Schema(demoSchemaStr))
 
-function hehe (): void{
-  demoSchema.value.rootNode.childNodes[1].childNodes[0].changeTo(new SchemaNode({
-    tag: 'loco-button',
-    text: 'p11111'
-  }))
-}
-
 export default demoSchema
-export {
-  hehe
-}
-// export default demoSchema
+export { demoSchemaStr }

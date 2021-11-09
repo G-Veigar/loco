@@ -32,6 +32,7 @@
 <script lang="ts">
 import { Vue, Options, Prop, Watch } from 'vue-property-decorator'
 import 'animate.css'
+import locoAction from '../../../loco-action'
 
 type animationEffects = 'fade' | 'bounce' | 'zoom' | 'slide'
 
@@ -208,8 +209,9 @@ export default class locoPopup extends Vue {
   mounted (): void{
     setTimeout(() => {
       this.visible = true
+      // console.log('Toast', locoAction.Toast)
+      locoAction.toast('hehe')
     }, 3000)
-
     // setTimeout(() => {
     //   this.visible = false
     // }, 8000)

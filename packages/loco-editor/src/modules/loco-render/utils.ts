@@ -35,6 +35,7 @@ function schema2RenderParmas (schema: any, h: any): any {
   if (schema.props) {
     res.prop = schema.props
   }
+  // 处理childNodes
   let children = []
   if (schema.childNodes) {
     children = schema.childNodes.map((item: any) => {
@@ -45,6 +46,10 @@ function schema2RenderParmas (schema: any, h: any): any {
     })
   }
   res.children = children
+
+  // 处理event
+  if (schema.event) {
+  }
 
   return res
 }

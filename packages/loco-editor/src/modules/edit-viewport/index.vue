@@ -6,13 +6,15 @@
     <iframe
     :width="width"
     :height="height"
-    src="/render-app" frameborder="0"></iframe>
+    src="/render-app" frameborder="0"
+    ref="renderIframe"></iframe>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, Prop } from 'vue-property-decorator'
-// import tp from './tp.html'
+import messenger from '@/modules/messenger'
+import { demoSchemaStr } from '@/modules/loco-schema/demo'
 
 @Options({
   name: 'editViewport'
@@ -46,6 +48,15 @@ export default class EditViewport extends Vue {
 
   handleDragOver (e: any) :void {
     console.log('handleDragOver', e)
+  }
+
+  mounted (): void{
+    const renderIframe = this.$refs.renderIframe as HTMLIFrameElement
+    messenger.init(renderIframe.contentWindow)
+    // TODO: 优化messenger.emit，改为需要先ready
+    setTimeout(() => {
+      messenger.emit('schemaInit', demoSchemaStr)
+    }, 2000)
   }
 }
 </script>

@@ -3,6 +3,7 @@ import { defineComponent, VNode, h } from 'vue'
 import { schema2RenderParmas } from './utils'
 
 export default defineComponent({
+  name: 'loco-render',
   props: {
     schema: {
       type: Object,

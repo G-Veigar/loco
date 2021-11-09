@@ -5,7 +5,7 @@
 <style lang="scss">
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

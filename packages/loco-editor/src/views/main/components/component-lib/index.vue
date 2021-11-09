@@ -19,89 +19,89 @@ import componentGroup from './component-group.vue'
 export default class Editor extends Vue {
   basicComponents = [
     {
-      name: 'block',
+      name: 'loco-block',
       icon: 'icon-rongqi'
     },
     {
-      name: 'button',
+      name: 'loco-button',
       icon: 'icon-anniu1'
     },
     {
-      name: 'text',
+      name: 'loco-text',
       icon: 'icon-textEdit'
     },
     {
-      name: 'img',
+      name: 'loco-image',
       icon: 'icon-f-img'
     },
     {
-      name: 'audio',
+      name: 'loco-audio',
       icon: 'icon-yinpin'
     },
     {
-      name: 'vedio',
+      name: 'loco-vedio',
       icon: 'icon-shipin-tianchong'
     }
   ]
 
   proComponents = [
     {
-      name: 'block',
+      name: 'loco-swiper',
       icon: 'icon-shouyelunbotu'
     },
     {
-      name: 'popup',
+      name: 'loco-popup',
       icon: 'icon-program-code'
     },
     {
-      name: 'lottery',
+      name: 'loco-lottery',
       icon: 'icon-zhuanpanshezhi'
     },
     {
-      name: 'upload',
+      name: 'loco-upload',
       icon: 'icon-cloudupload'
     },
     {
-      name: 'share',
+      name: 'loco-share',
       icon: 'icon-fenxiang'
     },
     {
-      name: 'tabs',
+      name: 'loco-tabs',
       icon: 'icon-bootstrap_tabs'
     }
   ]
 
   formComponents = [
     {
-      name: 'input',
+      name: 'loco-input',
       icon: 'icon-input1'
     },
     {
-      name: 'textarea',
+      name: 'loco-textarea',
       icon: 'icon-textarea'
     },
     {
-      name: 'radio',
+      name: 'loco-radio',
       icon: 'icon-radioboxfill'
     },
     {
-      name: 'checkbox',
+      name: 'loco-checkbox',
       icon: 'icon-check-box'
     },
     {
-      name: 'switch',
+      name: 'loco-switch',
       icon: 'icon-switch1'
     },
     {
-      name: 'select',
+      name: 'loco-select',
       icon: 'icon-biaodanzujian-xialakuang'
     },
     {
-      name: 'picker',
+      name: 'loco-picker',
       icon: 'icon-date'
     },
     {
-      name: 'slider',
+      name: 'loco-slider',
       icon: 'icon-Slider-horizontal'
     }
   ]

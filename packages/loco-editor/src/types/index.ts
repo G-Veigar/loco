@@ -1,4 +1,6 @@
 import { Vue } from 'vue-class-component'
+import Schema from '../modules/loco-schema'
+import SchemaNode from '../modules/loco-schema/schema-node.class'
 
 export type EditorPluginConfig = {
   name: string;
@@ -20,4 +22,9 @@ export type EditorStoreState = {
     },
     childMenus: any
   }
+}
+
+export type SchemaStoreState = {
+  schema: Schema | null,
+  currentNodes: SchemaNode[] | null
 }

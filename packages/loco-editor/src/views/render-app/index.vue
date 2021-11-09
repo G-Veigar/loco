@@ -12,49 +12,55 @@
 import locoRender from '@/modules/loco-render/index.vue'
 import locoComponent from '@/modules/loco-component'
 import { app } from '@/app'
-import { defineComponent } from 'vue'
-import schema, { hehe } from '../../modules/loco-schema/demo'
+import { Vue, Options, Prop } from 'vue-property-decorator'
+// import { ref } from 'vue'
+// import demoSchema, { demoSchemaStr } from '../../modules/loco-schema/demo'
+import Schema from '../../modules/loco-schema/schema.class'
+import messenger from '@/modules/messenger'
 
 app.use(locoComponent)
 
-export default defineComponent({
+@Options({
   name: 'render-app',
   components: {
     locoRender
-  },
-  methods: {
-    handleDragover (e: any):void {
-      e.preventDefault()
-    },
-    handleDrop (e: any): void{
-      console.log('handleDrop', e)
-      const targetClass = e.target.classList
-      if (targetClass.contains('slot-zone')) {
-        hehe()
-      }
-      const data = e.dataTransfer.getData('materialData')
-      // const files = e.dataTransfer.files
+  }
+})
+export default class RenderApp extends Vue {
+  schema:any = null
 
-      e.preventDefault()
-      // const { x, y } = e
-      // window.parent.postMessage({
-      //   type: 'drop',
-      //   data: {
-      //     dropPos: {
-      //       x,
-      //       y
-      //     },
-      //     component: data,
-      //     type: files[0].type
-      //   }
-      // }, '*')
-    }
-  },
-  setup () {
-    return { schema }
+  handleDragover (e: any):void {
+    e.preventDefault()
   }
 
-})
+  handleDrop (e: any): void{
+    const targetClass = e.target.classList
+    const data = e.dataTransfer.getData('materialData')
+    // const files = e.dataTransfer.files
+
+    e.preventDefault()
+    // const { x, y } = e
+    // window.parent.postMessage({
+    //   type: 'drop',
+    //   data: {
+    //     dropPos: {
+    //       x,
+    //       y
+    //     },
+    //     component: data,
+    //     type: files[0].type
+    //   }
+    // }, '*')
+    messenger.emit('loco-drop', data)
+  }
+
+  mounted (): void{
+    messenger.init(window.parent)
+    messenger.on('schemaInit', data => {
+      this.schema = new Schema(data.data)
+    })
+  }
+}
 </script>
 
 <style lang="scss">

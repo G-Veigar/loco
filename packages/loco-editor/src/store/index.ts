@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import editorModule from './modules/editor'
+// import schemaModule from './modules/schema'
 
 export default createStore({
   state: {
@@ -10,5 +11,6 @@ export default createStore({
   },
   modules: {
     editor: editorModule
+    // schema: schemaModule
   }
 })

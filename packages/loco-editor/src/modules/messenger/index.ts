@@ -1,29 +1,52 @@
 
-import schema, { hehe } from '../loco-schema/demo'
+// import schema from '../loco-schema/demo'
 
-const messageTypeHandler = {
-  drop (data: any): void{
-    if (data.isDropToSlot) {
-      // console.log('拖放到了一个slot', demoSchema)
-      // demoSchema.rootNode.childNodes[1].remove()
-      console.log('fk')
-      hehe()
-    } else {
-      console.log('拖放了')
+// const messageTypeHandler = {
+//   drop (data: any): void{
+//     if (data.isDropToSlot) {
+//       // console.log('拖放到了一个slot', demoSchema)
+//       // demoSchema.rootNode.childNodes[1].remove()
+//       console.log('fk')
+//     } else {
+//       console.log('拖放了')
+//     }
+//   }
+// }
+
+class Messenger {
+  messengerReady = false
+  receiver: Window | null = null
+
+  init (receiver: Window | null): void{
+    this.receiver = receiver
+    window.addEventListener('message', e => {
+      const { origin, data } = e
+      if (data.type?.startsWith('loco-')) {
+        console.log('hava a message', data)
+      }
+    })
+    this.messengerReady = true
+  }
+
+  emit (type: string, data: any): void{
+    if (this.receiver) {
+      this.receiver.postMessage({
+        type,
+        data
+      }, '*')
     }
+  }
+
+  on (msg: string, callback: (data: any) => void):void {
+    window.addEventListener('message', e => {
+      const { origin, data } = e
+      if (data.type === msg) {
+        callback(data)
+      }
+    })
   }
 }
 
-function initMessenger (): void {
-  window.addEventListener('message', e => {
-    const { origin, data } = e
-    console.log('hava a message', data)
-    if (data.type) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      messageTypeHandler[data.type](data.data)
-    }
-  })
-}
+const messenger = new Messenger()
 
-export { initMessenger }
+export default messenger

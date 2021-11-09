@@ -16,7 +16,7 @@ import contextMenu from '@/modules/context-menu/components/context-menu.vue'
 import { initHotkeys } from '@/modules/hot-key'
 import { HOOK, callHook } from '@/modules/hook'
 import { initContextMenu } from '@/modules/context-menu'
-// import { initMessenger } from '@/modules/messenger'
+import { initSchema } from '@/modules/loco-schema'
 
 @Options({
   name: 'editor-main',
@@ -31,7 +31,7 @@ export default class Editor extends Vue {
   created (): void {
     initHotkeys()
     initContextMenu()
-    // initMessenger()
+    initSchema()
   }
 
   mounted (): void {

@@ -29,7 +29,6 @@ export default class Editor extends Vue {
   icon!: string
 
   handleDragstart (e: any):void {
-    console.log('dragStart')
     e.dataTransfer.setData('materialData', this.name)
   }
 }
