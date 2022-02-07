@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Options, Prop } from 'vue-property-decorator'
 import messenger from '@/modules/messenger'
-import { demoSchemaStr } from '@/modules/loco-schema/demo'
+import demoSchema, { demoSchemaStr } from '@/modules/loco-schema/demo'
 
 @Options({
   name: 'editViewport'
@@ -52,7 +52,15 @@ export default class EditViewport extends Vue {
 
   mounted (): void{
     const renderIframe = this.$refs.renderIframe as HTMLIFrameElement
-    messenger.init(renderIframe.contentWindow)
+    messenger.init(renderIframe.contentWindow, {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      'loco-schema': ({ type, scopeNode, params }) => {
+        if (type === 'addNewNode') {
+          // demoSchema.rootNode()
+        }
+      }
+    })
     // TODO: 优化messenger.emit，改为需要先ready
     setTimeout(() => {
       messenger.emit('schemaInit', demoSchemaStr)

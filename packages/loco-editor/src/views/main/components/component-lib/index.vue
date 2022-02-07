@@ -1,8 +1,8 @@
 <template>
   <div class="component-lib">
-    <component-group name="basic" :components="basicComponents"></component-group>
-    <component-group name="pro" :components="proComponents"></component-group>
-    <component-group name="form" :components="formComponents"></component-group>
+    <component-group name="基础组件" :components="basicComponents"></component-group>
+    <component-group name="高级组件" :components="proComponents"></component-group>
+    <component-group name="表单组件" :components="formComponents"></component-group>
   </div>
 </template>
 
@@ -19,89 +19,119 @@ import componentGroup from './component-group.vue'
 export default class Editor extends Vue {
   basicComponents = [
     {
-      name: 'loco-block',
+      name: '容器',
+      component: 'loco-block',
       icon: 'icon-rongqi'
     },
     {
-      name: 'loco-button',
+      name: '按钮',
+      component: 'loco-button',
       icon: 'icon-anniu1'
     },
     {
-      name: 'loco-text',
+      name: '文本',
+      component: 'loco-text',
       icon: 'icon-textEdit'
     },
     {
-      name: 'loco-image',
+      name: '图片',
+      component: 'loco-image',
       icon: 'icon-f-img'
     },
     {
-      name: 'loco-audio',
+      name: '音频',
+      component: 'loco-audio',
       icon: 'icon-yinpin'
     },
     {
-      name: 'loco-vedio',
+      name: '视频',
+      component: 'loco-vedio',
       icon: 'icon-shipin-tianchong'
     }
   ]
 
   proComponents = [
     {
-      name: 'loco-swiper',
+      name: '轮播',
+      component: 'loco-swiper',
       icon: 'icon-shouyelunbotu'
     },
     {
-      name: 'loco-popup',
-      icon: 'icon-program-code'
+      name: '弹框',
+      component: 'loco-dialog',
+      icon: 'icon-dankuang'
     },
+    // {
+    //   name: '底部弹层',
+    //   component: 'loco-popup',
+    //   icon: 'icon-program-code'
+    // },
     {
-      name: 'loco-lottery',
+      name: '抽奖',
+      component: 'loco-lottery',
       icon: 'icon-zhuanpanshezhi'
     },
     {
-      name: 'loco-upload',
+      name: '上传',
+      component: 'loco-upload',
       icon: 'icon-cloudupload'
     },
     {
-      name: 'loco-share',
+      name: '分享',
+      component: 'loco-share',
       icon: 'icon-fenxiang'
     },
     {
-      name: 'loco-tabs',
+      name: 'Tab',
+      component: 'loco-tabs',
       icon: 'icon-bootstrap_tabs'
+    },
+    {
+      name: '挂件',
+      component: 'loco-widget',
+      icon: 'icon-widget'
     }
   ]
 
   formComponents = [
     {
-      name: 'loco-input',
+      name: '输入框',
+      component: 'loco-input',
       icon: 'icon-input1'
     },
     {
-      name: 'loco-textarea',
+      name: '文本域',
+      component: 'loco-textarea',
       icon: 'icon-textarea'
     },
     {
-      name: 'loco-radio',
+      name: '单选框',
+      component: 'loco-radio',
       icon: 'icon-radioboxfill'
     },
     {
-      name: 'loco-checkbox',
+      name: '多选框',
+      component: 'loco-checkbox',
       icon: 'icon-check-box'
     },
     {
-      name: 'loco-switch',
+      name: '开关',
+      component: 'loco-checkbox',
       icon: 'icon-switch1'
     },
     {
-      name: 'loco-select',
+      name: '选择器',
+      component: 'loco-select',
       icon: 'icon-biaodanzujian-xialakuang'
     },
     {
-      name: 'loco-picker',
+      name: '时间选择器',
+      component: 'loco-picker',
       icon: 'icon-date'
     },
     {
-      name: 'loco-slider',
+      name: '滑动选择器',
+      component: 'loco-slider',
       icon: 'icon-Slider-horizontal'
     }
   ]

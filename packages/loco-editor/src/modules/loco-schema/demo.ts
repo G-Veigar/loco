@@ -32,7 +32,7 @@ const demoSchemaStr = {
         nodeId: '111',
         style: {
           fontWeight: 'bold',
-          marginTop: '100px'
+          marginTop: '120px'
         },
         event: {
           on: {
@@ -180,37 +180,53 @@ const demoSchemaStr = {
           ]
         }
       },
+      // {
+      //   tag: 'loco-button',
+      //   nodeId: 'img000',
+      //   style: {
+      //     fontWeight: 'bold'
+      //   },
+      //   props: {
+      //     src: {
+      //       type: 'static',
+      //       value: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2203133702,1040096964&fm=26&gp=0.jpg'
+      //     },
+      //     other: {
+      //       type: 'ref',
+      //       path: 'root.module1'
+      //     }
+      //   }
+      // },
       {
-        tag: 'loco-button',
+        tag: 'loco-image',
         nodeId: 'img000',
-        style: {
-          fontWeight: 'bold'
-        },
         props: {
-          src: {
-            type: 'static',
-            value: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2203133702,1040096964&fm=26&gp=0.jpg'
-          },
-          other: {
-            type: 'ref',
-            path: 'root.module1'
-          }
+          src: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2203133702,1040096964&fm=26&gp=0.jpg'
+        },
+        style: {
+          width: '100px'
         }
-      },
-      {
-        tag: 'loco-popup',
-        nodeId: 'popup000',
-        childNodes: [
-          // {
-          //   tag: 'slot-zone',
-          //   nodeId: '11155522',
-          //   props: {
-          //     id: '11155522',
-          //     height: '100%'
-          //   }
-          // }
-        ]
       }
+      // {
+      //   tag: 'loco-popup',
+      //   nodeId: 'popup000',
+      //   props: {
+      //     popupPosition: {
+      //       type: 'static',
+      //       value: 'middle'
+      //     }
+      //   },
+      //   childNodes: [
+      //     // {
+      //     //   tag: 'slot-zone',
+      //     //   nodeId: '11155522',
+      //     //   props: {
+      //     //     id: '11155522',
+      //     //     height: '100%'
+      //     //   }
+      //     // }
+      //   ]
+      // }
     ]
   },
   // 全局状态

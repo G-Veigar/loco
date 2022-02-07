@@ -202,7 +202,7 @@ export default class locoPopup extends Vue {
 
   handleClickMask () {
     if (this.maskClose) {
-      this.$emit('close')
+      this.$emit('updata:visible', false)
     }
   }
 

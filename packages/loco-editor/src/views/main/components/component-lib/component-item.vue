@@ -80,6 +80,7 @@ export default class Editor extends Vue {
   }
   .component-name {
     margin-top: 2px;
+    font-size: 12px;
   }
 }
 </style>

@@ -17,12 +17,15 @@ class Messenger {
   messengerReady = false
   receiver: Window | null = null
 
-  init (receiver: Window | null): void{
+  init (receiver: Window | null, msgHandlers: any): void{
     this.receiver = receiver
     window.addEventListener('message', e => {
       const { origin, data } = e
       if (data.type?.startsWith('loco-')) {
-        console.log('hava a message', data)
+        // console.log('a message', data.data)
+        if (msgHandlers[data.type]) {
+          msgHandlers[data.type](data.data)
+        }
       }
     })
     this.messengerReady = true

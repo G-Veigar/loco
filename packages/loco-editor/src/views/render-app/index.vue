@@ -3,7 +3,11 @@
     class="loco-render-app"
     @dragover="handleDragover"
     @drop="handleDrop">
-    <loco-render :schema="schema"></loco-render>
+    <loco-render
+      :schema="schema"
+      mode="edit"
+      @hover="handleHover"></loco-render>
+    <div class="hover-box" :style="hoverBoxStyle"></div>
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2912932_j4fdpgcwuso.css">
   </div>
 </template>
@@ -13,8 +17,6 @@ import locoRender from '@/modules/loco-render/index.vue'
 import locoComponent from '@/modules/loco-component'
 import { app } from '@/app'
 import { Vue, Options, Prop } from 'vue-property-decorator'
-// import { ref } from 'vue'
-// import demoSchema, { demoSchemaStr } from '../../modules/loco-schema/demo'
 import Schema from '../../modules/loco-schema/schema.class'
 import messenger from '@/modules/messenger'
 
@@ -28,9 +30,24 @@ app.use(locoComponent)
 })
 export default class RenderApp extends Vue {
   schema:any = null
+  hoverBoxStyle:any = null
 
   handleDragover (e: any):void {
     e.preventDefault()
+  }
+
+  handleHover (e: any):void {
+    const { nodeId } = e
+    const el = document.getElementById(nodeId)
+    if (el) {
+      const rectData = el.getBoundingClientRect()
+      this.hoverBoxStyle = {
+        left: `${rectData.left}px`,
+        top: `${rectData.top}px`,
+        width: `${rectData.width}px`,
+        height: `${rectData.height}px`
+      }
+    }
   }
 
   handleDrop (e: any): void{
@@ -51,11 +68,26 @@ export default class RenderApp extends Vue {
     //     type: files[0].type
     //   }
     // }, '*')
-    messenger.emit('loco-drop', data)
+    if (data) {
+      const newNode = this.schema.createNode({
+        tag: data,
+        name: data
+      })
+      this.schema.rootNode.appendChild(newNode)
+      // TODO: 优化，找到更好的schema同步方式
+      messenger.emit('loco-schema', {
+        scopeNode: 'rootNode',
+        type: 'addNewNode',
+        params: {
+          tag: data,
+          name: data
+        }
+      })
+    }
   }
 
   mounted (): void{
-    messenger.init(window.parent)
+    messenger.init(window.parent, {})
     messenger.on('schemaInit', data => {
       this.schema = new Schema(data.data)
     })
@@ -69,5 +101,11 @@ export default class RenderApp extends Vue {
 .loco-render-app {
   height: 100vh;
   color: $mainFontColor;
+}
+.hover-box {
+  position: fixed;
+  border: 2px solid blue;
+  left: 0;
+  top: 0;
 }
 </style>

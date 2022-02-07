@@ -52,6 +52,7 @@ export default class Editor extends Vue {
     border-bottom: 1px solid $mainBorderColor;
     color: $mainFontColor;
     cursor: default;
+    font-size: 13px;
 
     .iconfont {
       font-size: 12px;

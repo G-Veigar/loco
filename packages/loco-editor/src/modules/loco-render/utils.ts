@@ -10,6 +10,9 @@ import locoPopup from '../loco-component/base/loco-popup/view.vue'
 // TODO: delete
 import cardDemo from '../loco-component/base/loco-container/card-demo.vue'
 import slotZone from '../loco-component/slot-zone/index.vue'
+import mitt from 'mitt'
+
+const emitter = mitt()
 
 const componentMap = {
   'loco-button': locoButton,
@@ -20,7 +23,7 @@ const componentMap = {
   'loco-popup': locoPopup
 }
 
-function schema2RenderParmas (schema: any, h: any): any {
+function schema2RenderParmas (schema: any, h: any, mode: string): any {
   // if (schema._isRoot) {
   //   return schema2RenderParmas(schema.container, h)
   // }
@@ -28,9 +31,12 @@ function schema2RenderParmas (schema: any, h: any): any {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     tag: componentMap[schema.tag] || 'div',
-    prop: null,
+    prop: {},
     children: null
   }
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  res.prop.id = schema.nodeId
   // props处理逻辑
   if (schema.props) {
     res.prop = schema.props
@@ -41,7 +47,7 @@ function schema2RenderParmas (schema: any, h: any): any {
     children = schema.childNodes.map((item: any) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const { tag, prop, children } = schema2RenderParmas.call(this, item, h)
+      const { tag, prop, children } = schema2RenderParmas.call(this, item, h, mode)
       return h(tag, prop, children)
     })
   }
@@ -50,10 +56,21 @@ function schema2RenderParmas (schema: any, h: any): any {
   // 处理event
   if (schema.event) {
   }
+  // 编辑模式下处理
+  if (mode === 'edit' && schema.nodeId !== 'container') {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    res.prop.onMouseover = () => {
+      emitter.emit('hoverEl', {
+        nodeId: schema.nodeId
+      })
+    }
+  }
 
   return res
 }
 
 export {
-  schema2RenderParmas
+  schema2RenderParmas,
+  emitter
 }

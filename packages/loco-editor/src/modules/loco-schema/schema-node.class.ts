@@ -8,9 +8,10 @@ class SchemaNode {
   props: any;
   event: {on: any, emit: any};
   parent: SchemaNode | null;
+  root: SchemaNode | null;
   childNodes: SchemaNode[] = [];
 
-  constructor (options: any) {
+  constructor (options: any, root?: SchemaNode) {
     const { props, parent, tag, nodeId, text, style, event, childNodes } = options
     this.nodeId = nodeId || uid() // 节点唯一标识
     this.tag = tag
@@ -19,6 +20,7 @@ class SchemaNode {
     this.props = props
     this.event = event || { on: {}, emit: {} }
     this.parent = parent || null // 父节点
+    this.root = root || null // 根节点
 
     // 递归初始化子节点
     if (childNodes) {

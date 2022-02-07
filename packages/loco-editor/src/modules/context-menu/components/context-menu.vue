@@ -2,6 +2,9 @@
   <div
     class="context-menu"
     v-show="contextMenuShow"
+    tabindex="1"
+    ref="contextMenu"
+    @blur="close"
     :style="contextMenuStyle">
     <!-- 主菜单 -->
     <div class="menu-panel main-menu">
@@ -36,6 +39,7 @@
 import { Vue, Options } from 'vue-property-decorator'
 import { mapState, mapMutations } from 'vuex'
 import contextMenuItem from './context-menu-item.vue'
+import store from '@/store'
 
 @Options({
   name: 'contextMenu',
@@ -49,6 +53,15 @@ import contextMenuItem from './context-menu-item.vue'
       contextMenuPosition: state => state.editor.contextMenu.position,
       childMenus: state => state.editor.contextMenu.childMenus
     })
+  },
+  watch: {
+    contextMenuShow (val) {
+      if (val) {
+        this.$nextTick(() => {
+          this.$refs.contextMenu.focus()
+        })
+      }
+    }
   },
   methods: {
     ...mapMutations(['setContextMenu'])
@@ -81,6 +94,13 @@ export default class contextMenu extends Vue {
       value: childMenus
     })
   }
+
+  close () {
+    store.commit('setContextMenu', {
+      key: 'show',
+      value: false
+    })
+  }
 }
 </script>
 
@@ -89,6 +109,7 @@ export default class contextMenu extends Vue {
 $mainMenuWidth: 200px;
 
 .context-menu {
+  outline: none;
   position: fixed;
   left: 0;
   top: 0;
