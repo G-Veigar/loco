@@ -31,15 +31,15 @@ function schema2RenderParmas (schema: any, h: any, mode: string): any {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     tag: componentMap[schema.tag] || 'div',
-    prop: {},
+    prop: {
+      id: schema.nodeId
+    },
     children: null
   }
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  res.prop.id = schema.nodeId
+
   // props处理逻辑
   if (schema.props) {
-    res.prop = schema.props
+    res.prop = { ...res.prop, ...schema.props }
   }
   // 处理childNodes
   let children = []

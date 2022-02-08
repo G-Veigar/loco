@@ -104,7 +104,7 @@ export default class RenderApp extends Vue {
 }
 .hover-box {
   position: fixed;
-  border: 2px solid blue;
+  border: 1px solid blue;
   left: 0;
   top: 0;
 }

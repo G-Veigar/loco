@@ -29,7 +29,7 @@ const demoSchemaStr = {
       {
         tag: 'loco-button',
         text: 'p11111',
-        nodeId: '111',
+        nodeId: 'button111',
         style: {
           fontWeight: 'bold',
           marginTop: '120px'
@@ -50,8 +50,16 @@ const demoSchemaStr = {
         }
       },
       {
+        tag: 'loco-image',
+        text: 'p11111',
+        nodeId: 'img11122',
+        props: {
+          src: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2203133702,1040096964&fm=26&gp=0.jpg'
+        }
+      },
+      {
         tag: 'loco-container',
-        nodeId: '123',
+        nodeId: 'container123',
         text: 'p222',
         style: {
           color: '#369'
@@ -179,7 +187,7 @@ const demoSchemaStr = {
             }
           ]
         }
-      },
+      }
       // {
       //   tag: 'loco-button',
       //   nodeId: 'img000',
@@ -197,16 +205,6 @@ const demoSchemaStr = {
       //     }
       //   }
       // },
-      {
-        tag: 'loco-image',
-        nodeId: 'img000',
-        props: {
-          src: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2203133702,1040096964&fm=26&gp=0.jpg'
-        },
-        style: {
-          width: '100px'
-        }
-      }
       // {
       //   tag: 'loco-popup',
       //   nodeId: 'popup000',

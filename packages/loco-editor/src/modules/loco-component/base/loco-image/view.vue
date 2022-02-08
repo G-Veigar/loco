@@ -62,5 +62,8 @@ export default class BaseImage extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.base-image {
+  width: 100%;
+}
 </style>
