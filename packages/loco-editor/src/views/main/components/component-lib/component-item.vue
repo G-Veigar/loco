@@ -1,41 +1,28 @@
+<script lang="ts" setup>
+const props = defineProps({
+  name: String,
+  icon: String,
+});
+
+function handleDragstart(e: any): void {
+  e.dataTransfer.setData("materialData", props.name);
+}
+</script>
+
 <template>
-  <div
-    class="component-item"
-    draggable="true"
-    @dragstart="handleDragstart">
+  <div class="component-item" draggable="true" @dragstart="handleDragstart">
     <div class="component-question">
       <i class="iconfont icon-question-circle-fill"></i>
     </div>
     <div class="component-icon">
       <i class="iconfont" :class="icon"></i>
     </div>
-    <div class="component-name">{{name}}</div>
+    <div class="component-name">{{ name }}</div>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue, Prop } from 'vue-property-decorator'
-
-@Options({
-  name: 'componentItem',
-  components: {
-  }
-})
-export default class Editor extends Vue {
-  @Prop({ type: String, required: true })
-  name!: string
-
-  @Prop({ type: String, required: true })
-  icon!: string
-
-  handleDragstart (e: any):void {
-    e.dataTransfer.setData('materialData', this.name)
-  }
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .component-item {
   flex: 0 0 33.3333%;

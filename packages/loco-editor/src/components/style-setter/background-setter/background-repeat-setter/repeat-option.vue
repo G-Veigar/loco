@@ -1,42 +1,35 @@
+<script lang="ts" setup>
+import { computed } from "vue";
+const props = defineProps<{
+  type: string | undefined;
+}>();
+
+const backgroundItemNum = computed(() => {
+  if (props.type === "repeat") {
+    return 9;
+  } else if (props.type === "repeat-x" || props.type === "repeat-y") {
+    return 3;
+  } else {
+    return 0;
+  }
+});
+</script>
+
 <template>
   <div class="repeat-option">
     <div class="option-no-repeat" v-if="type === 'no-repeat'">×</div>
-    <div
-      class="background-item-wrapper"
-      v-else
-      :class="type">
+    <div class="background-item-wrapper" v-else :class="type">
       <div
         class="background-item"
         v-for="item in backgroundItemNum"
-        :key="item"></div>
+        :key="item"
+      ></div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
-@Options({
-  name: 'RepeatOption'
-})
-export default class RepeatOption extends Vue {
-  @Prop({ type: Object, required: true })
-  readonly type: string | undefined
-
-  get backgroundItemNum ():number {
-    if (this.type === 'repeat') {
-      return 9
-    } else if (this.type === 'repeat-x' || this.type === 'repeat-y') {
-      return 3
-    } else {
-      return 0
-    }
-  }
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .repeat-option {
   flex: auto;

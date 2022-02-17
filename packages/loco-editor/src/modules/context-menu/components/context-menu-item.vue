@@ -1,45 +1,47 @@
-<template>
-  <div
-    class="context-menu-item"
-    ref="menuItem"
-    @mouseenter="handleMouseEnter">
-    <div class="menu-label">
-      {{menu.label}}
-    </div>
-    <i class="iconfont icon-caret-right" v-if="menu.childs && menu.childs.length > 0"></i>
-  </div>
-</template>
+<script lang="ts" setup>
+import { ref } from "vue";
+import type { Ref } from "vue";
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
+const props = withDefaults(
+  defineProps<{
+    menu: any;
+  }>(),
+  {}
+);
 
-@Options({
-  name: 'contextMenuItem',
-  components: {
-  },
-  computed: {
-  }
-})
-export default class contextMenu extends Vue {
-  @Prop({ required: true })
+const menuItem: Ref<HTMLDivElement | null> = ref(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  menu!: any
+const emit = defineEmits<{
+  (event: "child", childInfo: { left: number; top: number; childs: [] }): void;
+}>();
 
-  handleMouseEnter (): void{
-    const $menuItem = this.$refs.menuItem as HTMLElement
-    const { left, top } = $menuItem.getBoundingClientRect()
-    this.$emit('child', {
+function handleMouseEnter(): void {
+  const $menuItem = menuItem.value;
+  if ($menuItem) {
+    const { left, top } = $menuItem.getBoundingClientRect();
+    emit("child", {
       left,
       top,
-      childs: this.menu.childs
-    })
+      childs: props.menu.childs,
+    });
   }
 }
 </script>
 
+<template>
+  <div class="context-menu-item" ref="menuItem" @mouseenter="handleMouseEnter">
+    <div class="menu-label">
+      {{ menu.label }}
+    </div>
+    <i
+      class="iconfont icon-caret-right"
+      v-if="menu.childs && menu.childs.length > 0"
+    ></i>
+  </div>
+</template>
+
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 .context-menu-item {
   height: 26px;
   line-height: 26px;

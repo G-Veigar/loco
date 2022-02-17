@@ -1,3 +1,31 @@
+<script lang="ts" setup>
+import { ref, computed } from "vue";
+import draggable from "vuedraggable";
+
+const props = withDefaults(
+  defineProps<{
+    nodes: any[];
+  }>(),
+  {}
+);
+
+const collapsed = ref(false);
+const drag = ref(false);
+
+const dragOptions = computed(() => {
+  return {
+    animation: 200,
+    group: "description",
+    disabled: false,
+    ghostClass: "ghost",
+  };
+});
+
+function toggleCollapse(): void {
+  collapsed.value = !collapsed.value;
+}
+</script>
+
 <template>
   <draggable
     class="dragArea"
@@ -8,7 +36,7 @@
     :component-data="{
       tag: 'ul',
       type: 'transition-group',
-      name: !drag ? 'flip-list' : null
+      name: !drag ? 'flip-list' : null,
     }"
     v-bind="dragOptions"
     @start="drag = true"
@@ -17,66 +45,38 @@
     <template #item="{ element }">
       <div class="tree-node">
         <div class="tree-node-item">
-          <div v-if="element.childNodes && element.childNodes.length > 0" class="tree-node-collapse-btn" @click="toggleCollapse">
-            <i class="iconfont" :class="collapsed? 'icon-caret-right' : 'icon-caret-down'"></i>
+          <div
+            v-if="element.childNodes && element.childNodes.length > 0"
+            class="tree-node-collapse-btn"
+            @click="toggleCollapse"
+          >
+            <i
+              class="iconfont"
+              :class="collapsed ? 'icon-caret-right' : 'icon-caret-down'"
+            ></i>
           </div>
           <div class="tree-node-icon">
             <i class="iconfont" :class="element.icon"></i>
           </div>
-          <div class="tree-node-name">{{element.name}}</div>
+          <div class="tree-node-name">{{ element.name }}</div>
         </div>
         <div
           class="tree-node-content"
           v-if="element.childNodes && element.childNodes.length > 0"
-          v-show="!collapsed">
+          v-show="!collapsed"
+        >
           <tree-node
             v-if="element.childNodes"
-            :nodes="element.childNodes"></tree-node>
+            :nodes="element.childNodes"
+          ></tree-node>
         </div>
       </div>
     </template>
   </draggable>
 </template>
 
-<script lang="ts">
-import draggable from 'vuedraggable'
-
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
-@Options({
-  name: 'tree-node',
-  components: {
-    draggable
-  }
-})
-export default class TreeNode extends Vue {
-  @Prop({ type: Array, required: true })
-  nodes!: any
-
-  @Prop({ type: Array, required: true })
-  tasks!: any
-
-  collapsed = false
-
-  drag = false
-
-  get dragOptions () {
-    return {
-      animation: 200,
-      group: 'description',
-      disabled: false,
-      ghostClass: 'ghost'
-    }
-  }
-
-  toggleCollapse (): void{
-    this.collapsed = !this.collapsed
-  }
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 $collapseBtnWidth: 16px;
 $collapseBtnLeft: 3px;
@@ -123,7 +123,7 @@ $nodeItemPaddingLeft: 20px;
 
     &::before {
       display: block;
-      content: '';
+      content: "";
       width: 1px;
       bottom: 0;
       // left: ($collapseBtnWidth + $collapseBtnLeft - 1px) / 2 + 1px;

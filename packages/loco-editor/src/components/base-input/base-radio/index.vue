@@ -1,3 +1,21 @@
+<script lang="ts" setup>
+const props = withDefaults(
+  defineProps<{
+    options: { value: any; label: string }[];
+    value: any;
+  }>(),
+  {}
+);
+
+const emit = defineEmits<{
+  (event: "update:modelValue", val: any): void;
+}>();
+
+function handleValueChanged(e: any): void {
+  emit("update:modelValue", e);
+}
+</script>
+
 <template>
   <div class="radio-wrapper">
     <el-radio
@@ -5,28 +23,11 @@
       :key="item.label"
       :label="item.value"
       :modelValue="value"
-      @update:modelValue="handleValueChanged">{{item.label}}</el-radio>
+      @update:modelValue="handleValueChanged"
+      >{{ item.label }}</el-radio
+    >
   </div>
 </template>
-
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
-Options({
-  name: 'base-radio'
-})
-export default class BaseRadio extends Vue {
-  @Prop({ type: Array, default: [] })
-  options!: {value: any, label: string}[]
-
-  @Prop({ required: true })
-  value: any
-
-  handleValueChanged (e: any): void {
-    this.$emit('update:modelValue', e)
-  }
-}
-</script>
 
 <style lang="scss">
 .radio-wrapper {

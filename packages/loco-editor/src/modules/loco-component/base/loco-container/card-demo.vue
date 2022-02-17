@@ -1,16 +1,8 @@
+<script lang="ts" setup></script>
+
 <template>
   <div class="demo-card">demo-card</div>
 </template>
-
-<script lang="ts">
-import { Vue, Options } from 'vue-property-decorator'
-
-@Options({
-  name: 'demo-card'
-})
-export default class BaseContainer extends Vue {
-}
-</script>
 
 <style lang="scss" scoped>
 .demo-card {

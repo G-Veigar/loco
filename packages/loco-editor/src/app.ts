@@ -1,8 +1,6 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
 
-const app = createApp(App)
+const app = createApp(App);
 
-export {
-  app
-}
+export { app };

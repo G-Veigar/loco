@@ -1,43 +1,33 @@
-<template>
-  <div
-    class="picker-bar-item"
-    @click="handleClick"
-    :class="{selected: value=== currentValue}">
-    <slot></slot>
-  </div>
-</template>
+<script lang="ts" setup>
+import { inject } from "vue";
 
-<script lang="ts">
-import { Vue, Prop, Options, Inject } from 'vue-property-decorator'
+const props = defineProps<{
+  value: any;
+}>();
 
-Options({
-  emits: ['select']
-})
-export default class PickerBar extends Vue {
-  @Prop({ required: true })
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any
+const selectItem: ((item: any) => void) | undefined = inject("selectItem");
 
-  @Inject()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  selectItem: any
+const currentValue = inject("currentValue");
 
-  @Inject()
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  currentValue: any
-
-  // @Prop({ required: true })
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // selectedValue: any
-
-  handleClick (): void {
-    this.selectItem(this.value)
+function handleClick(): void {
+  if (selectItem) {
+    selectItem(props.value);
   }
 }
 </script>
 
+<template>
+  <div
+    class="picker-bar-item"
+    @click="handleClick"
+    :class="{ selected: value === currentValue }"
+  >
+    <slot></slot>
+  </div>
+</template>
+
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .picker-bar-item {
   flex: 1;

@@ -1,51 +1,21 @@
-function navTo () {
-  console.log('navTo')
+import actions from './actions'
+
+let actionScope: null = null
+
+function invokeAction(actionName: string, params: any) {
+  // @ts-ignore
+  const action = actions[actionName]
+  action({
+    ...params,
+    scope: actionScope
+  })
 }
 
-function setData () {
-  console.log('setData')
+function initActionScope(scope: any) {
+  actionScope = scope
 }
 
-function show () {
-  console.log('show')
+export {
+  initActionScope,
+  invokeAction
 }
-
-function hide () {
-  console.log('hide')
-}
-
-function toast (msg: string) {
-  console.log(msg)
-}
-
-function alert (msg: string) {
-  console.log(msg)
-}
-
-function confirm (msg: string) {
-  console.log(msg)
-}
-
-function loading (msg?: string) {
-  console.log(msg)
-}
-
-const action = {
-  navTo,
-  setData,
-  show,
-  hide,
-  toast,
-  alert,
-  confirm,
-  loading
-  // follow
-  // share
-  // download
-  // upload
-  // request
-  // log
-  // animate
-}
-
-export default action

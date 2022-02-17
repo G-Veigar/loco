@@ -1,3 +1,41 @@
+<script lang="ts" setup>
+import { ref } from "vue";
+import spacingSetter from "./spacing-setter/index.vue";
+import sizeSetter from "./size-setter/index.vue";
+import backgroundSetter from "./background-setter/index.vue";
+import textFontSetter from "./text-font-setter/index.vue";
+import borderSetter from "./border-setter/index.vue";
+import displaySetter from "./display-setter/index.vue";
+import pickerBar from "../base-input/picker-bar/index.vue";
+import pickerBarItem from "../base-input/picker-bar/picker-bar-item.vue";
+
+const activeNames = ref([
+  "间隔",
+  "尺寸",
+  "定位",
+  "布局",
+  "背景",
+  "文本",
+  "test",
+  "边框",
+]);
+
+const currentTest = ref("hehe");
+
+function handleChange(val: string): void {
+  console.log(val);
+}
+
+// 处理样式设置
+function handleInput(val: string): void {
+  console.log(val);
+}
+
+function handleSelect(val: string): void {
+  currentTest.value = val;
+}
+</script>
+
 <template>
   <div class="style-setter">
     <el-collapse v-model="activeNames" @change="handleChange">
@@ -7,9 +45,7 @@
       <el-collapse-item title="尺寸" name="尺寸">
         <size-setter></size-setter>
       </el-collapse-item>
-      <el-collapse-item title="定位" name="定位">
-        定位
-      </el-collapse-item>
+      <el-collapse-item title="定位" name="定位"> 定位 </el-collapse-item>
       <el-collapse-item title="布局" name="定位">
         <display-setter></display-setter>
       </el-collapse-item>
@@ -32,50 +68,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-property-decorator'
-import spacingSetter from './spacing-setter/index.vue'
-import sizeSetter from './size-setter/index.vue'
-import backgroundSetter from './background-setter/index.vue'
-import textFontSetter from './text-font-setter/index.vue'
-import borderSetter from './border-setter/index.vue'
-import displaySetter from './display-setter/index.vue'
-import pickerBar from '../base-input/picker-bar/index.vue'
-import pickerBarItem from '../base-input/picker-bar/picker-bar-item.vue'
-
-@Options({
-  components: {
-    spacingSetter,
-    sizeSetter,
-    backgroundSetter,
-    pickerBar,
-    pickerBarItem,
-    textFontSetter,
-    borderSetter,
-    displaySetter
-  }
-})
-export default class styleSetter extends Vue {
-  activeNames = ['间隔', '尺寸', '定位', '布局', '背景', '文本', 'test', '边框']
-  currentTest = 'hehe'
-
-  handleChange (val: string):void {
-    console.log(val)
-  }
-
-  // 处理样式设置
-  handleInput (val: string):void {
-    console.log(val)
-  }
-
-  handleSelect (val: string):void {
-    this.currentTest = val
-  }
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .style-setter {
   .el-collapse {

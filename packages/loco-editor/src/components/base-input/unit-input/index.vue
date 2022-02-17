@@ -1,82 +1,67 @@
-<template>
-  <div class="unit-input">
-    <input
-      type="text"
-      class="unit-base-input"
-      @blur="handleBlur">
-    <div class="unit-display" @click="handleUnitClick">{{unit}}</div>
-    <div
-      class="unit-select"
-      v-show="selectShow"
-      :style="unitSelectStyle">
-      <div
-        class="unit-option"
-        v-for="item in unitOptions"
-        :key="item">{{item}}</div>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
+<script lang="ts" setup>
+import { ref, computed } from "vue";
 // import UnitSelect from './unit-select.vue'
 
 const buildInUnits = {
-  size: ['PX', '%', 'VW', 'VH', 'EM', 'REM'],
-  time: ['MS', 'S', 'MIN', 'H', 'D']
+  size: ["PX", "%", "VW", "VH", "EM", "REM"],
+  time: ["MS", "S", "MIN", "H", "D"],
+};
+
+type UnitType = "size" | "time";
+
+const props = withDefaults(
+  defineProps<{
+    unit: string;
+    value: number | string;
+    type: UnitType;
+    unitList: string[];
+  }>(),
+  {
+    unit: "px",
+    type: "size",
+  }
+);
+
+const selectShow = ref(false);
+const inputFocusLeft = ref(0);
+const inputFocusTop = ref(0);
+
+const unitOptions = computed(() => {
+  return props.unitList || buildInUnits[props.type];
+});
+
+const unitSelectStyle = computed(() => {
+  return {
+    left: inputFocusLeft.value + "px",
+    top: inputFocusTop.value + "px",
+  };
+});
+
+function handleUnitClick(e: FocusEvent): void {
+  const $input = e.target as HTMLInputElement;
+  const { left, top } = $input.getBoundingClientRect();
+  inputFocusLeft.value = left;
+  inputFocusTop.value = top;
+  selectShow.value = true;
+  console.log("this.inputFocusLeft", inputFocusLeft.value);
 }
 
-type UnitType = 'size' | 'time'
-
-@Options({
-  name: 'unit-input'
-  // components: { UnitSelect }
-})
-export default class UnitInput extends Vue {
-  @Prop({ type: String, default: 'px' })
-  unit!: string
-
-  @Prop({ type: [Number, String], required: true })
-  value!: number | string
-
-  @Prop({ type: String, default: 'size' })
-  type!: UnitType
-
-  @Prop({ type: Array })
-  unitList!: string[]
-
-  selectShow = false
-  inputFocusLeft = 0
-  inputFocusTop = 0
-
-  get unitOptions ():string[] {
-    if (this.unitList) {
-      return this.unitList
-    }
-    return buildInUnits[this.type]
-  }
-
-  get unitSelectStyle (): {left: string, top: string} {
-    return {
-      left: this.inputFocusLeft + 'px',
-      top: this.inputFocusTop + 'px'
-    }
-  }
-
-  handleUnitClick (e: FocusEvent):void {
-    const $input = e.target as HTMLInputElement
-    const { left, top } = $input.getBoundingClientRect()
-    this.inputFocusLeft = left
-    this.inputFocusTop = top
-    this.selectShow = true
-    console.log('this.inputFocusLeft', this.inputFocusLeft)
-  }
-
-  handleBlur (): void{
-    this.selectShow = false
-  }
+function handleBlur(): void {
+  selectShow.value = false;
 }
 </script>
+
+<template>
+  <div class="unit-input">
+    <input type="text" class="unit-base-input" @blur="handleBlur" />
+    <div class="unit-display" @click="handleUnitClick">{{ unit }}</div>
+    <div class="unit-select" v-show="selectShow" :style="unitSelectStyle">
+      <div class="unit-option" v-for="item in unitOptions" :key="item">
+        {{ item }}
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="scss">
 .unit-input {

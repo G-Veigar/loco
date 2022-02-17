@@ -1,24 +1,18 @@
+<script lang="ts" setup>
+const props = defineProps<{
+  backgroundSize: string | undefined;
+}>();
+</script>
+
 <template>
   <div class="background-size-expression">
     <div class="background-root"></div>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
-@Options({
-  name: 'BackgroundSizeSetter'
-})
-export default class BackgroundSizeSetter extends Vue {
-  @Prop({ type: Object, required: true })
-  readonly backgroundSize: string | undefined
-}
-</script>
-
 <style lang="scss">
 .background-size-expression {
-  background: url('./selected-bg.png') left top no-repeat;
+  background: url("./selected-bg.png") left top no-repeat;
   background-size: 24px;
   padding: 10px;
   .background-root {

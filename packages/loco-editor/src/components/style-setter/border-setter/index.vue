@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import borderRadiusSetter from "./border-radius-setter/index.vue";
+import borderSelector from "./border-selector/index.vue";
+import borderStyleSetter from "./border-style-setter/index.vue";
+</script>
+
 <template>
   <div class="border-setter">
     <div class="child-setter">
@@ -15,26 +21,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-property-decorator'
-import borderRadiusSetter from './border-radius-setter/index.vue'
-import borderSelector from './border-selector/index.vue'
-import borderStyleSetter from './border-style-setter/index.vue'
-
-@Options({
-  components: {
-    borderRadiusSetter,
-    borderSelector,
-    borderStyleSetter
-  }
-})
-export default class styleSetter extends Vue {
-
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .border-setter {
   background-color: $mainBgColorLight;

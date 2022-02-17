@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+const props = defineProps<{
+  options: { value: any; label: string }[];
+}>();
+</script>
+
 <template>
   <el-select>
     <el-option
@@ -10,18 +16,4 @@
   </el-select>
 </template>
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
-Options({
-  name: 'base-select'
-})
-export default class BaseSelect extends Vue {
-  @Prop({ type: Array, default: [] })
-  options!: {value: any, label: string}[]
-}
-</script>
-
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

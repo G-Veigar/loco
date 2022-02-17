@@ -1,47 +1,38 @@
+<script lang="ts" setup>
+import { onMounted } from "vue";
+import EditorLeftBar from "./components/editor-left-bar/editor-left-bar.vue";
+import EditorZone from "./components/editor-zone/editor-zone.vue";
+import EditorRightBar from "./components/editor-right-bar/editor-right-bar.vue";
+import ContextMenu from "@/modules/context-menu/components/context-menu.vue";
+import { initHotkeys } from "@/modules/hot-key";
+import { HOOK, callHook } from "@/modules/hook";
+import { initContextMenu } from "@/modules/context-menu";
+import { initSchema } from "../../modules/loco-schema";
+
+initHotkeys();
+initContextMenu();
+initSchema();
+
+onMounted(() => {
+  callHook(HOOK.editorReady);
+});
+</script>
+
 <template>
   <div id="loco-editor">
-    <editor-left-bar></editor-left-bar>
-    <editor-zone></editor-zone>
-    <editor-right-bar></editor-right-bar>
-    <context-menu></context-menu>
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_2821318_lya2lga61v.css"
+    />
+    <EditorLeftBar />
+    <EditorZone />
+    <EditorRightBar />
+    <ContextMenu />
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component'
-import editorLeftBar from './components/editor-left-bar/index.vue'
-import editorZone from './components/editor-zone/index.vue'
-import editorRightBar from './components/editor-right-bar/index.vue'
-import contextMenu from '@/modules/context-menu/components/context-menu.vue'
-import { initHotkeys } from '@/modules/hot-key'
-import { HOOK, callHook } from '@/modules/hook'
-import { initContextMenu } from '@/modules/context-menu'
-import { initSchema } from '@/modules/loco-schema'
-
-@Options({
-  name: 'editor-main',
-  components: {
-    editorLeftBar,
-    editorZone,
-    editorRightBar,
-    contextMenu
-  }
-})
-export default class Editor extends Vue {
-  created (): void {
-    initHotkeys()
-    initContextMenu()
-    initSchema()
-  }
-
-  mounted (): void {
-    callHook(HOOK.editorReady)
-  }
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 #loco-editor {
   height: 100vh;
@@ -49,7 +40,7 @@ export default class Editor extends Vue {
   color: $mainFontColor;
 
   .el-notification {
-  padding: 10px !important;
+    padding: 10px !important;
 
     &.right {
       right: 308px !important;
@@ -58,7 +49,7 @@ export default class Editor extends Vue {
 }
 
 .el-overlay {
-  background-color: rgba(0,0,0,.85) !important;
+  background-color: rgba(0, 0, 0, 0.85) !important;
 }
 
 .el-message-box {

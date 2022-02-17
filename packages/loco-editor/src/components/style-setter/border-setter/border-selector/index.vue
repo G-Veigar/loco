@@ -1,3 +1,15 @@
+<script lang="ts" setup>
+import { ref } from "vue";
+import borderOption from "./border-option.vue";
+
+const borderOptions = ["top", "bottom", "left", "right", "all"];
+const currentBorder = ref("left");
+
+function handleSelectBorder(type: string): void {
+  currentBorder.value = type;
+}
+</script>
+
 <template>
   <div class="border-picker">
     <!-- 四个border -->
@@ -8,29 +20,10 @@
       class="border-option-item"
       :class="item"
       :type="item"
-      @select="handleSelectBorder"></border-option>
+      @select="handleSelectBorder"
+    ></border-option>
   </div>
 </template>
-
-<script lang="ts">
-import { Vue, Options } from 'vue-property-decorator'
-import borderOption from './border-option.vue'
-
-@Options({
-  name: 'borderPicker',
-  components: {
-    borderOption
-  }
-})
-export default class BorderPicker extends Vue {
-  borderOptions = ['top', 'bottom', 'left', 'right', 'all']
-  currentBorder = 'left'
-
-  handleSelectBorder (type: string):void {
-    this.currentBorder = type
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .border-picker {

@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import displayPicker from "./display-picker/index.vue";
+</script>
+
 <template>
   <div class="display-setter">
     <div class="child-setter">
@@ -7,23 +11,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options } from 'vue-property-decorator'
-import displayPicker from './display-picker/index.vue'
-
-@Options({
-  name: 'displaySetter',
-  components: {
-    displayPicker
-  }
-})
-export default class DisplaySetter extends Vue {
-
-}
-</script>
-
 <style lang="scss" scoped>
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 .display-setter {
   background-color: $mainBgColorLight;
   .child-setter {

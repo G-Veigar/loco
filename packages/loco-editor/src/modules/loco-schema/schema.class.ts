@@ -2,17 +2,23 @@ import SchemaNode from './schema-node.class'
 
 class Schema {
   rootNode: SchemaNode | null;
+  states: any;
+  actions: any;
   // currentNode: SchemaNode | null;
   constructor (schemaData: any) {
     // 初始化nodeTree
     if (schemaData) {
       if (schemaData._isRoot) {
         this.rootNode = new SchemaNode(schemaData.container)
+        this.states = schemaData.states
+        this.actions = schemaData.actions
       } else {
         this.rootNode = new SchemaNode(schemaData)
       }
     } else {
       this.rootNode = null
+      this.states = null
+      this.actions = null
     }
     // this.currentNode = null
   }

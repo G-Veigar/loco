@@ -1,3 +1,124 @@
+<script lang="ts" setup>
+interface StyleObjSpacing {
+  marginTop: number | string;
+  marginRight: number | string;
+  marginBottom: number | string;
+  marginLeft: number | string;
+  paddingTop: number | string;
+  paddingRight: number | string;
+  paddingBottom: number | string;
+  paddingLeft: number | string;
+}
+
+const marginBarList = [
+  {
+    name: "marginTop",
+    id: "margin-top-button",
+    pathD: "m1,1 h223 l-36,24 h-151 l-36,-24z",
+    color: "rgb(77, 77, 77)",
+  },
+  {
+    name: "marginRight",
+    id: "margin-right-button",
+    pathD: "m223,1 v119 l-36,-24 v-71 l36,-24z",
+    color: "rgb(85, 85, 85)",
+  },
+  {
+    name: "marginBottom",
+    id: "margin-bottom-button",
+    pathD: "m1,119 h223 l-36,-24 h-151l-36,24z",
+    color: "rgb(77, 77, 77)",
+  },
+  {
+    name: "marginLeft",
+    id: "margin-left-button",
+    pathD: "m1,1 v119 l36,-24 v-71 l-36,-24z",
+    color: "rgb(85, 85, 85)",
+  },
+];
+
+const marginEditList = [
+  {
+    name: "marginTop",
+    id: "margin-top-edit",
+    gridArea: "1 / 2 / 2 / 3",
+  },
+  {
+    name: "marginRight",
+    id: "margin-right-edit",
+    gridArea: "2 / 3 / 3 / 4",
+  },
+  {
+    name: "marginBottom",
+    id: "margin-bottom-edit",
+    gridArea: "3 / 2 / 4 / 3",
+  },
+  {
+    name: "marginLeft",
+    id: "margin-left-edit",
+    gridArea: "2 / 1 / 3 / 2",
+  },
+];
+
+const paddingEditList = [
+  {
+    name: "paddingTop",
+    id: "padding-top-edit",
+    gridArea: "1 / 2 / 2 / 3",
+  },
+  {
+    name: "paddingRight",
+    id: "padding-right-edit",
+    gridArea: "2 / 3 / 3 / 4",
+  },
+  {
+    name: "paddingBottom",
+    id: "padding-bottom-edit",
+    gridArea: "3 / 2 / 4 / 3",
+  },
+  {
+    name: "paddingLeft",
+    id: "padding-left-edit",
+    gridArea: "2 / 1 / 3 / 2",
+  },
+];
+
+const paddingBarList = [
+  {
+    name: "paddingTop",
+    id: "padding-top-button",
+    pathD: "m1,1 h143 l-36,24 h-71 l-36,-24z",
+    color: "rgb(77, 77, 77)",
+  },
+  {
+    name: "paddingRight",
+    id: "padding-right-button",
+    pathD: "m143,1 v63 l-36,-24 v-15 l36,-24z",
+    color: "rgb(85, 85, 85)",
+  },
+  {
+    name: "paddingBottom",
+    id: "padding-bottom-button",
+    pathD: "m1,63 h143 l-36,-24 h-71 l-36,24z",
+    color: "rgb(77, 77, 77)",
+  },
+  {
+    name: "paddingLeft",
+    id: "padding-left-button",
+    pathD: "m1,1 v63 l36,-24 v-15 l-36,-24z",
+    color: "rgb(85, 85, 85)",
+  },
+];
+
+const props = defineProps<{
+  styleObj: StyleObjSpacing | undefined;
+}>();
+
+function handleValueEdit(name: string): void {
+  console.log("handleValueEdit", name);
+}
+</script>
+
 <template>
   <div class="spacing-setter">
     <div class="inner-wrapper">
@@ -15,16 +136,16 @@
             v-for="item in marginBarList"
             :key="item.name"
           >
-              <path
-                cursor="n-resize"
-                mode="delta"
-                fill="currentColor"
-                :d="item.pathD"
-                threshold="1"
-                :data-automation-id="item.id"
-                delay="0"
-                :style="{color: item.color}"
-              ></path>
+            <path
+              cursor="n-resize"
+              mode="delta"
+              fill="currentColor"
+              :d="item.pathD"
+              threshold="1"
+              :data-automation-id="item.id"
+              delay="0"
+              :style="{ color: item.color }"
+            ></path>
           </g>
           <clipPath id="margin-outer">
             <rect
@@ -47,11 +168,7 @@
             fill="transparent"
             rx="2"
             ry="2"
-            style="
-              pointer-events: none;
-              stroke-width: 2px;
-              stroke: #333333;
-            "
+            style="pointer-events: none; stroke-width: 2px; stroke: #333333"
           ></rect>
           <clipPath id="margin-inner">
             <rect
@@ -74,11 +191,7 @@
             fill="transparent"
             rx="2"
             ry="2"
-            style="
-              pointer-events: none;
-              stroke-width: 2px;
-              stroke: #333333;
-            "
+            style="pointer-events: none; stroke-width: 2px; stroke: #333333"
           ></rect>
         </svg>
 
@@ -89,7 +202,7 @@
           :key="item.name"
           :name="item.name"
           :data-automation-id="item.id"
-          :style="{gridArea: item.gridArea}"
+          :style="{ gridArea: item.gridArea }"
           threshold="1"
           delay="300"
           mode="delta"
@@ -121,7 +234,7 @@
               threshold="1"
               :data-automation-id="item.id"
               delay="0"
-              :style="{color: item.color}"
+              :style="{ color: item.color }"
             ></path>
           </g>
           <clipPath id="padding-outer">
@@ -145,11 +258,7 @@
             fill="transparent"
             rx="2"
             ry="2"
-            style="
-              pointer-events: none;
-              stroke-width: 2px;
-              stroke: #333333;
-            "
+            style="pointer-events: none; stroke-width: 2px; stroke: #333333"
           ></rect>
           <clipPath id="padding-inner">
             <rect
@@ -172,11 +281,7 @@
             fill="transparent"
             rx="2"
             ry="2"
-            style="
-              pointer-events: none;
-              stroke-width: 2px;
-              stroke: #333333;
-            "
+            style="pointer-events: none; stroke-width: 2px; stroke: #333333"
           ></rect>
         </svg>
 
@@ -190,7 +295,7 @@
           mode="delta"
           :name="item.name"
           :data-automation-id="item.id"
-          :style="{gridArea: item.gridArea}"
+          :style="{ gridArea: item.gridArea }"
           @click="handleValueEdit(item.name)"
         >
           0
@@ -239,130 +344,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { Vue, Prop } from 'vue-property-decorator'
-
-interface StyleObjSpacing {
-  marginTop: number | string;
-  marginRight: number | string;
-  marginBottom: number | string;
-  marginLeft: number | string;
-  paddingTop: number | string;
-  paddingRight: number | string;
-  paddingBottom: number | string;
-  paddingLeft: number | string;
-}
-
-export default class SpacingSetter extends Vue {
-  @Prop({ type: Object, required: true })
-  readonly styleObj: StyleObjSpacing | undefined
-
-  marginBarList = [
-    {
-      name: 'marginTop',
-      id: 'margin-top-button',
-      pathD: 'm1,1 h223 l-36,24 h-151 l-36,-24z',
-      color: 'rgb(77, 77, 77)'
-    },
-    {
-      name: 'marginRight',
-      id: 'margin-right-button',
-      pathD: 'm223,1 v119 l-36,-24 v-71 l36,-24z',
-      color: 'rgb(85, 85, 85)'
-    },
-    {
-      name: 'marginBottom',
-      id: 'margin-bottom-button',
-      pathD: 'm1,119 h223 l-36,-24 h-151l-36,24z',
-      color: 'rgb(77, 77, 77)'
-    },
-    {
-      name: 'marginLeft',
-      id: 'margin-left-button',
-      pathD: 'm1,1 v119 l36,-24 v-71 l-36,-24z',
-      color: 'rgb(85, 85, 85)'
-    }
-  ]
-
-  marginEditList = [
-    {
-      name: 'marginTop',
-      id: 'margin-top-edit',
-      gridArea: '1 / 2 / 2 / 3'
-    },
-    {
-      name: 'marginRight',
-      id: 'margin-right-edit',
-      gridArea: '2 / 3 / 3 / 4'
-    },
-    {
-      name: 'marginBottom',
-      id: 'margin-bottom-edit',
-      gridArea: '3 / 2 / 4 / 3'
-    },
-    {
-      name: 'marginLeft',
-      id: 'margin-left-edit',
-      gridArea: '2 / 1 / 3 / 2'
-    }
-  ]
-
-  paddingEditList = [
-    {
-      name: 'paddingTop',
-      id: 'padding-top-edit',
-      gridArea: '1 / 2 / 2 / 3'
-    },
-    {
-      name: 'paddingRight',
-      id: 'padding-right-edit',
-      gridArea: '2 / 3 / 3 / 4'
-    },
-    {
-      name: 'paddingBottom',
-      id: 'padding-bottom-edit',
-      gridArea: '3 / 2 / 4 / 3'
-    },
-    {
-      name: 'paddingLeft',
-      id: 'padding-left-edit',
-      gridArea: '2 / 1 / 3 / 2'
-    }
-  ]
-
-  paddingBarList = [
-    {
-      name: 'paddingTop',
-      id: 'padding-top-button',
-      pathD: 'm1,1 h143 l-36,24 h-71 l-36,-24z',
-      color: 'rgb(77, 77, 77)'
-    },
-    {
-      name: 'paddingRight',
-      id: 'padding-right-button',
-      pathD: 'm143,1 v63 l-36,-24 v-15 l36,-24z',
-      color: 'rgb(85, 85, 85)'
-    },
-    {
-      name: 'paddingBottom',
-      id: 'padding-bottom-button',
-      pathD: 'm1,63 h143 l-36,-24 h-71 l-36,24z',
-      color: 'rgb(77, 77, 77)'
-    },
-    {
-      name: 'paddingLeft',
-      id: 'padding-left-button',
-      pathD: 'm1,1 v63 l36,-24 v-15 l-36,-24z',
-      color: 'rgb(85, 85, 85)'
-    }
-  ]
-
-  handleValueEdit (name: string): void {
-    console.log('handleValueEdit', name)
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .spacing-setter {
@@ -417,10 +398,9 @@ export default class SpacingSetter extends Vue {
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: 10px;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
-        Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', sans-serif;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
       font-weight: 400;
       line-height: 10px;
       letter-spacing: -0.2px;
@@ -456,10 +436,9 @@ export default class SpacingSetter extends Vue {
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: 10px;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-        Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue',
-        Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', sans-serif;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
       font-weight: 400;
       line-height: 10px;
       letter-spacing: -0.2px;

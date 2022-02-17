@@ -1,13 +1,35 @@
+<script lang="ts" setup>
+import type { EditorPluginConfig } from "@/types";
+
+const props = withDefaults(
+  defineProps<{
+    topPlugins: any;
+    bottomPlugins: any;
+    current: string;
+  }>(),
+  {}
+);
+
+const emit = defineEmits<{
+  (event: "pluginChange", pluginName: string): void;
+}>();
+
+function changePlugin(item: EditorPluginConfig): void {
+  emit("pluginChange", item.name);
+}
+</script>
+
 <template>
   <div class="left-bar-nav">
     <div class="nav-top">
       <div
         class="plugin-item"
         :title="item.name"
-        :class="{active: current===item.name}"
+        :class="{ active: current === item.name }"
         v-for="item in topPlugins"
         :key="item.label"
-        @click="changePlugin(item)">
+        @click="changePlugin(item)"
+      >
         <i class="iconfont plugin-icon" :class="item.icon"></i>
       </div>
     </div>
@@ -15,41 +37,19 @@
       <div
         class="plugin-item"
         :title="item.name"
-        :class="{active: current===item.name}"
+        :class="{ active: current === item.name }"
         v-for="item in bottomPlugins"
         :key="item.label"
-        @click="changePlugin(item)">
+        @click="changePlugin(item)"
+      >
         <i class="iconfont plugin-icon" :class="item.icon"></i>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Prop, Options } from 'vue-property-decorator'
-import { EditorPluginConfig } from '@/types'
-
-@Options({
-  name: 'leftBarNav'
-})
-export default class LeftBarNav extends Vue {
-  @Prop({ type: Array, required: true })
-  topPlugins!: any;
-
-  @Prop({ type: Array, required: true })
-  bottomPlugins!: any;
-
-  @Prop({ type: String, required: true })
-  current!: string;
-
-  changePlugin (item: EditorPluginConfig): void {
-    this.$emit('pluginChange', item.name)
-  }
-}
-</script>
-
 <style lang="scss" scoped>
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .left-bar-nav {
   width: $leftBarWidth;

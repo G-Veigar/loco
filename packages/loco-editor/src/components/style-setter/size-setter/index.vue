@@ -1,3 +1,20 @@
+<script lang="ts" setup>
+import unitInput from "@/components/base-input/unit-input/index.vue";
+
+interface StyleObjSize {
+  width: number | string;
+  height: number | string;
+  maxWidth: number | string;
+  maxHeight: number | string;
+  minWidth: number | string;
+  minHeight: number | string;
+}
+
+const props = defineProps<{
+  styleObj: StyleObjSize | undefined;
+}>();
+</script>
+
 <template>
   <div class="size-setter">
     <!-- width + height -->
@@ -36,32 +53,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-import unitInput from '@/components/base-input/unit-input/index.vue'
-
-interface StyleObjSize {
-  width: number | string;
-  height: number | string;
-  maxWidth: number | string;
-  maxHeight: number | string;
-  minWidth: number | string;
-  minHeight: number | string;
-}
-
-@Options({
-  components: {
-    unitInput
-  }
-})
-export default class SizeSetter extends Vue {
-  @Prop({ type: Object, required: true })
-  readonly styleObj: StyleObjSize | undefined
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 
 .size-setter {
   background-color: $mainBgColorLight;

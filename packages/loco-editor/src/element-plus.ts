@@ -1,4 +1,4 @@
-import 'element-plus/dist/index.css'
+import "element-plus/dist/index.css";
 
 import {
   ElButton,
@@ -15,8 +15,8 @@ import {
   ElOption,
   ElSwitch,
   ElDatePicker,
-  ElColorPicker
-} from 'element-plus'
+  ElColorPicker,
+} from "element-plus";
 
 export default [
   ElButton,
@@ -33,5 +33,5 @@ export default [
   ElOption,
   ElSwitch,
   ElDatePicker,
-  ElColorPicker
-]
+  ElColorPicker,
+];

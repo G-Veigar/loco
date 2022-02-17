@@ -58,135 +58,148 @@ const demoSchemaStr = {
         }
       },
       {
-        tag: 'loco-container',
-        nodeId: 'container123',
-        text: 'p222',
-        style: {
-          color: '#369'
-        },
-        event: {
-          emit: {},
-          on: {
-            '#123@click': {
-              type: 'base',
-              name: 'hide',
-              params: {
-                nodeId: '123'
-              }
-            },
-            '#mybtn@click': {
-              type: 'base',
-              name: 'hide',
-              params: {
-                nodeId: '123'
-              }
-              // params: {
-              //   url: 'http://www.baidu.com'
-              // }
-              // app
-              //   .setData()
-              //   .hide()
-              //   .show()
-              //   .showToast()
-              //   .showLoading()
-              //   .closeToast()
-              //   .navTo()
-              //   .routerPush()
-              //   .routerReplace()
-              //   .routerBack()
-              //   .requestApi()
-              //   .track()
-            }
-          }
-        },
-        childNodes: [
-          // {
-          //   tag: 'card-demo',
-          //   text: 'p1111122',
-          //   nodeId: '11122',
-          //   style: {
-          //     fontWeight: 'bold',
-          //     marginTop: '100px'
-          //   },
-          //   event: {
-          //     on: {},
-          //     emit: {
-          //       click: '#mybtn@click'
-          //     }
-          //   }
-          // },
-          // {
-          //   tag: 'card-demo',
-          //   text: 'p1111122',
-          //   nodeId: '11122222',
-          //   style: {
-          //     fontWeight: 'bold',
-          //     marginTop: '100px'
-          //   },
-          //   event: {
-          //     on: {},
-          //     emit: {
-          //       click: '#mybtn@click'
-          //     }
-          //   }
-          // },
-          // {
-          //   tag: 'card-demo',
-          //   text: 'p1111122',
-          //   nodeId: '111333',
-          //   style: {
-          //     fontWeight: 'bold',
-          //     marginTop: '100px'
-          //   },
-          //   event: {
-          //     on: {},
-          //     emit: {
-          //       click: '#mybtn@click'
-          //     }
-          //   }
-          // },
-          // {
-          //   tag: 'card-demo',
-          //   text: 'p1111122',
-          //   nodeId: '111444',
-          //   style: {
-          //     fontWeight: 'bold',
-          //     marginTop: '100px'
-          //   },
-          //   event: {
-          //     on: {},
-          //     emit: {
-          //       click: '#mybtn@click'
-          //     }
-          //   }
-          // },
-          {
-            tag: 'slot-zone',
-            nodeId: '111555',
-            props: {
-              id: '111555',
-              includes: ['button']
-            }
-          }
-        ],
-        editorInfo: {
-          // slot: {
-          //   width: '100%',
-          //   height: '200px'
-          // },
-          slot: [
-            {
-              name: 'header',
-              width: '100%',
-              height: '100px'
-            },
-            {
-              name: 'footer',
-              width: '100%',
-              height: '100px'
-            }
-          ]
+        tag: 'loco-dialog',
+        nodeId: 'dialog111',
+        props: {
+          title: '确定xxx吗？',
+          message: '哈哈哈哈哈',
+          showCancelBtn: true
         }
+      },
+      // {
+      //   tag: 'loco-container',
+      //   nodeId: 'container123',
+      //   text: 'p222',
+      //   style: {
+      //     color: '#369'
+      //   },
+      //   event: {
+      //     emit: {},
+      //     on: {
+      //       '#123@click': {
+      //         type: 'base',
+      //         name: 'hide',
+      //         params: {
+      //           nodeId: '123'
+      //         }
+      //       },
+      //       '#mybtn@click': {
+      //         type: 'base',
+      //         name: 'hide',
+      //         params: {
+      //           nodeId: '123'
+      //         }
+      //         // params: {
+      //         //   url: 'http://www.baidu.com'
+      //         // }
+      //         // app
+      //         //   .setData()
+      //         //   .hide()
+      //         //   .show()
+      //         //   .showToast()
+      //         //   .showLoading()
+      //         //   .closeToast()
+      //         //   .navTo()
+      //         //   .routerPush()
+      //         //   .routerReplace()
+      //         //   .routerBack()
+      //         //   .requestApi()
+      //         //   .track()
+      //       }
+      //     }
+      //   },
+      //   childNodes: [
+      //     {
+      //       tag: 'card-demo',
+      //       text: 'p1111122',
+      //       nodeId: '11122',
+      //       style: {
+      //         fontWeight: 'bold',
+      //         marginTop: '100px'
+      //       },
+      //       event: {
+      //         on: {},
+      //         emit: {
+      //           click: '#mybtn@click'
+      //         }
+      //       }
+      //     },
+      //     {
+      //       tag: 'card-demo',
+      //       text: 'p1111122',
+      //       nodeId: '11122222',
+      //       style: {
+      //         fontWeight: 'bold',
+      //         marginTop: '100px'
+      //       },
+      //       event: {
+      //         on: {},
+      //         emit: {
+      //           click: '#mybtn@click'
+      //         }
+      //       }
+      //     },
+      //     {
+      //       tag: 'card-demo',
+      //       text: 'p1111122',
+      //       nodeId: '111333',
+      //       style: {
+      //         fontWeight: 'bold',
+      //         marginTop: '100px'
+      //       },
+      //       event: {
+      //         on: {},
+      //         emit: {
+      //           click: '#mybtn@click'
+      //         }
+      //       }
+      //     },
+      //     {
+      //       tag: 'card-demo',
+      //       text: 'p1111122',
+      //       nodeId: '111444',
+      //       style: {
+      //         fontWeight: 'bold',
+      //         marginTop: '100px'
+      //       },
+      //       event: {
+      //         on: {},
+      //         emit: {
+      //           click: '#mybtn@click'
+      //         }
+      //       }
+      //     },
+      //     {
+      //       tag: 'slot-zone',
+      //       nodeId: '111555',
+      //       props: {
+      //         id: '111555',
+      //         includes: ['button']
+      //       }
+      //     }
+      //   ],
+      //   editorInfo: {
+      //     // slot: {
+      //     //   width: '100%',
+      //     //   height: '200px'
+      //     // },
+      //     slot: [
+      //       {
+      //         name: 'header',
+      //         width: '100%',
+      //         height: '100px'
+      //       },
+      //       {
+      //         name: 'footer',
+      //         width: '100%',
+      //         height: '100px'
+      //       }
+      //     ]
+      //   }
+      // },
+      {
+        tag: 'loco-tab',
+        nodeId: 'tab000'
       }
       // {
       //   tag: 'loco-button',
@@ -228,7 +241,7 @@ const demoSchemaStr = {
     ]
   },
   // 全局状态
-  state: {
+  states: {
     $root: {},
     123: {
       $show: true,
@@ -240,6 +253,34 @@ const demoSchemaStr = {
           text: '456'
         }
       ]
+    },
+    img11122: {
+      $show: false,
+    }
+  },
+  // 事件处理器
+  actions: {
+    // 全局事件，如window，document上的或者一些自定义事件
+    $root: {
+      pageScrollTop: {
+        type: 'base',
+        action: 'toast',
+        params: {
+          msg: '页面已经滚动到了顶部'
+        }
+      }
+    },
+    'button111': {
+      click: {
+        type: 'base',
+        action: 'toggleShow',
+        params: {
+          nodeId: 'img11122'
+        }
+      },
+      dbclick: {
+        type: 'combine'
+      }
     }
   }
 }

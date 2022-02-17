@@ -1,111 +1,89 @@
+<script lang="ts" setup>
+import { computed } from "vue";
+import contextMenuItem from "./context-menu-item.vue";
+import { useEditorStore } from "@/stores/editor";
+
+const editorStore = useEditorStore();
+
+const contextMenuStyle = computed(() => {
+  const { left, top } = editorStore.contextMenu.position;
+  return {
+    left: left + "px",
+    top: top + "px",
+  };
+});
+
+const childMenusStyle = computed(() => {
+  const contextMenuTop = editorStore.contextMenu.position.top;
+  const { top } = editorStore.contextMenu.childMenus;
+  const offsetTop = top - contextMenuTop;
+  return {
+    top: offsetTop + "px !important",
+  };
+});
+
+function showChildMenu(childMenus: any) {
+  editorStore.setContextMenu({
+    key: "childMenus",
+    value: childMenus,
+  });
+}
+
+function close() {
+  editorStore.setContextMenu({
+    key: "show",
+    value: false,
+  });
+}
+</script>
+
 <template>
   <div
     class="context-menu"
-    v-show="contextMenuShow"
+    v-show="editorStore.contextMenu.show"
     tabindex="1"
     ref="contextMenu"
     @blur="close"
-    :style="contextMenuStyle">
+    :style="contextMenuStyle"
+  >
     <!-- 主菜单 -->
     <div class="menu-panel main-menu">
       <div
         class="menu-group"
-        v-for="item in contextMenuList"
-        :key="item.id">
-        <context-menu-item v-if="!item.isGroup" :menu="item" @child="showChildMenu"></context-menu-item>
+        v-for="item in editorStore.contextMenu.menuList"
+        :key="item.id"
+      >
+        <context-menu-item
+          v-if="!item.isGroup"
+          :menu="item"
+          @child="showChildMenu"
+        ></context-menu-item>
         <context-menu-item
           v-else
           v-for="menuItem in item.items"
           :key="menuItem.id"
           :menu="menuItem"
-          @child="showChildMenu"></context-menu-item>
+          @child="showChildMenu"
+        ></context-menu-item>
       </div>
     </div>
     <!-- 子菜单 -->
     <div
       class="menu-panel child-menu menu-left"
-      v-show="childMenus.childs"
-      :style="childMenusStyle">
+      v-show="editorStore.contextMenu.childMenus.childs"
+      :style="childMenusStyle"
+    >
       <context-menu-item
-        v-for="item in childMenus.childs"
+        v-for="item in editorStore.contextMenu.childMenus.childs"
         :key="item.id"
         :menu="item"
-        ></context-menu-item>
+      ></context-menu-item>
     </div>
   </div>
 </template>
 
-<script>
-import { Vue, Options } from 'vue-property-decorator'
-import { mapState, mapMutations } from 'vuex'
-import contextMenuItem from './context-menu-item.vue'
-import store from '@/store'
-
-@Options({
-  name: 'contextMenu',
-  components: {
-    contextMenuItem
-  },
-  computed: {
-    ...mapState({
-      contextMenuShow: state => state.editor.contextMenu.show,
-      contextMenuList: state => state.editor.contextMenu.menuList,
-      contextMenuPosition: state => state.editor.contextMenu.position,
-      childMenus: state => state.editor.contextMenu.childMenus
-    })
-  },
-  watch: {
-    contextMenuShow (val) {
-      if (val) {
-        this.$nextTick(() => {
-          this.$refs.contextMenu.focus()
-        })
-      }
-    }
-  },
-  methods: {
-    ...mapMutations(['setContextMenu'])
-  }
-})
-export default class contextMenu extends Vue {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  get contextMenuStyle () {
-    const { left, top } = this.contextMenuPosition
-    return {
-      left: left + 'px',
-      top: top + 'px'
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  get childMenusStyle () {
-    const contextMenuTop = this.contextMenuPosition.top
-    const { top } = this.childMenus
-    const offsetTop = top - contextMenuTop
-    return {
-      top: offsetTop + 'px !important'
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  showChildMenu (childMenus) {
-    this.setContextMenu({
-      key: 'childMenus',
-      value: childMenus
-    })
-  }
-
-  close () {
-    store.commit('setContextMenu', {
-      key: 'show',
-      value: false
-    })
-  }
-}
-</script>
-
 <style lang="scss">
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 $mainMenuWidth: 200px;
 
 .context-menu {

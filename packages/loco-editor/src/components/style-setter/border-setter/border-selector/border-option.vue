@@ -1,35 +1,30 @@
+<script lang="ts" setup>
+const props = defineProps<{
+  type: string | undefined;
+  selectedValue: string | undefined;
+}>();
+
+const emit = defineEmits<{
+  (event: "select", val: any): void;
+}>();
+
+function selectBorder(): void {
+  emit("select", props.type);
+}
+</script>
+
 <template>
   <div
     class="border-option"
-    :class="{selected: selectedValue === type}"
-    @click="selectBorder">
+    :class="{ selected: selectedValue === type }"
+    @click="selectBorder"
+  >
     <div class="demo-box" :class="type"></div>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
-@Options({
-  name: 'borderOption',
-  components: {
-  }
-})
-export default class BorderOption extends Vue {
-  @Prop({ type: String, required: true })
-  readonly type: string | undefined
-
-  @Prop({ type: String, required: true })
-  readonly selectedValue: string | undefined
-
-  selectBorder (): void{
-    this.$emit('select', this.type)
-  }
-}
-</script>
-
 <style lang="scss" scoped>
-@import '@/style/var.scss';
+@import "@/style/var.scss";
 .border-option {
   width: 24px;
   height: 24px;
