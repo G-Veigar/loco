@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { ref, computed, watch, nextTick } from "vue";
-// import locoAction from "../../../loco-action";
 import "animate.css";
 
-type animationEffects = "fade" | "bounce" | "zoom" | "slide";
+type animationEffects = "fade" | "bounce" | "zoom" | "slide" | "slideUp";
 
 type popupPosition = "middle" | "bottom";
 
@@ -27,14 +26,15 @@ const animateNameMap = {
   backInOut: ["animate__backInDown", "animate__backOutDown"],
 };
 
-const visible = ref(false);
 const popupShow = ref(false);
 const popupMainShow = ref(false);
+const popupMaskShow = ref(false);
 
 const props = withDefaults(
   defineProps<{
     type: popupPosition;
     maskClose: boolean;
+    visible: boolean;
     animated: boolean;
     outAnimated: boolean;
     effect: animationEffects;
@@ -43,11 +43,12 @@ const props = withDefaults(
     closeBtnType: closeBtnType;
   }>(),
   {
+    visible: false,
     type: "bottom",
-    boolean: true,
+    maskClose: true,
     animated: true,
     outAnimated: true,
-    effect: "fade",
+    effect: "slideUp",
     showCloseBtn: true,
     closeBtnPos: "inner-top-right",
     closeBtnType: "normal",
@@ -147,26 +148,28 @@ function handleAnimationEnd(): void {
 }
 
 const emit = defineEmits<{
-  (event: "updata:visible", visible: boolean): void;
+  (event: "update:visible", visible: boolean): void;
 }>();
 
 function handleClickMask() {
   if (props.maskClose) {
-    emit("updata:visible", false);
+    emit("update:visible", false);
   }
 }
 
 watch(
-  () => visible.value,
+  () => props.visible,
   (value) => {
     // 弹出弹框
     if (value) {
       popupShow.value = true;
       nextTick(() => {
         popupMainShow.value = true;
+        popupMaskShow.value = true;
       });
     } else {
       popupMainShow.value = false;
+      popupMaskShow.value = false;
       if (!props.outAnimated || !props.animated) {
         popupShow.value = false;
       }
@@ -176,12 +179,18 @@ watch(
 </script>
 
 <template>
-  <div
-    class="loco-popup"
-    v-if="popupShow"
-    :style="popupStyle"
-    @click="handleClickMask"
-  >
+  <div class="loco-popup" v-if="popupShow" :style="popupStyle">
+    <transition
+      name="custom-classes-transition"
+      :enter-active-class="`animate__animated animate__fadeIn`"
+      :leave-active-class="`animate__animated animate__fadeOut`"
+    >
+      <div
+        v-show="popupMaskShow"
+        class="popup-mask"
+        @click="handleClickMask"
+      ></div>
+    </transition>
     <transition
       v-if="animated"
       name="custom-classes-transition"
@@ -216,12 +225,22 @@ watch(
   top: 0;
   right: 0;
   bottom: 0;
+  // background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  animation-duration: 350ms;
 }
 .popup-main {
   height: 400px;
   background-color: #fff;
-  animation-duration: 400ms; /* don't forget to set a duration! */
+  animation-duration: 350ms; /* don't forget to set a duration! */
   position: relative;
 }
 .close-btn {

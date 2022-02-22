@@ -1,20 +1,19 @@
 <script lang="ts" setup>
-import LocoDialog from './view.vue'
+import LocoDialog from "./view.vue";
 
 const props = withDefaults(
   defineProps<{
     title: string;
     message: string;
-    visiable: boolean;
+    visible: boolean;
     showCancelBtn: boolean;
     cancelBtnText: string;
     confirmBtnText: string;
   }>(),
   {
-    visiable: true,
-    showCancel: false,
-    cancelBtnText: '取消',
-    confirmBtnText: '确认'
+    showCancelBtn: false,
+    cancelBtnText: "取消",
+    confirmBtnText: "确认",
   }
 );
 
@@ -24,27 +23,30 @@ const emit = defineEmits<{
 }>();
 
 function cancel() {
-  emit('cancel')
+  emit("cancel");
 }
 
 function confirm() {
-  emit('confirm')
+  emit("confirm");
 }
 </script>
 
 <template>
-  <LocoDialog :visiable="visiable">
+  <LocoDialog :visible="visible">
     <div class="common-dialog-wrapper">
-      <div class="dialog-title" v-if="title">{{title}}</div>
-      <div class="dialog-msg" v-if="message">{{message}}</div>
+      <div class="dialog-title" v-if="title">{{ title }}</div>
+      <div class="dialog-msg" v-if="message">{{ message }}</div>
       <div class="dialog-btn-wrappr">
         <div
           v-if="showCancelBtn"
           class="dialog-btn dialog-btn-cancel"
-          @click="cancel">{{cancelBtnText}}</div>
-        <div
-          class="dialog-btn dialog-btn-confirm"
-          @click="confirm">{{confirmBtnText}}</div>
+          @click="cancel"
+        >
+          {{ cancelBtnText }}
+        </div>
+        <div class="dialog-btn dialog-btn-confirm" @click="confirm">
+          {{ confirmBtnText }}
+        </div>
       </div>
     </div>
   </LocoDialog>
@@ -70,6 +72,7 @@ function confirm() {
     padding: 4px 0 16px;
     font-size: 14px;
     color: #333;
+    text-align: center;
   }
 
   .dialog-btn-wrappr {
@@ -82,9 +85,11 @@ function confirm() {
       font-weight: bold;
       height: 40px;
       line-height: 40px;
+      text-align: center;
 
       &.dialog-btn-cancel {
-        &+.dialog-btn-confirm {
+        color: #aaa;
+        & + .dialog-btn-confirm {
           border-left: 1px solid #eee;
         }
       }

@@ -5,140 +5,145 @@
       v-for="(item, index) in tabs"
       :key="item.value"
       :ref="setItemRef"
-      @click="handleClick(item, index)">{{item.label}}</div>
-    <div class="active-bar" v-if="activeBarVisiable" :style="activeBarStyle"></div>
+      @click="handleClick(item, index)"
+    >
+      {{ item.label }}
+    </div>
+    <div
+      class="active-bar"
+      v-if="activeBarVisiable"
+      :style="activeBarStyle"
+    ></div>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Options, Prop } from 'vue-property-decorator'
-
+<script lang="ts" setup>
+import { ref, onMounted, computed } from "vue";
 type TabItem = {
-  label: string,
-  value: string
+  label: string;
+  value: string;
+};
+
+type TabType = "normal" | "slide" | "auto";
+
+type SpaceType = "between" | "around" | "full";
+
+const props = withDefaults(
+  defineProps<{
+    tabs: TabItem[];
+    tabType: TabType;
+    spaceType: SpaceType;
+    slideItemMin: number;
+    showActvieBar: boolean;
+    sticky: boolean;
+  }>(),
+  {
+    tabType: "auto",
+    spaceType: "between",
+    slideItemMin: 5,
+    showActvieBar: true,
+    sticky: true,
+  }
+);
+
+const activeBarReady = ref(false);
+
+const itemsPosArr = ref([]);
+
+const itemRefs = ref([]);
+
+const activeValue = ref("tab3");
+const activeIndex = ref(2);
+
+const tabWrapperStyle = computed(() => {
+  const res: any = {};
+  if (props.sticky) {
+    res.position = "sticky";
+    res.top = "0";
+  }
+  // 如果是normal 平铺展示方式
+  if (
+    props.tabType === "normal" ||
+    (props.tabType === "auto" && props.tabs.length < props.slideItemMin)
+  ) {
+    let justifyContent;
+    switch (props.spaceType) {
+      case "between":
+        justifyContent = "space-between";
+        break;
+      case "around":
+        justifyContent = "space-around";
+        break;
+    }
+    res.display = "flex";
+    res.justifyContent = justifyContent;
+  } else {
+    res.display = "flex";
+    res.flexWrap = "nowrap";
+    res.overflow = "auto";
+  }
+  return res;
+});
+
+const activeBarVisiable = computed(() => {
+  return props.showActvieBar && activeBarReady.value;
+});
+
+const activeBarStyle = computed(() => {
+  if (activeBarVisiable.value) {
+    const { left, width } = itemsPosArr.value[activeIndex.value];
+    return {
+      left: `${left}px`,
+      width: `${width}px`,
+    };
+  } else {
+    return {};
+  }
+});
+
+function handleClick(item: any, index: number): void {
+  activeValue.value = item.value;
+  activeIndex.value = index;
 }
 
-type TabType = 'normal' | 'slide' | 'auto'
-
-type SpaceType = 'between' | 'around' | 'full'
-
-@Options({
-  name: 'loco-tab'
-})
-export default class LocoTab extends Vue {
-  @Prop({ type: Array, required: true })
-  tabs!: TabItem[]
-
-  @Prop({ type: Array, default: 'auto' })
-  tabType!: TabType
-
-  @Prop({ type: String, default: 'between' })
-  spaceType!: SpaceType
-
-  // 当item 大于等于此选项，开启横滑滚动
-  @Prop({ type: Number, default: 5 })
-  slideItemMin!: number
-
-  // 是否展示active的item底部的指示条
-  @Prop({ type: Boolean, default: true })
-  showActvieBar!: boolean
-
-  // 是否展示active的item底部的指示条
-  @Prop({ type: Boolean, default: true })
-  sticky!: boolean
-
-  activeBarReady = false
-
-  itemsPosArr = []
-
-  itemRefs = []
-
-  activeValue = 'tab3'
-  activeIndex = 2
-
-  get tabWrapperStyle ():any {
-    const res:any = {}
-    if (this.sticky) {
-      res.position = 'sticky'
-      res.top = '0'
-    }
-    // 如果是normal 平铺展示方式
-    if (this.tabType === 'normal' || (this.tabType === 'auto' && this.tabs.length < this.slideItemMin)) {
-      let justifyContent
-      switch (this.spaceType) {
-        case 'between': justifyContent = 'space-between'; break
-        case 'around': justifyContent = 'space-around'; break
-      }
-      res.display = 'flex'
-      res.justifyContent = justifyContent
-    } else {
-      res.display = 'flex'
-      res.flexWrap = 'nowrap'
-      res.overflow = 'auto'
-    }
-    return res
+function setItemRef(el: HTMLElement): void {
+  if (el) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    itemRefs.value.push(el);
   }
+}
 
-  get activeBarVisiable ():boolean {
-    return this.showActvieBar && this.activeBarReady
-  }
-
-  get activeBarStyle () {
-    if (this.activeBarVisiable) {
-      const { left, width } = this.itemsPosArr[this.activeIndex]
-      return {
-        left: `${left}px`,
-        width: `${width}px`
-      }
-    } else {
-      return null
-    }
-  }
-
-  handleClick (item:any, index: number):void {
-    this.activeValue = item.value
-    this.activeIndex = index
-  }
-
-  setItemRef (el: HTMLElement):void {
-    if (el) {
+function initActiveBar(): void {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const posArr = [];
+  itemRefs.value.forEach((item, index) => {
+    posArr.push({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      this.itemRefs.push(el)
+      left: item.offsetLeft,
+    });
+    if (index !== 0) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const lastItemPos = posArr[index - 1];
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      lastItemPos.width = item.offsetLeft - lastItemPos.left;
     }
-  }
-
-  initActiveBar (): void{
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const posArr = []
-    this.itemRefs.forEach((item, index) => {
-      posArr.push({
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        left: item.offsetLeft
-      })
-      if (index !== 0) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const lastItemPos = posArr[index - 1]
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        lastItemPos.width = item.offsetLeft - lastItemPos.left
-      }
-    })
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.itemsPosArr = posArr
-    this.activeBarReady = true
-  }
-
-  mounted ():void{
-    if (this.showActvieBar) {
-      this.initActiveBar()
-    }
-  }
+  });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  itemsPosArr.value = posArr;
+  activeBarReady.value = true;
 }
+
+onMounted(() => {
+  if (props.showActvieBar) {
+    initActiveBar();
+  }
+});
 </script>
 
 <style lang="scss" scoped>

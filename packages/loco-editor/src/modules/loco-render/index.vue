@@ -2,7 +2,7 @@
 import type { VNode } from "vue";
 import { defineComponent, h } from "vue";
 import { schema2RenderParmas, emitter } from "./utils";
-import { initActionScope } from "@/modules/loco-action"
+import { initActionScope } from "@/modules/loco-action";
 
 export default defineComponent({
   name: "loco-render",
@@ -25,7 +25,7 @@ export default defineComponent({
       {
         mode: this.mode,
         schemaStates: this.schema.states,
-        schemaActions: this.schema.actions
+        schemaActions: this.schema.actions,
       }
     );
     return h(
@@ -38,8 +38,8 @@ export default defineComponent({
   },
   watch: {
     schema(val) {
-      initActionScope(this.schema.states)
-    }
+      initActionScope(val.states);
+    },
   },
   mounted() {
     if (this.mode === "edit") {

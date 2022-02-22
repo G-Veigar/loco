@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { CONTAINER_TYPE } from "./const";
-// import { throttle } from 'lodash-es'
+// import { throttle } from "lodash-es";
 
 const props = withDefaults(
   defineProps<{
@@ -12,39 +12,38 @@ const props = withDefaults(
   }>(),
   {
     type: CONTAINER_TYPE.FLEX,
-    column: 2,
+    column: 1,
     spaceType: "all",
     spaceNum: 10,
   }
 );
 
-const getScrollTop = (element: any) => {
-  if (element === window) {
-    return Math.max(
-      window.pageYOffset || 0,
-      document.documentElement.scrollTop
-    );
-  }
-  return element.scrollTop;
-};
+// const getScrollTop = (element: any) => {
+//   if (element === window) {
+//     return Math.max(
+//       window.pageYOffset || 0,
+//       document.documentElement.scrollTop
+//     );
+//   }
+//   return element.scrollTop;
+// };
 
-const getVisibleHeight = (element: any) => {
-  if (element === window) {
-    return document.documentElement.clientHeight;
-  }
-  return element.clientHeight;
-};
+// const getVisibleHeight = (element: any) => {
+//   if (element === window) {
+//     return document.documentElement.clientHeight;
+//   }
+//   return element.clientHeight;
+// };
 
-// TODO: 节流处理
-function handleScroll(e: any): void {
-  const distance = 100;
-  const viewportScrollTop = getScrollTop(e.target);
-  const viewportBottom = viewportScrollTop + getVisibleHeight(e.target);
-  const shouldTrigger = e.target.scrollHeight - viewportBottom <= 10;
-  if (shouldTrigger) {
-    console.log("on bottom");
-  }
-}
+// const handleScroll = throttle((e: any) => {
+//   const distance = 100;
+//   const viewportScrollTop = getScrollTop(e.target);
+//   const viewportBottom = viewportScrollTop + getVisibleHeight(e.target);
+//   const shouldTrigger = e.target.scrollHeight - viewportBottom <= 10;
+//   if (shouldTrigger) {
+//     console.log("on bottom");
+//   }
+// }, 5000);
 
 const containerStyle = computed(() => {
   const gridRowGap = props.spaceType !== "column" ? props.spaceNum : 0;
@@ -57,7 +56,7 @@ const containerStyle = computed(() => {
 </script>
 
 <template>
-  <div class="base-container" @scroll="handleScroll">
+  <div class="base-container">
     <div class="inner-wrapper" :style="containerStyle">
       <slot></slot>
     </div>

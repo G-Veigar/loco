@@ -11,10 +11,15 @@
 <script lang="ts" setup>
 import "animate.css";
 
-defineProps<{
-  message: string;
-  visible: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    message: string;
+    visible: boolean;
+  }>(),
+  {
+    message: "",
+  }
+);
 </script>
 
 <style lang="scss" scoped>
