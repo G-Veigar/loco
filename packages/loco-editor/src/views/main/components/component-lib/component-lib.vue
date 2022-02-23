@@ -127,18 +127,20 @@ const searchVal = ref("");
 <template>
   <div class="component-lib">
     <div class="search-bar">
-      <input
-        type="text"
-        class="search-input"
-        placeholder="Search component"
-        v-model="searchVal"
-      />
-      <i
-        class="iconfont icon-close2"
-        v-show="searchVal"
-        @click="searchVal = ''"
-      ></i>
-      <i class="iconfont icon-search"></i>
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Search component"
+          v-model="searchVal"
+        />
+        <i
+          class="iconfont icon-close2"
+          v-show="searchVal"
+          @click="searchVal = ''"
+        ></i>
+        <i class="iconfont icon-search"></i>
+      </div>
     </div>
     <div class="component-group-wrapper">
       <component-group
@@ -161,18 +163,38 @@ const searchVal = ref("");
 </template>
 
 <style lang="scss" scoped>
+@import "@/style/var.scss";
+
 .component-lib {
   user-select: none;
+  flex: auto;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .search-bar {
   display: flex;
-  margin: 6px;
-  position: relative;
   align-items: center;
+  padding: 0 8px;
+  position: sticky;
+  align-items: center;
+  top: 0;
   flex: none;
+  height: 46px;
+  background-color: $mainBgColorLight;
+  border-bottom: 1px solid #444;
+
+  .search-input-wrapper {
+    flex: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .search-input {
+    box-sizing: border-box;
     background-color: transparent;
     outline: none;
     border: 1px solid #333;
@@ -198,7 +220,7 @@ const searchVal = ref("");
 
   .icon-search {
     position: absolute;
-    right: 4px;
+    right: 14px;
     z-index: 1;
     font-size: 18px;
     color: #aaa;
@@ -211,7 +233,7 @@ const searchVal = ref("");
 
   .icon-close2 {
     position: absolute;
-    right: 28px;
+    right: 36px;
     z-index: 1;
     font-size: 14px;
     cursor: pointer;

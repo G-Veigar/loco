@@ -104,6 +104,8 @@ function handlePluginChange(plugin: string): void {
     top: $headerTopHeight;
     border-right: 1px solid $mainBorderColor;
     background-color: $leftBarDetailBgColor;
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
