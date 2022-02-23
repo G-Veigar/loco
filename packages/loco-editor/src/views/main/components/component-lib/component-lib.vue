@@ -120,27 +120,43 @@ const formComponents = [
     icon: "icon-Slider-horizontal",
   },
 ];
+
+const searchVal = ref("");
 </script>
 
 <template>
   <div class="component-lib">
     <div class="search-bar">
-      <input type="text" class="search-input" placeholder="Search component" />
-      <i class="iconfont icon-close2"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search component"
+        v-model="searchVal"
+      />
+      <i
+        class="iconfont icon-close2"
+        v-show="searchVal"
+        @click="searchVal = ''"
+      ></i>
       <i class="iconfont icon-search"></i>
     </div>
-    <component-group
-      name="基础组件"
-      :components="basicComponents"
-    ></component-group>
-    <component-group
-      name="高级组件"
-      :components="proComponents"
-    ></component-group>
-    <component-group
-      name="表单组件"
-      :components="formComponents"
-    ></component-group>
+    <div class="component-group-wrapper">
+      <component-group
+        name="基础组件"
+        :components="basicComponents"
+        :searchVal="searchVal"
+      ></component-group>
+      <component-group
+        name="高级组件"
+        :components="proComponents"
+        :searchVal="searchVal"
+      ></component-group>
+      <component-group
+        name="表单组件"
+        :components="formComponents"
+        :searchVal="searchVal"
+      ></component-group>
+    </div>
   </div>
 </template>
 
@@ -154,6 +170,7 @@ const formComponents = [
   margin: 6px;
   position: relative;
   align-items: center;
+  flex: none;
 
   .search-input {
     background-color: transparent;
@@ -203,6 +220,14 @@ const formComponents = [
     &:hover {
       color: #fff;
     }
+  }
+}
+
+.component-group-wrapper {
+  overflow: auto;
+  flex: auto;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 </style>

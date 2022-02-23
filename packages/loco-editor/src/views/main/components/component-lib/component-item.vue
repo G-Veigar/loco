@@ -31,10 +31,12 @@ function handleDragstart(e: any): void {
   // cursor: pointer;
   padding: 4px 0 10px;
   position: relative;
+  background-color: #444;
 
   &:hover {
     background-color: #5d5d5d;
     color: $optionHoveredColor;
+    box-shadow: 0 0 6px -1px #111 inset;
 
     .component-question {
       display: block;

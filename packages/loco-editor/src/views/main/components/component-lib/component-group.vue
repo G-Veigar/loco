@@ -1,24 +1,42 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 import componentItem from "./component-item.vue";
 
 const props = withDefaults(
   defineProps<{
     name: string;
     components: any[];
+    searchVal: string;
   }>(),
   {}
 );
+
+const searchedComponents = computed(() => {
+  if (props.searchVal) {
+    return props.components.filter((item) => {
+      return item.name.includes(props.searchVal);
+    });
+  } else {
+    return props.components;
+  }
+});
 
 const folded = ref(false);
 
 function toggleFold(): void {
   folded.value = !folded.value;
 }
+
+watch(
+  () => props.searchVal,
+  () => {
+    folded.value = false;
+  }
+);
 </script>
 
 <template>
-  <div class="component-group">
+  <div class="component-group" v-show="searchedComponents.length > 0">
     <div class="component-group-header" @click="toggleFold">
       <i
         class="iconfont"
@@ -28,7 +46,7 @@ function toggleFold(): void {
     </div>
     <div class="component-group-wrapper" v-show="!folded">
       <component-item
-        v-for="item in components"
+        v-for="item in searchedComponents"
         :key="item.name"
         :icon="item.icon"
         :name="item.name"

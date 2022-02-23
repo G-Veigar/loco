@@ -16,28 +16,28 @@ function setData(options: {
   scope[nodeId][key] = value;
 }
 
-function show(optipns: { nodeId: string; scope: any }) {
+function show(options: { nodeId: string; scope: any }) {
   const setDataOptions = {
-    ...optipns,
+    ...options,
     key: "$show",
     value: true,
   };
   setData(setDataOptions);
 }
 
-function toggleShow(optipns: { nodeId: string; scope: any }) {
-  const { nodeId, scope } = optipns;
+function toggleShow(options: { nodeId: string; scope: any }) {
+  const { nodeId, scope } = options;
   const setDataOptions = {
-    ...optipns,
+    ...options,
     key: "$show",
     value: !scope[nodeId]["$show"],
   };
   setData(setDataOptions);
 }
 
-function hide(optipns: { nodeId: string; scope: any }) {
+function hide(options: { nodeId: string; scope: any }) {
   const setDataOptions = {
-    ...optipns,
+    ...options,
     key: "$show",
     value: false,
   };
@@ -47,6 +47,11 @@ function hide(optipns: { nodeId: string; scope: any }) {
 // 跳转
 function navTo() {
   console.log("navTo");
+}
+
+// 滚动到
+function scrollTo(options: { nodeId: string }) {
+  console.log("滚到到", options.nodeId);
 }
 
 function loading(msg?: string) {
@@ -64,6 +69,7 @@ const actions = {
   showToast,
   showLoading,
   hideLoading,
+  scrollTo,
   // follow
   // share
   // download
