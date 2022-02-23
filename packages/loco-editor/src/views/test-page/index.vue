@@ -4,10 +4,6 @@ import LocoSlide from "@/modules/loco-component/base/loco-slide/loco-slide.vue";
 import LocoPopup from "@/modules/loco-component/base/loco-popup/view.vue";
 import LocoDialog from "@/modules/loco-component/base/loco-dialog/view.vue";
 
-document.addEventListener("touchstart", (e) => {
-  console.log("touchstart", e.target);
-});
-
 const popupVisible = ref(false);
 const dialogVisible = ref(false);
 

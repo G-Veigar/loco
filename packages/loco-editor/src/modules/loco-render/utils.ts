@@ -35,7 +35,7 @@ function schema2RenderParmas(
     mode: string;
     schemaStates: any;
     schemaActions: any;
-    forScopeData: any;
+    forScopeData?: any;
   }
 ): any {
   // if (schema._isRoot) {
@@ -105,10 +105,9 @@ function schema2RenderParmas(
     res.prop = { ...res.prop, ...schema.props };
   }
 
-  const actions = processEvent(schema, schemaActions);
-  res.prop = { ...res.prop, ...actions };
+  processEvent(schema, res, schemaActions);
 
-  res.children = processChildNodes(schema, h, options);
+  processChildNodes(schema, res, h, options);
 
   processEditMode(schema, res, mode);
 
@@ -116,26 +115,43 @@ function schema2RenderParmas(
 }
 
 // 处理事件绑定
-function processEvent(schema: any, schemaActions: any) {
+function processEvent(schema: any, res: any, schemaActions: any) {
   // 事件处理
   if (schemaActions[schema.nodeId]) {
     const actions: any = {};
     for (const key in schemaActions[schema.nodeId]) {
-      const actionKey = "on" + key.slice(0, 1).toUpperCase() + key.slice(1);
       const actionOptions = schemaActions[schema.nodeId][key];
-      actions[actionKey] = () => {
-        if (actionOptions.type === "base") {
-          invokeAction(actionOptions.action, actionOptions.params);
-        } else if (actionOptions.type === "compose") {
-          invokeComposedAction(actionOptions.actionData);
+      // 自定义事件处理
+      if (key.startsWith("$")) {
+        // TODO：优化自定事件配置方式
+        if (key === "$longPress") {
+          (function () {
+            let timer: any;
+            actions.onTouchstart = () => {
+              timer = setTimeout(() => {
+                handleAction(actionOptions);
+              }, 2000);
+            };
+            actions.onTouchmove = () => {
+              clearTimeout(timer);
+            };
+            actions.onTouchend = () => {
+              clearTimeout(timer);
+            };
+          })();
         }
-      };
+      } else {
+        const actionKey = "on" + key.slice(0, 1).toUpperCase() + key.slice(1);
+        actions[actionKey] = () => {
+          handleAction(actionOptions);
+        };
+      }
     }
-    return actions;
+    res.prop = { ...res.prop, ...actions };
   }
 }
 
-function processChildNodes(schema: any, h: any, options: any) {
+function processChildNodes(schema: any, res: any, h: any, options: any) {
   // 处理childNodes
   let children = [];
   if (schema.childNodes) {
@@ -151,7 +167,7 @@ function processChildNodes(schema: any, h: any, options: any) {
       }
     });
   }
-  return children;
+  res.children = children;
 }
 
 function processEditMode(schema: any, res: any, mode: string) {
@@ -164,6 +180,14 @@ function processEditMode(schema: any, res: any, mode: string) {
         nodeId: schema.nodeId,
       });
     };
+  }
+}
+
+function handleAction(actionOptions: any) {
+  if (actionOptions.type === "base") {
+    invokeAction(actionOptions.action, actionOptions.params);
+  } else if (actionOptions.type === "compose") {
+    invokeComposedAction(actionOptions.actionData);
   }
 }
 

@@ -37,8 +37,13 @@ export default defineComponent({
     );
   },
   watch: {
-    schema(val) {
-      initActionScope(val.states);
+    schema: {
+      handler(val) {
+        if (val?.states) {
+          initActionScope(val.states);
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {

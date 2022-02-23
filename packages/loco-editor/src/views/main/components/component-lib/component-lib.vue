@@ -124,6 +124,11 @@ const formComponents = [
 
 <template>
   <div class="component-lib">
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search component" />
+      <i class="iconfont icon-close2"></i>
+      <i class="iconfont icon-search"></i>
+    </div>
     <component-group
       name="基础组件"
       :components="basicComponents"
@@ -139,8 +144,65 @@ const formComponents = [
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .component-lib {
   user-select: none;
+}
+
+.search-bar {
+  display: flex;
+  margin: 6px;
+  position: relative;
+  align-items: center;
+
+  .search-input {
+    background-color: transparent;
+    outline: none;
+    border: 1px solid #333;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #333;
+    flex: auto;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding-left: 6px;
+    padding-right: 48px;
+    transition: all 0.2s;
+    box-shadow: 0 0 5px -1px #ccc;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 5px -2px #fff;
+      border: 1px solid #aaa;
+    }
+  }
+
+  .icon-search {
+    position: absolute;
+    right: 4px;
+    z-index: 1;
+    font-size: 18px;
+    color: #aaa;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .icon-close2 {
+    position: absolute;
+    right: 28px;
+    z-index: 1;
+    font-size: 14px;
+    cursor: pointer;
+    color: #aaa;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 }
 </style>

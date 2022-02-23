@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { deviceList } from "@/modules/edit-viewport/device";
 import { confirm } from "@/modules/notify";
 import { useEditorStore } from "@/stores/editor";
-import QRcode from 'qrcode';
+import QRcode from "qrcode";
 
 const editorStore = useEditorStore();
 
@@ -30,16 +30,16 @@ async function toggleShowDeviceList() {
 }
 
 function preview() {
-  console.log('preview')
+  console.log("preview");
 }
 
-let QRcodeLink = 'http://www.baidu.com'
-const QRcodeCanvas = ref()
-const QRcodeVisiable = ref(false)
+let QRcodeLink = "http://172.17.25.204:3000/preview";
+const QRcodeCanvas = ref();
+const QRcodeVisiable = ref(false);
 
 function showPreviewQrcode() {
-  QRcodeVisiable.value = !QRcodeVisiable.value
-  QRcode.toCanvas(QRcodeCanvas.value, QRcodeLink, {margin: 2}, err => {
+  QRcodeVisiable.value = !QRcodeVisiable.value;
+  QRcode.toCanvas(QRcodeCanvas.value, QRcodeLink, { margin: 2 }, (err) => {
     if (err) {
       throw Error();
     }
@@ -59,7 +59,11 @@ function showPreviewQrcode() {
         </div>
         <div class="pick-list" v-if="showDeviceList">
           <div class="pick-list-item custom">自定义...</div>
-          <div class="pick-list-item" v-for="item in deviceList" :key="item.name">
+          <div
+            class="pick-list-item"
+            v-for="item in deviceList"
+            :key="item.name"
+          >
             {{ item.name }}
           </div>
         </div>
@@ -81,11 +85,20 @@ function showPreviewQrcode() {
     </div>
 
     <div class="top-right">
-      <i class="preview-btn btn iconfont icon-preview" title="预览" @click="preview"></i>
+      <i
+        class="preview-btn btn iconfont icon-preview"
+        title="预览"
+        @click="preview"
+      ></i>
       <div class="qrcode-wrapper">
-        <i class="qrcode-btn btn iconfont icon-QR-code" title="扫码预览" @click="showPreviewQrcode"></i>
+        <i
+          class="qrcode-btn btn iconfont icon-QR-code"
+          title="扫码预览"
+          @click="showPreviewQrcode"
+        ></i>
         <div class="qrcode-card" v-show="QRcodeVisiable">
-          <canvas class="qrcode-canvas" ref="QRcodeCanvas"></canvas></div>
+          <canvas class="qrcode-canvas" ref="QRcodeCanvas"></canvas>
+        </div>
       </div>
     </div>
   </div>

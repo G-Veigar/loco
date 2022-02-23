@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 const main = () => import("../views/main/index.vue");
 const renderApp = () => import("../views/render-app/index.vue");
+const preview = () => import("../views/preview/index.vue");
 const testPage = () => import("../views/test-page/index.vue");
 
 const router = createRouter({
@@ -15,6 +16,11 @@ const router = createRouter({
       path: "/render-app",
       name: "render-app",
       component: renderApp,
+    },
+    {
+      path: "/preview",
+      name: "preview",
+      component: preview,
     },
     {
       path: "/test",

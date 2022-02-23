@@ -84,6 +84,11 @@ const demoSchemaStr = {
         nodeId: "button777",
       },
       {
+        tag: "loco-button",
+        text: "长按",
+        nodeId: "button888",
+      },
+      {
         tag: "loco-image",
         text: "p11111",
         nodeId: "img11122",
@@ -350,15 +355,6 @@ const demoSchemaStr = {
         },
       },
     },
-    button666: {
-      $longPress: {
-        type: "base",
-        action: "showToast",
-        params: {
-          message: "我长按了",
-        },
-      },
-    },
     button777: {
       click: {
         type: "base",
@@ -374,6 +370,15 @@ const demoSchemaStr = {
               text: "我被改变了2",
             },
           ],
+        },
+      },
+    },
+    button888: {
+      $longPress: {
+        type: "base",
+        action: "showToast",
+        params: {
+          message: "我长按了",
         },
       },
     },
