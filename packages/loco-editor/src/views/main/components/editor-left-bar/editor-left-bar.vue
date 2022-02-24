@@ -3,6 +3,7 @@ import { ref, computed } from "vue";
 import leftBarNav from "./components/left-bar-nav.vue";
 import toolHeader from "./components/tool-header.vue";
 import componentLib from "../component-lib/component-lib.vue";
+import extensionLib from "../extension-lib/index.vue";
 import componentTree from "@/modules/component-tree/index.vue";
 
 const toolBarShow = ref(true);
@@ -18,10 +19,18 @@ const mockPluginList = [
     icon: "icon-ts-tubiao_component",
     component: componentLib,
   },
-  { name: "组件树", icon: "icon-node-tree", component: componentTree },
+  {
+    name: "组件树",
+    icon: "icon-node-tree",
+    component: componentTree,
+  },
   { name: "页面管理", icon: "icon-file-text-fill" },
   { name: "静态资源管理", icon: "icon-folder-open-fill" },
-  { name: "插件市场", icon: "icon-shopping-fill" },
+  {
+    name: "扩展",
+    icon: "icon-shopping-fill",
+    component: extensionLib,
+  },
   { name: "审查", icon: "icon-contentAudit" },
 ];
 

@@ -32,6 +32,7 @@ function handleDragstart(e: any): void {
   padding: 4px 0 10px;
   position: relative;
   background-color: #444;
+  transition: box-shadow 0.2s;
 
   &:hover {
     background-color: #5d5d5d;

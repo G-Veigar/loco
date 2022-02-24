@@ -49,7 +49,9 @@ function showPreviewQrcode() {
 
 <template>
   <div class="header-top">
-    <div class="top-left"></div>
+    <div class="top-left">
+      <i class="iconfont icon-feedback-line" title="反馈"></i>
+    </div>
     <div class="top-middle">
       <div class="device-picker">
         <i class="iconfont icon-phone"></i>
@@ -119,6 +121,12 @@ function showPreviewQrcode() {
 
   .top-left {
     flex: 1;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    .iconfont {
+      font-size: 20px;
+    }
   }
 
   .top-middle {
@@ -133,14 +141,14 @@ function showPreviewQrcode() {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 16px;
+    padding-right: 10px;
 
     .qrcode-wrapper {
       position: relative;
       .qrcode-card {
         position: absolute;
         top: 36px;
-        right: -10px;
+        right: -4px;
         box-shadow: 1px 1px 5px 0px #666;
         background-color: #fff;
         padding: 0;
