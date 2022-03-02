@@ -1,24 +1,31 @@
-import SchemaNode from './schema-node.class'
+import SchemaNode from "./schema-node.class";
+import { useSchemaStore } from "@/stores/schema";
+
+const schemaStore = useSchemaStore();
+
+// setTimeout(() => {
+//   schemaStore.removeNode("button111");
+// }, 10000);
 
 class Schema {
   rootNode: SchemaNode | null;
   states: any;
   actions: any;
   // currentNode: SchemaNode | null;
-  constructor (schemaData: any) {
+  constructor(schemaData: any) {
     // 初始化nodeTree
     if (schemaData) {
       if (schemaData._isRoot) {
-        this.rootNode = new SchemaNode(schemaData.container)
-        this.states = schemaData.states
-        this.actions = schemaData.actions
+        this.rootNode = new SchemaNode(schemaData.container);
+        this.states = schemaData.states;
+        this.actions = schemaData.actions;
       } else {
-        this.rootNode = new SchemaNode(schemaData)
+        this.rootNode = new SchemaNode(schemaData);
       }
     } else {
-      this.rootNode = null
-      this.states = null
-      this.actions = null
+      this.rootNode = null;
+      this.states = null;
+      this.actions = null;
     }
     // this.currentNode = null
   }
@@ -30,12 +37,12 @@ class Schema {
   // }
 
   // 创建新节点
-  public createNode (options: any):SchemaNode {
+  public createNode(options: any): SchemaNode {
     const node = new SchemaNode({
       tag: options.tag,
-      text: options.name
-    })
-    return node
+      text: options.name,
+    });
+    return node;
   }
 
   // TODO：完善功能
@@ -56,4 +63,4 @@ class Schema {
   // }
 }
 
-export default Schema
+export default Schema;

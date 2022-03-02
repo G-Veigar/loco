@@ -5,7 +5,7 @@ import { deviceList } from "../modules/edit-viewport/device";
 const defaultDevice = deviceList[0];
 
 export const useEditorStore = defineStore({
-  id: "counter",
+  id: "editor",
   state: (): EditorStoreState => ({
     plugins: {},
     activePlugin: null,
