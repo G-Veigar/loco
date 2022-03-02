@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { deviceList } from "@/modules/edit-viewport/device";
-import { confirm } from "@/modules/notify";
+import { confirm, alert, notify } from "@/modules/notify";
 import { useEditorStore } from "@/stores/editor";
 import QRcode from "qrcode";
 
@@ -22,9 +22,13 @@ function rorateDevice() {
 
 async function toggleShowDeviceList() {
   showDeviceList.value = !showDeviceList.value;
-  const res = await confirm({
-    title: "Info",
-    message: "This is an info message",
+  // const res = await confirm({
+  //   title: "Info",
+  //   message: "This is an info message",
+  // });
+  const res = await notify({
+    title: "Prompt",
+    message: "This is a message that does not automatically close",
   });
   console.log("toggleShowDeviceList", res);
 }

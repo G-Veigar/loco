@@ -4,6 +4,8 @@ import leftBarNav from "./components/left-bar-nav.vue";
 import toolHeader from "./components/tool-header.vue";
 import componentLib from "../component-lib/component-lib.vue";
 import extensionLib from "../extension-lib/index.vue";
+import assetsManager from "../assets-manager/index.vue";
+
 import componentTree from "@/modules/component-tree/index.vue";
 
 const toolBarShow = ref(true);
@@ -25,7 +27,11 @@ const mockPluginList = [
     component: componentTree,
   },
   { name: "页面管理", icon: "icon-file-text-fill" },
-  { name: "静态资源管理", icon: "icon-folder-open-fill" },
+  {
+    name: "静态资源管理",
+    icon: "icon-folder-open-fill",
+    component: assetsManager,
+  },
   {
     name: "扩展",
     icon: "icon-shopping-fill",

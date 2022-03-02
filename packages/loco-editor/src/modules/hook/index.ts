@@ -1,15 +1,13 @@
 const HOOK = {
-  editorReady: 'editorReady',
-  contextMenu: 'contextMenu',
-  dropFromComponentLib: 'dropFromComponentLib',
-  beforePageCreated: 'beforePageCreated'
+  beforeEditorCreate: "beforeEditorCreate",
+  editorReady: "editorReady",
+  contextMenu: "contextMenu",
+  dropFromComponentLib: "dropFromComponentLib",
+  beforePageCreated: "beforePageCreated",
+};
+
+function callHook(hookName: string, data?: unknown): void {
+  console.log(hookName, data);
 }
 
-function callHook (hookName: string, data?: unknown): void{
-  console.log(hookName, data)
-}
-
-export {
-  HOOK,
-  callHook
-}
+export { HOOK, callHook };

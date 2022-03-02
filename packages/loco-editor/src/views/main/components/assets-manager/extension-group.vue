@@ -1,0 +1,60 @@
+<script lang="ts" setup>
+import { ref, computed, watch } from "vue";
+
+const props = withDefaults(
+  defineProps<{
+    name: string;
+  }>(),
+  {}
+);
+
+const folded = ref(false);
+
+function toggleFold(): void {
+  folded.value = !folded.value;
+}
+</script>
+
+<template>
+  <div class="component-group">
+    <div class="component-group-header" @click="toggleFold">
+      <i
+        class="iconfont"
+        :class="folded ? 'icon-caret-right' : 'icon-caret-down'"
+      ></i>
+      {{ name }}
+    </div>
+    <div class="component-group-wrapper" v-show="!folded">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@import "@/style/var.scss";
+
+.component-group {
+  .component-group-header {
+    padding-left: 6px;
+    text-align: left;
+    background-color: $mainBgColor;
+    height: 30px;
+    line-height: 28px;
+    border-bottom: 1px solid $mainBorderColor;
+    color: $mainFontColor;
+    cursor: default;
+    font-size: 13px;
+
+    .iconfont {
+      font-size: 12px;
+      margin-right: 6px;
+    }
+  }
+
+  .component-group-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+</style>
