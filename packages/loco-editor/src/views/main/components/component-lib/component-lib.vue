@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import componentGroup from "./component-group.vue";
+import pinyin from "tiny-pinyin";
 
-const basicComponents = [
+const isSupportPinyin = pinyin.isSupported();
+
+const basicComponents = ref([
   {
     name: "容器",
     component: "loco-block",
@@ -33,9 +36,9 @@ const basicComponents = [
     component: "loco-vedio",
     icon: "icon-shipin-tianchong",
   },
-];
+]);
 
-const proComponents = [
+const proComponents = ref([
   {
     name: "轮播",
     component: "loco-swiper",
@@ -76,9 +79,9 @@ const proComponents = [
     component: "loco-widget",
     icon: "icon-widget",
   },
-];
+]);
 
-const formComponents = [
+const formComponents = ref([
   {
     name: "输入框",
     component: "loco-input",
@@ -119,7 +122,19 @@ const formComponents = [
     component: "loco-slider",
     icon: "icon-Slider-horizontal",
   },
-];
+]);
+
+function transformPinyin(componentGroup: any) {
+  if (isSupportPinyin) {
+    componentGroup.forEach((element: any) => {
+      element.namePinyin = pinyin.convertToPinyin(element.name).toLowerCase();
+    });
+  }
+}
+
+transformPinyin(basicComponents.value);
+transformPinyin(proComponents.value);
+transformPinyin(formComponents.value);
 
 const searchVal = ref("");
 </script>

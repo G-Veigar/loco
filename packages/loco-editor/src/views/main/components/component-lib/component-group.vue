@@ -14,7 +14,10 @@ const props = withDefaults(
 const searchedComponents = computed(() => {
   if (props.searchVal) {
     return props.components.filter((item) => {
-      return item.name.includes(props.searchVal);
+      return (
+        item.name.includes(props.searchVal) ||
+        item.namePinyin.includes(props.searchVal.toLowerCase())
+      );
     });
   } else {
     return props.components;
