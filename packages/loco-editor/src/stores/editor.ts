@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
-import type { EditorPluginConfig, EditorStoreState } from "../types";
+import type { EditorPluginConfig } from "../types";
 import { deviceList } from "../modules/edit-viewport/device";
 
 const defaultDevice = deviceList[0];
 
 export const useEditorStore = defineStore({
   id: "editor",
-  state: (): EditorStoreState => ({
+  state: () => ({
     plugins: {},
     activePlugin: null,
     editViewport: {
@@ -76,6 +76,9 @@ export const useEditorStore = defineStore({
         top: 0,
         childs: undefined,
       },
+    },
+    expandPanel: {
+      show: true,
     },
   }),
   actions: {

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import styleSetter from "@/components/style-setter/index.vue";
 import propRender from "@/components/prop-render/index.vue";
+import eventSetter from "@/components/event-setter/index.vue";
 
 // defineProps<{
 //   msg: string;
@@ -26,8 +27,7 @@ import propRender from "@/components/prop-render/index.vue";
         <template #label>
           <i class="iconfont icon-click"></i>
         </template>
-        <!-- <event-setter></event-setter> -->
-        event-setter
+        <event-setter></event-setter>
       </el-tab-pane>
       <el-tab-pane label="动画" name="data">
         <template #label>
@@ -44,13 +44,14 @@ import propRender from "@/components/prop-render/index.vue";
 @import "@/style/var.scss";
 
 #editor-right-bar {
-  width: 300px;
+  width: $editorRightBarWidth;
   max-height: 100vh;
   overflow-y: auto;
   border-left: 1px solid #1a1a1a;
   background-color: $mainBgColor;
   display: flex;
   align-self: stretch;
+  position: relative;
 
   .iconfont {
     font-size: 22px;

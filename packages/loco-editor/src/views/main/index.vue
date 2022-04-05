@@ -2,12 +2,16 @@
 import { onMounted } from "vue";
 import EditorLeftBar from "./components/editor-left-bar/editor-left-bar.vue";
 import EditorZone from "./components/editor-zone/editor-zone.vue";
+import ExpandPanel from "./components/expand-panel/expand-panel.vue";
 import EditorRightBar from "./components/editor-right-bar/editor-right-bar.vue";
 import ContextMenu from "@/modules/context-menu/components/context-menu.vue";
 import { initHotkeys } from "@/modules/hot-key";
 import { HOOK, callHook } from "@/modules/hook";
 import { initContextMenu } from "@/modules/context-menu";
 import { initSchema } from "../../modules/loco-schema";
+import { useEditorStore } from "@/stores/editor";
+
+const editorStore = useEditorStore();
 
 initHotkeys();
 initContextMenu();
@@ -26,6 +30,7 @@ onMounted(() => {
     />
     <EditorLeftBar />
     <EditorZone />
+    <ExpandPanel v-if="editorStore.expandPanel.show" />
     <EditorRightBar />
     <ContextMenu />
   </div>

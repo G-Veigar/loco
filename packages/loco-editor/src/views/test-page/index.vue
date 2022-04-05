@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import LocoSwiper from "@/modules/loco-component/base/loco-swiper/loco-swiper.vue";
-import LocoPopup from "@/modules/loco-component/base/loco-popup/view.vue";
-import LocoDialog from "@/modules/loco-component/base/loco-dialog/view.vue";
+// import LocoSwiper from "@/modules/loco-component/base/loco-swiper/loco-swiper.vue";
+// import LocoPopup from "@/modules/loco-component/base/loco-popup/view.vue";
+// import LocoDialog from "@/modules/loco-component/base/loco-dialog/view.vue";
+import PrizeWheel from "@/modules/loco-component/lottery/prize-wheel/view.vue";
+
 import { SwiperSlide } from "swiper/vue";
 
 // import LocoTab from "@/modules/loco-component/pro/loco-tab/view.vue";
@@ -35,7 +37,7 @@ const tabs = ref([
 
 <template>
   <div class="test-page">
-    <LocoSwiper>
+    <!-- <LocoSwiper>
       <swiper-slide>
         <div class="slide-item">111</div>
       </swiper-slide>
@@ -67,7 +69,8 @@ const tabs = ref([
     <LocoPopup v-model:visible="popupVisible">111</LocoPopup>
     <LocoDialog v-model:visible="dialogVisible">
       <div class="dialog-box">222</div>
-    </LocoDialog>
+    </LocoDialog> -->
+    <PrizeWheel></PrizeWheel>
     <!-- <LocoTab :tabs="tabs" /> -->
   </div>
 </template>

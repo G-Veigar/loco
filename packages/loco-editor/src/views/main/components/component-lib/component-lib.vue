@@ -2,6 +2,20 @@
 import { ref } from "vue";
 import componentGroup from "./component-group.vue";
 import pinyin from "tiny-pinyin";
+import pinyin2 from "pinyin";
+
+const res = pinyin2("弹框", {
+  style: pinyin2.STYLE_NORMAL,
+  heteronym: true,
+  group: true,
+  // segment: true,
+});
+
+// const res2 = pinyin2.compare(a, b);
+
+console.log("拼音", res);
+
+// console.log("对比", res2);
 
 const isSupportPinyin = pinyin.isSupported();
 
