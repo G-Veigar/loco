@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import contextMenuItem from "./context-menu-item.vue";
-import { useEditorStore } from "@/stores/editor";
+import { useContextMenuStore } from "@/stores/context-menu";
 
-const editorStore = useEditorStore();
+const contextMenuStore = useContextMenuStore();
 
 const contextMenuStyle = computed(() => {
-  const { left, top } = editorStore.contextMenu.position;
+  const { left, top } = contextMenuStore.position;
   return {
     left: left + "px",
     top: top + "px",
@@ -14,8 +14,8 @@ const contextMenuStyle = computed(() => {
 });
 
 const childMenusStyle = computed(() => {
-  const contextMenuTop = editorStore.contextMenu.position.top;
-  const { top } = editorStore.contextMenu.childMenus;
+  const contextMenuTop = contextMenuStore.position.top;
+  const { top } = contextMenuStore.childMenus;
   const offsetTop = top - contextMenuTop;
   return {
     top: offsetTop + "px !important",
@@ -23,14 +23,14 @@ const childMenusStyle = computed(() => {
 });
 
 function showChildMenu(childMenus: any) {
-  editorStore.setContextMenu({
+  contextMenuStore.setContextMenu({
     key: "childMenus",
     value: childMenus,
   });
 }
 
 function close() {
-  editorStore.setContextMenu({
+  contextMenuStore.setContextMenu({
     key: "show",
     value: false,
   });
@@ -40,7 +40,7 @@ function close() {
 <template>
   <div
     class="context-menu"
-    v-show="editorStore.contextMenu.show"
+    v-show="contextMenuStore.show"
     tabindex="1"
     ref="contextMenu"
     @blur="close"
@@ -50,7 +50,7 @@ function close() {
     <div class="menu-panel main-menu">
       <div
         class="menu-group"
-        v-for="item in editorStore.contextMenu.menuList"
+        v-for="item in contextMenuStore.menuList"
         :key="item.id"
       >
         <context-menu-item
@@ -70,11 +70,11 @@ function close() {
     <!-- 子菜单 -->
     <div
       class="menu-panel child-menu menu-left"
-      v-show="editorStore.contextMenu.childMenus.childs"
+      v-show="contextMenuStore.childMenus.childs"
       :style="childMenusStyle"
     >
       <context-menu-item
-        v-for="item in editorStore.contextMenu.childMenus.childs"
+        v-for="item in contextMenuStore.childMenus.childs"
         :key="item.id"
         :menu="item"
       ></context-menu-item>

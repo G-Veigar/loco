@@ -1,7 +1,7 @@
 // import { callHook, HOOK } from "@/modules/hook";
-import { useEditorStore } from "@/stores/editor";
+import { useContextMenuStore } from "@/stores/context-menu";
 
-const editorStore = useEditorStore();
+const contextMenuStore = useContextMenuStore();
 
 type menuConfig = {
   label: string;
@@ -16,7 +16,7 @@ function initContextMenu(): void {
     //   x: e.x,
     //   y: e.y
     // })
-    editorStore.setContextMenu({
+    contextMenuStore.setContextMenu({
       key: "position",
       value: {
         left: e.x,
@@ -24,7 +24,7 @@ function initContextMenu(): void {
       },
     });
 
-    editorStore.setContextMenu({
+    contextMenuStore.setContextMenu({
       key: "show",
       value: true,
     });

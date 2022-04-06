@@ -5,7 +5,7 @@ import { registerLogicNode } from "./logic-node";
 
 registerLogicNode(Graph);
 
-let graph: Graph | null = null;
+let graph: Graph;
 let flowContainer = ref();
 let dnd: Addon.Dnd | null = null;
 
@@ -68,17 +68,15 @@ function addConditionNode(e: any) {
 }
 
 function runFlowData() {
-  const flowData = getFlowData();
+  const graphJson = graph.toJSON();
+  const flowData = parseGraphJson(graphJson);
   run(flowData);
 }
 
 function getFlowData() {
-  if (graph) {
-    let graphJson = graph.toJSON();
-    let data = parseGraphJson(graphJson);
-    console.log("flowData", data);
-    return data;
-  }
+  let graphJson = graph.toJSON();
+  let data = parseGraphJson(graphJson);
+  return data;
 }
 
 function parseGraphJson(graphJson: any) {
@@ -157,13 +155,51 @@ async function run(logicNode: any) {
   }
 }
 
+function undo() {
+  graph.history.undo();
+}
+
+function redo() {
+  graph.history.redo();
+}
+
 onMounted(() => {
   graph = new Graph({
     container: flowContainer.value,
     width: 400,
     height: 600,
+    history: true, // 开启撤销重做
+    keyboard: true,
+    // rotating: true, // 节点是否可以旋转
+    translating: {
+      restrict: true, // 限制节点只能在画布内移动
+    },
     background: {
       color: "#fffbe6", // 设置画布背景颜色
+    },
+    connecting: {
+      // router: {
+      //   name: "manhattan",
+      //   args: {
+      //     padding: 1,
+      //   },
+      // },
+      snap: {
+        // 自动吸附触发距离
+        radius: 20,
+      },
+      allowBlank: false, // 是否允许连接到画布空白位置的点
+      allowMulti: false, // 是否允许在相同的起始节点和终止之间创建多条边
+      allowLoop: false, // 是否允许创建循环连线，即边的起始节点和终止节点为同一节点
+      allowNode: false, // 是否允许边链接到节点（非节点上的链接桩）
+      allowEdge: false, // 是否允许边链接到另一个边
+      allowPort: true, // 是否允许边链接到链接桩
+      highlight: false, // 拖动边时，是否高亮显示所有可用的连接桩或节点
+      connector: "rounded",
+      validateConnection(params) {
+        console.log("validateConnection", params);
+        return true;
+      },
     },
     grid: {
       size: 10, // 网格大小 10px
@@ -187,13 +223,22 @@ onMounted(() => {
 
   graph.on("node:selected", (args: any) => {
     const { cell, node, options } = args;
-    console.log("selected", cell, node, options);
   });
 
   graph.fromJSON(data);
 
   dnd = new Addon.Dnd({
     target: graph,
+  });
+
+  graph.bindKey("backspace", () => {
+    const cells = graph.getSelectedCells();
+    const deleteableCells = cells.filter((cell) => {
+      return cell.shape !== "begin";
+    });
+    if (deleteableCells.length) {
+      graph.removeCells(deleteableCells);
+    }
   });
 
   // const Polygon = Node.define({
@@ -273,6 +318,8 @@ onMounted(() => {
       <button @mousedown="addActionNode">动作节点</button>
       <button @click="getFlowData">序列化节点</button>
       <button @click="runFlowData">执行逻辑</button>
+      <button @click="undo">撤销</button>
+      <button @click="redo">重做</button>
     </div>
     <div class="flow-container" ref="flowContainer"></div>
   </div>
