@@ -5,8 +5,8 @@ import toolHeader from "./components/tool-header.vue";
 import componentLib from "../component-lib/component-lib.vue";
 import extensionLib from "../extension-lib/index.vue";
 import assetsManager from "../assets-manager/index.vue";
-
 import componentTree from "@/modules/component-tree/index.vue";
+import flowManager from "../flow-setter/flow-manager.vue";
 
 const toolBarShow = ref(true);
 
@@ -25,6 +25,11 @@ const mockPluginList = [
     name: "组件树",
     icon: "icon-node-tree",
     component: componentTree,
+  },
+  {
+    name: "逻辑管理",
+    icon: "icon-flow",
+    component: flowManager,
   },
   { name: "页面管理", icon: "icon-file-text-fill" },
   {
@@ -113,7 +118,7 @@ function handlePluginChange(plugin: string): void {
   .tool-bar {
     background-color: #aaa;
     position: absolute;
-    width: $leftToolBarWidth;
+    min-width: $leftToolBarWidth;
     bottom: 0;
     left: $leftBarWidth;
     top: $headerTopHeight;

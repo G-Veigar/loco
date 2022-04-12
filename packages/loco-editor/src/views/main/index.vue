@@ -26,7 +26,7 @@ onMounted(() => {
   <div id="loco-editor">
     <link
       rel="stylesheet"
-      href="//at.alicdn.com/t/font_2821318_zpuyhw25gal.css"
+      href="//at.alicdn.com/t/font_2821318_1z5dbtwnyu5.css"
     />
     <EditorLeftBar />
     <EditorZone />
