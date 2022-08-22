@@ -4,6 +4,7 @@ import { ref, onMounted } from "vue";
 // import LocoPopup from "@/modules/loco-component/base/loco-popup/view.vue";
 // import LocoDialog from "@/modules/loco-component/base/loco-dialog/view.vue";
 import PrizeWheel from "@/modules/loco-component/lottery/prize-wheel/view.vue";
+import CodeEditor from "../main/components/code-editor/code-editor.vue";
 
 import { SwiperSlide } from "swiper/vue";
 
@@ -70,7 +71,8 @@ const tabs = ref([
     <LocoDialog v-model:visible="dialogVisible">
       <div class="dialog-box">222</div>
     </LocoDialog> -->
-    <PrizeWheel></PrizeWheel>
+    <!-- <PrizeWheel></PrizeWheel> -->
+    <CodeEditor></CodeEditor>
     <!-- <LocoTab :tabs="tabs" /> -->
   </div>
 </template>

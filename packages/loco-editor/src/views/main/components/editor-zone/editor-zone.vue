@@ -9,10 +9,6 @@ const editorStore = useEditorStore();
 const editViewport = computed(() => {
   return editorStore.editViewport;
 });
-
-const props = defineProps<{
-  msg: string;
-}>();
 </script>
 
 <template>

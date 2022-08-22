@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import LogicSetter from "./logic/index.vue";
+import LogicNode from "./node.vue";
 </script>
 
 <template>
-  <div class="event-setter">
-    <div class="setter-main">
-      <logic-setter></logic-setter>
+  <div class="lo">
+    <div class="setter-main" contenteditable="true">
+      <logic-node></logic-node>
     </div>
   </div>
 </template>

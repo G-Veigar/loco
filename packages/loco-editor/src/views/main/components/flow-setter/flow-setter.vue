@@ -6,7 +6,7 @@ import { registerLogicNode } from "./logic-node";
 registerLogicNode(Graph);
 
 let graph: Graph;
-let flowContainer = ref();
+let flowContainer = ref<HTMLDivElement>();
 let dnd: Addon.Dnd | null = null;
 
 const data = {

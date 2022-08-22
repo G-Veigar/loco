@@ -71,6 +71,7 @@ function handleDragstart(e: any): void {
   .component-name {
     margin-top: 2px;
     font-size: 12px;
+    text-align: center;
   }
 }
 </style>

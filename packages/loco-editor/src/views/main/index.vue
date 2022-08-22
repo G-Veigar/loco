@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import EditorLeftBar from "./components/editor-left-bar/editor-left-bar.vue";
 import EditorZone from "./components/editor-zone/editor-zone.vue";
 import ExpandPanel from "./components/expand-panel/expand-panel.vue";
+import EventSetter from "./components/event-setter/event-setter.vue";
 import EditorRightBar from "./components/editor-right-bar/editor-right-bar.vue";
+import EditorLoading from "./components/editor-loading/editor-loading.vue";
 import ContextMenu from "@/modules/context-menu/components/context-menu.vue";
 import { initHotkeys } from "@/modules/hot-key";
 import { HOOK, callHook } from "@/modules/hook";
@@ -17,8 +19,13 @@ initHotkeys();
 initContextMenu();
 initSchema();
 
+const eventSetterShow = ref(false);
+
 onMounted(() => {
   callHook(HOOK.editorReady);
+  // setTimeout(() => {
+  //   eventSetterShow.value = true;
+  // }, 3000);
 });
 </script>
 
@@ -26,13 +33,15 @@ onMounted(() => {
   <div id="loco-editor">
     <link
       rel="stylesheet"
-      href="//at.alicdn.com/t/font_2821318_1z5dbtwnyu5.css"
+      href="//at.alicdn.com/t/c/font_2821318_f0nmgtw6di6.css"
     />
     <EditorLeftBar />
     <EditorZone />
-    <ExpandPanel v-if="editorStore.expandPanel.show" />
+    <EventSetter v-model="eventSetterShow" />
+    <!-- <ExpandPanel v-if="editorStore.expandPanel.show" /> -->
     <EditorRightBar />
     <ContextMenu />
+    <EditorLoading />
   </div>
 </template>
 
@@ -54,7 +63,7 @@ onMounted(() => {
 }
 
 .el-overlay {
-  background-color: rgba(0, 0, 0, 0.85) !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .el-message-box {

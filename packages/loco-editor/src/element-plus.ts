@@ -14,6 +14,7 @@ import {
   ElSelect,
   ElOption,
   ElSwitch,
+  ElDialog,
   ElDatePicker,
   ElColorPicker,
 } from "element-plus";
@@ -32,6 +33,7 @@ export default [
   ElSelect,
   ElOption,
   ElSwitch,
+  ElDialog,
   ElDatePicker,
   ElColorPicker,
 ];
