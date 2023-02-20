@@ -12,7 +12,7 @@ const editViewport = computed(() => {
 </script>
 
 <template>
-  <div id="editor-zone">
+  <div id="editor-canvas">
     <header-top></header-top>
     <div class="edit-main">
       <EditViewport
@@ -27,7 +27,7 @@ const editViewport = computed(() => {
 <style lang="scss">
 @import "@/style/var.scss";
 
-#editor-zone {
+#editor-canvas {
   flex: auto;
   background-color: $mainZoneBg;
   display: flex;

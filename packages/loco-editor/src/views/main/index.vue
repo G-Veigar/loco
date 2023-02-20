@@ -1,31 +1,37 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 import EditorLeftBar from "./components/editor-left-bar/editor-left-bar.vue";
-import EditorZone from "./components/editor-zone/editor-zone.vue";
-import ExpandPanel from "./components/expand-panel/expand-panel.vue";
+import EditorCanvas from "./components/editor-canvas/editor-canvas.vue";
+// import ExpandPanel from "./components/expand-panel/expand-panel.vue";
 import EventSetter from "./components/event-setter/event-setter.vue";
 import EditorRightBar from "./components/editor-right-bar/editor-right-bar.vue";
-import EditorLoading from "./components/editor-loading/editor-loading.vue";
-import ContextMenu from "@/modules/context-menu/components/context-menu.vue";
-import { initHotkeys } from "@/modules/hot-key";
 import { HOOK, callHook } from "@/modules/hook";
-import { initContextMenu } from "@/modules/context-menu";
 import { initSchema } from "../../modules/loco-schema";
 import { useEditorStore } from "@/stores/editor";
+import { allInOneSearchPlugin } from "../../modules/editor-plugin/all-in-one-search";
+import { hotKeyPlugin } from "../../modules/editor-plugin/hot-key";
+import { contextMenuPlugin } from "../../modules/editor-plugin/context-menu";
+
+import { LocoEditor } from "../../modules/editor/index";
 
 const editorStore = useEditorStore();
 
-initHotkeys();
-initContextMenu();
+const locoEditor = new LocoEditor();
+const initProgress = locoEditor.initProgress;
+
+locoEditor
+  .use(hotKeyPlugin)
+  .use(allInOneSearchPlugin)
+  .use(contextMenuPlugin)
+  .init();
+
 initSchema();
 
-const eventSetterShow = ref(false);
+// const eventSetterShow = ref(true);
 
 onMounted(() => {
-  callHook(HOOK.editorReady);
-  // setTimeout(() => {
-  //   eventSetterShow.value = true;
-  // }, 3000);
+  // callHook(HOOK.editorReady);
+  locoEditor.ready();
 });
 </script>
 
@@ -35,13 +41,12 @@ onMounted(() => {
       rel="stylesheet"
       href="//at.alicdn.com/t/c/font_2821318_f0nmgtw6di6.css"
     />
+    <div id="loading-mask" v-if="initProgress < 100">{{ initProgress }} %</div>
     <EditorLeftBar />
-    <EditorZone />
-    <EventSetter v-model="eventSetterShow" />
-    <!-- <ExpandPanel v-if="editorStore.expandPanel.show" /> -->
+    <EditorCanvas />
     <EditorRightBar />
-    <ContextMenu />
-    <EditorLoading />
+    <!-- <EventSetter v-model="eventSetterShow" /> -->
+    <!-- <ExpandPanel v-if="editorStore.expandPanel.show" /> -->
   </div>
 </template>
 
@@ -60,6 +65,21 @@ onMounted(() => {
       right: 308px !important;
     }
   }
+}
+
+#loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  font-size: 40px;
+  color: #888;
 }
 
 .el-overlay {

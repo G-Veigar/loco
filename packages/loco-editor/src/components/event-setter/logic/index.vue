@@ -1,6 +1,9 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import LogicNode from "./node.vue";
+import { initFlowStateUtil } from "../state/index";
+
+const stateUtil = initFlowStateUtil();
+console.log("fs: val1", stateUtil.value.$jimu.appInfo.hehe);
 </script>
 
 <template>

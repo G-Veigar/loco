@@ -33,8 +33,7 @@ import eventSetter from "@/components/event-setter/index.vue";
         <template #label>
           <i class="iconfont icon-bim_donghua"></i>
         </template>
-        <!-- <status-setter></status-setter> -->
-        status-setter
+        status
       </el-tab-pane>
     </el-tabs>
   </div>

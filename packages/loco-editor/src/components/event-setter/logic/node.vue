@@ -1,15 +1,30 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import type { Ref } from "vue";
+import hljs from "highlight.js/lib/core";
+import javascript from "highlight.js/lib/languages/javascript";
+import css from "highlight.js/lib/languages/css";
+import "highlight.js/styles/vs.css";
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("css", css);
+
+const code: Ref<HTMLElement | null> = ref(null);
+
+onMounted(() => {
+  if (code.value) {
+    hljs.highlightBlock(code.value);
+  }
+});
 </script>
 
 <template>
-  <div class="logic-node">
-    <div class="node1">且</div>
-    <div class="node2">val1</div>
-    <div class="node3">=</div>
-    <div class="node4">4</div>
-    <button class="btn btn-detete">x</button>
-    <button class="btn btn-add">+</button>
+  <div class="container">
+    <pre class="language-javascript" ref="code">
+      <code>
+        button.name || '123'
+      </code>
+    </pre>
   </div>
 </template>
 

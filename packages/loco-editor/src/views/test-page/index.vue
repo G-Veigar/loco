@@ -1,14 +1,41 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import LocoButton from "@/modules/loco-component/base/loco-button/view.vue";
+import LocoCard from "./card.vue";
+import LocoListContainer from "@/modules/loco-component/pro/loco-list-container/index.vue";
+import { useElGlueStore } from "@/modules/loco-component-glue/index";
 // import LocoSwiper from "@/modules/loco-component/base/loco-swiper/loco-swiper.vue";
 // import LocoPopup from "@/modules/loco-component/base/loco-popup/view.vue";
 // import LocoDialog from "@/modules/loco-component/base/loco-dialog/view.vue";
 import PrizeWheel from "@/modules/loco-component/lottery/prize-wheel/view.vue";
-import CodeEditor from "../main/components/code-editor/code-editor.vue";
+// import CodeEditor from "../main/components/code-editor/code-editor.vue";
 
 import { SwiperSlide } from "swiper/vue";
 
 // import LocoTab from "@/modules/loco-component/pro/loco-tab/view.vue";
+
+const elGlueStore = useElGlueStore();
+
+// const componentGlue = new ComponentGlue();
+
+elGlueStore.registerComponent({
+  eid: "123",
+  props: {
+    col: 2,
+    rowGap: 10,
+    colGap: 10,
+    listData: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+    itemComponent: LocoCard,
+  },
+});
+
+setTimeout(() => {
+  elGlueStore.setProp({
+    eid: "123",
+    key: "col",
+    value: 3,
+  });
+}, 3000);
 
 const popupVisible = ref(false);
 const dialogVisible = ref(false);
@@ -34,10 +61,16 @@ const tabs = ref([
     value: "xixi",
   },
 ]);
+
+function handleClick() {
+  console.log("handleClick");
+}
 </script>
 
 <template>
   <div class="test-page">
+    <!-- <LocoListContainer v-bind="elGlueStore.states[123]"></LocoListContainer> -->
+    <LocoButton text="hello" @click="handleClick"></LocoButton>
     <!-- <LocoSwiper>
       <swiper-slide>
         <div class="slide-item">111</div>
@@ -72,7 +105,7 @@ const tabs = ref([
       <div class="dialog-box">222</div>
     </LocoDialog> -->
     <!-- <PrizeWheel></PrizeWheel> -->
-    <CodeEditor></CodeEditor>
+    <!-- <CodeEditor></CodeEditor> -->
     <!-- <LocoTab :tabs="tabs" /> -->
   </div>
 </template>
