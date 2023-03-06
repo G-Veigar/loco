@@ -5,7 +5,7 @@ import toolHeader from "./components/tool-header.vue";
 import componentLib from "../component-lib/component-lib.vue";
 import extensionLib from "../extension-lib/index.vue";
 import assetsManager from "../assets-manager/index.vue";
-import componentTree from "@/modules/component-tree/index.vue";
+import componentTree from "@/modules/component-tree/index2.vue";
 import flowManager from "../flow-setter/flow-manager.vue";
 
 const toolBarShow = ref(true);
