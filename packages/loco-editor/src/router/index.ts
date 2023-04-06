@@ -9,6 +9,10 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      redirect: '/edit/h5'
+    },
+    {
+      path: "/edit/:platform",
       name: "editor-main",
       component: main,
     },

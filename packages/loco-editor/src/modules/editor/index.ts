@@ -3,6 +3,7 @@ import { EditorModuleValidator } from "./modules/validator";
 import { EditorModuleOperator } from "./modules/operator";
 import { EditorModuleUI } from "./modules/ui";
 import { EditorModulePlugin } from "./modules/plugin";
+import { supportedBuildPlatforms } from "../platform"
 
 interface InitTask {
   name: string;
@@ -12,8 +13,13 @@ interface InitTask {
   };
 }
 
+interface EditorOptions {
+  platform: string;
+}
+
 export class LocoEditor {
   initProgress = ref(0);
+  platform: any;
 
   // 编辑器模块
   validator: EditorModuleValidator;
@@ -21,7 +27,8 @@ export class LocoEditor {
   UI: EditorModuleUI;
   plugin: EditorModulePlugin;
 
-  constructor() {
+  constructor(editorOptions: EditorOptions) {
+    this.platform = editorOptions.platform;
     this.validator = new EditorModuleValidator(this);
     this.operator = new EditorModuleOperator(this);
     this.UI = new EditorModuleUI(this);
@@ -35,7 +42,18 @@ export class LocoEditor {
       { name: "operator", run: () => this.operator.init() },
       { name: "UI", run: () => this.UI.init() },
       { name: "plugin", run: () => this.plugin.init() },
+      { name: "组件", run: () => this.#initPlatform() },
     ]);
+  }
+
+  // 初始化平台相关功能
+  #initPlatform() {
+    this.#installComponents()
+  }
+
+  // 下载组件库
+  #installComponents() {
+
   }
 
   #runInitTask(initTaskList: InitTask[]) {

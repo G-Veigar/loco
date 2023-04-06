@@ -11,12 +11,16 @@ import { useEditorStore } from "@/stores/editor";
 import { allInOneSearchPlugin } from "../../modules/editor-plugin/all-in-one-search";
 import { hotKeyPlugin } from "../../modules/editor-plugin/hot-key";
 import { contextMenuPlugin } from "../../modules/editor-plugin/context-menu";
+import { useRoute } from 'vue-router'
 
 import { LocoEditor } from "../../modules/editor/index";
 
 const editorStore = useEditorStore();
+const route = useRoute()
 
-const locoEditor = new LocoEditor();
+const locoEditor = new LocoEditor({
+  platform: route.params?.platform as any,
+});
 const initProgress = locoEditor.initProgress;
 
 locoEditor.plugin
@@ -32,7 +36,6 @@ initSchema();
 
 onMounted(() => {
   // callHook(HOOK.editorReady);
-  console.log("onMounted");
   locoEditor.UI.ready();
 });
 </script>
