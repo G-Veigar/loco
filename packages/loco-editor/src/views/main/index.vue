@@ -19,11 +19,12 @@ const editorStore = useEditorStore();
 const locoEditor = new LocoEditor();
 const initProgress = locoEditor.initProgress;
 
-locoEditor
+locoEditor.plugin
   .use(hotKeyPlugin)
   .use(allInOneSearchPlugin)
-  .use(contextMenuPlugin)
-  .init();
+  .use(contextMenuPlugin);
+
+locoEditor.init();
 
 initSchema();
 
@@ -31,7 +32,8 @@ initSchema();
 
 onMounted(() => {
   // callHook(HOOK.editorReady);
-  locoEditor.ready();
+  console.log("onMounted");
+  locoEditor.UI.ready();
 });
 </script>
 
@@ -41,6 +43,7 @@ onMounted(() => {
       rel="stylesheet"
       href="//at.alicdn.com/t/c/font_2821318_f0nmgtw6di6.css"
     />
+    <!-- TODO: 加载进度放到index.html中实现，减少白屏 -->
     <div id="loading-mask" v-if="initProgress < 100">{{ initProgress }} %</div>
     <EditorLeftBar />
     <EditorCanvas />
