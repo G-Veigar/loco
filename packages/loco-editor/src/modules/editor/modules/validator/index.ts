@@ -1,4 +1,4 @@
-// import type { LocoEditor } from "../index";
+import { EDITOR_HOOKS } from "../../hooks";
 
 type ValidatorRule = {
   name: string;
@@ -13,7 +13,9 @@ export class EditorModuleValidator {
   }
 
   init() {
-    // ...
+    this.#editor.on(EDITOR_HOOKS.appSave, () => {
+      this.validate();
+    });
   }
 
   addRule(rule: ValidatorRule) {
@@ -31,6 +33,7 @@ export class EditorModuleValidator {
   }
 
   validate() {
-    // ...
+    console.log("validate");
+    return false;
   }
 }

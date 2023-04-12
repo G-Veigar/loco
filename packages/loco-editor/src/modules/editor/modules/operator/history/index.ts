@@ -1,64 +1,75 @@
-import type { EditorModuleOperator } from '../index'
+import type { EditorModuleOperator } from "../index";
+import type {
+  ValueChange,
+  CanBeApplyValueChange,
+  ValueChangeRecord,
+} from "./diff";
 
 type EditorOperateHistory = {
-  name: string;
-  operator: string;
-  date: number;
-  type: string;
-  params: any;
-}
+  user: string; // 操作者
+  operator: string; // 操作
+  date: number; // 日期
+  valueChangeRecord: ValueChangeRecord;
+};
 
 export class OperatorHistory {
-  historyStack: EditorOperateHistory[] = []
-  currentIndex = 0
-  #editorOperator: EditorModuleOperator
+  dataManager: CanBeApplyValueChange;
+  historyStack: EditorOperateHistory[] = [];
+  currentIndex = 0;
+  // #editorOperator: EditorModuleOperator;
 
-  constructor(operator: any) {
-    this.#editorOperator = operator
+  constructor(operator: any, dataManager: CanBeApplyValueChange) {
+    // this.#editorOperator = operator;
+    this.dataManager = dataManager;
   }
 
   add(options: EditorOperateHistory) {
-    const { name, operator, type, params } = options
+    const { user, operator, valueChangeRecord } = options;
+    // 如果当前操作不是最后一次操作，则删除后面的操作
+    if (
+      this.historyStack.length &&
+      this.historyStack.length !== this.currentIndex + 1
+    ) {
+      this.historyStack.length = this.currentIndex + 1;
+    }
     this.historyStack.push({
-      name,
+      user,
       operator,
       date: Date.now(),
-      type,
-      params
-    })
+      valueChangeRecord,
+    });
+    this.currentIndex = this.historyStack.length - 1;
   }
 
   go(step: number) {
-    let index = this.currentIndex + step
-    const isGoBack = step < 0
-    if(index < 0) {
-      index = 0
-    } else if(index > this.historyStack.length - 1) {
-      index = this.historyStack.length - 1
+    let targetIndex = this.currentIndex + step;
+    const isGoBack = step < 0;
+    if (targetIndex < 0) {
+      targetIndex = 0;
+    } else if (targetIndex > this.historyStack.length - 1) {
+      targetIndex = this.historyStack.length - 1;
     }
-    if(index === this.currentIndex) {
-      return
+    if (targetIndex === this.currentIndex) {
+      return;
     }
-    const operateList = isGoBack ?
-      this.historyStack.slice(index, this.currentIndex) : this.historyStack.slice(this.currentIndex, index)
+    const operateList = isGoBack
+      ? this.historyStack.slice(targetIndex + 1, this.currentIndex + 1)
+      : this.historyStack.slice(this.currentIndex + 1, targetIndex + 1);
 
-    this.applyOperateList(operateList, isGoBack)
+    this.applyOperateList(operateList, isGoBack);
+
+    this.currentIndex = targetIndex;
   }
 
   applyOperateList(operateList: EditorOperateHistory[], isGoBack: boolean) {
-    if(isGoBack) {
-      operateList.reverse()
+    if (isGoBack) {
+      operateList.reverse();
     }
-    operateList.forEach(operate => {
-      const { operator, type, params } = operate
-      // const operatorInstance = this.#applyOperate(operator)
-      // if(operatorInstance) {
-      //   operatorInstance[type](params)
-      // }
-    })
-  }
-
-  #applyOperate(operator: string) {
-    console.log('applyOperate', this.#editorOperator)
+    const valueChangeRecordList = operateList.map(
+      (operate) => operate.valueChangeRecord
+    );
+    valueChangeRecordList.forEach((valueChangeRecord) => {
+      this.dataManager.applyValueChange(valueChangeRecord, isGoBack);
+    });
   }
 }

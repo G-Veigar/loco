@@ -4,6 +4,8 @@ import { deviceList } from "@/modules/edit-viewport/device";
 import { confirm, alert, notify } from "@/modules/notify";
 import { useEditorStore } from "@/stores/editor";
 import QRcode from "qrcode";
+import editor from "../../../../../modules/editor/index";
+import type { tsMethodSignature } from "@babel/types";
 
 const editorStore = useEditorStore();
 
@@ -35,6 +37,23 @@ async function toggleShowDeviceList() {
 
 function preview() {
   console.log("preview");
+}
+
+function save() {
+  editor.app.save();
+  console.log("save");
+}
+
+function testSet(key: string) {
+  editor.operator.setVal(key, key);
+}
+
+function undo() {
+  editor.operator.undo();
+}
+
+function redo() {
+  editor.operator.redo();
 }
 
 let QRcodeLink = "http://172.17.25.204:3000/preview";
@@ -91,8 +110,20 @@ function showPreviewQrcode() {
     </div>
 
     <div class="top-right">
+      <div class="test" style="display: flex">
+        <div @click="testSet('name')">setName</div>
+        <div @click="testSet('age')">setAge</div>
+        <div @click="testSet('child')">setChild</div>
+        <div @click="undo">undo</div>
+        <div @click="redo">redo</div>
+      </div>
       <i
-        class="preview-btn btn iconfont icon-preview"
+        class="btn iconfont icon-btn icon-save-fill"
+        title="保存"
+        @click="save"
+      ></i>
+      <i
+        class="icon-btn btn iconfont icon-preview"
         title="预览"
         @click="preview"
       ></i>
@@ -162,7 +193,7 @@ function showPreviewQrcode() {
         height: 132px !important;
       }
     }
-    .preview-btn {
+    .icon-btn {
       font-size: 20px;
       margin-right: 14px;
     }
@@ -266,6 +297,12 @@ function showPreviewQrcode() {
     .iconfont {
       font-size: 22px;
     }
+  }
+}
+
+.test {
+  div {
+    border: 1px solid #aaa;
   }
 }
 </style>
